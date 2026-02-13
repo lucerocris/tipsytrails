@@ -85,7 +85,7 @@ export function Navbar() {
         <div className="hidden md:flex w-full h-full justify-between">
           {/* CHANGED: Added flex items-center h-full to center logo vertically */}
           <Link href="/" className="navbar-logo flex items-center h-full">
-            <img src="/logo.svg" alt="Logo" />
+            <img src="/logo.svg" alt="Logo" className="w-28" />
           </Link>
 
           {/* CHANGED: Added h-full to UL */}
@@ -115,7 +115,7 @@ export function Navbar() {
             {/* CHANGED: Added self-center so the button doesn't stretch to full height */}
             <Link
               href="/"
-              className="self-center inline-flex w-fit items-center justify-center px-5 py-3 text-sm font-semibold !text-white bg-primary rounded-sm"
+              className="self-center inline-flex w-fit items-center justify-center px-5 py-3 font-medium !text-white bg-primary rounded-sm"
             >
               Get My Custom Quote
             </Link>
