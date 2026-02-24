@@ -69,15 +69,27 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    inquiries: Inquiry;
+    cocktails: Cocktail;
+    testimonials: Testimonial;
+    categories: Category;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    categories: {
+      drinks: 'cocktails';
+    };
+  };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    inquiries: InquiriesSelect<false> | InquiriesSelect<true>;
+    cocktails: CocktailsSelect<false> | CocktailsSelect<true>;
+    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -160,6 +172,87 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "inquiries".
+ */
+export interface Inquiry {
+  id: number;
+  status?: ('new' | 'contacted' | 'proposal_sent' | 'booked' | 'lost') | null;
+  /**
+   * Internal notes for this client (e.g., agreed price, specific needs).
+   */
+  adminNotes?: string | null;
+  firstName: string;
+  lastName: string;
+  fullName?: string | null;
+  email?: string | null;
+  mobileViber: string;
+  eventDate: string;
+  eventType?: string | null;
+  venue: string;
+  guestCount: number;
+  specialRequests?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cocktails".
+ */
+export interface Cocktail {
+  id: number;
+  name: string;
+  image: number | Media;
+  category: number | Category;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: number;
+  /**
+   * e.g., Signature Cocktails, Classic Cocktails, Shooters
+   */
+  name: string;
+  /**
+   * Toggle this on to show this category and its drinks as a slider on the homepage.
+   */
+  featuredOnLanding?: boolean | null;
+  /**
+   * Lower numbers appear first on the page (e.g., 1, 2, 3).
+   */
+  order?: number | null;
+  drinks?: {
+    docs?: (number | Cocktail)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: number;
+  /**
+   * The actual review or testimonial text.
+   */
+  quote: string;
+  clientName: string;
+  /**
+   * e.g., Marketing Lead, AboitizLand
+   */
+  clientRole?: string | null;
+  avatar?: (number | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -189,6 +282,22 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'inquiries';
+        value: number | Inquiry;
+      } | null)
+    | ({
+        relationTo: 'cocktails';
+        value: number | Cocktail;
+      } | null)
+    | ({
+        relationTo: 'testimonials';
+        value: number | Testimonial;
+      } | null)
+    | ({
+        relationTo: 'categories';
+        value: number | Category;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -271,6 +380,61 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "inquiries_select".
+ */
+export interface InquiriesSelect<T extends boolean = true> {
+  status?: T;
+  adminNotes?: T;
+  firstName?: T;
+  lastName?: T;
+  fullName?: T;
+  email?: T;
+  mobileViber?: T;
+  eventDate?: T;
+  eventType?: T;
+  venue?: T;
+  guestCount?: T;
+  specialRequests?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cocktails_select".
+ */
+export interface CocktailsSelect<T extends boolean = true> {
+  name?: T;
+  image?: T;
+  category?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  quote?: T;
+  clientName?: T;
+  clientRole?: T;
+  avatar?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  name?: T;
+  featuredOnLanding?: T;
+  order?: T;
+  drinks?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

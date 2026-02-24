@@ -102,12 +102,12 @@ export function Navbar() {
               </Link>
             </li>
             <li className="h-full">
-              <Link href="/contact" className="flex items-center h-full px-2">
+              <Link href="/menu" className="flex items-center h-full px-2">
                 Our Menu
               </Link>
             </li>
             <li className="h-full">
-              <Link href="/contact" className="flex items-center h-full px-2">
+              <Link href="/cocktail-tasting" className="flex items-center h-full px-2">
                 Cocktail Tasting
               </Link>
             </li>

@@ -1,23 +1,13 @@
 import React from 'react'
 import '../global.css'
-import { Inter, Parisienne, Playfair_Display } from 'next/font/google'
+import { Inter } from 'next/font/google'
+import type { Metadata } from 'next'
 import { Navbar } from '@/app/components/Navbar'
+import { InquiryForm } from '@/app/components/InquiryForm'
 
-export const playfair = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-playfair',
-})
+const inter = Inter({ subsets: ['latin'] })
 
-
-export const parrisienne = Parisienne({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-parrisienne',
-})
-const inter = Inter({subsets: ['latin']});
-
-export const metadata = {
+export const metadata: Metadata = {
   description: 'A blank template using Payload in a Next.js app.',
   title: 'Payload Blank Template',
 }
@@ -28,8 +18,17 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar/>
+        <Navbar />
         <main>{children}</main>
+
+        <InquiryForm />
+
+        {/* footer */}
+        <div className="bg-primary h-screen py-20 pb-10">
+          <div className="flex flex-col justify-end max-w-7xl mx-auto gap-10 h-full">
+            <img src="/logoLarge.svg" alt="Tipsy Trails logo" />
+          </div>
+        </div>
       </body>
     </html>
   )
