@@ -23,10 +23,8 @@ export function CocktailCarousel({ drinks, baseUrl }: CocktailCarouselProps) {
     }),
   ]);
 
-  // If no drinks, don't render
   if (!drinks.length) return null;
 
-  // Duplicate the array to ensure smooth infinite scrolling for small lists
   const displayDrinks = drinks.length < 10 ? [...drinks, ...drinks, ...drinks] : drinks;
 
   return (
