@@ -5,6 +5,26 @@
   --color-black: #3b3b3b;
 }
 
+/* Hide native date input calendar icon so we can use a custom one.
+   Note: Firefox may still show a built-in affordance; this is as close as CSS allows without a fully custom date picker. */
+input[type='date'] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  display: none;
+  -webkit-appearance: none;
+}
+
+/* Some Chromium/Safari builds still reserve space; collapse related affordances. */
+input[type='date']::-webkit-inner-spin-button,
+input[type='date']::-webkit-clear-button {
+  display: none;
+  -webkit-appearance: none;
+}
+
 /* Minimal Navbar Styles */
 .navbar {
   position: fixed;
