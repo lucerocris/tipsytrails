@@ -6,6 +6,7 @@ import configPromise from '@/payload.config';
 import { BrandCarousel } from '@/app/components/BrandCarousel'
 import { getPayload } from 'payload'
 import type { Cocktail, Media, Testimonial } from '@/payload-types'
+import { CocktailCarousel } from '../components/CocktailCarousel';
 
 function isPopulated<T extends object>(value: unknown): value is T {
   return typeof value === 'object' && value !== null
@@ -192,39 +193,10 @@ export default async function HomePage() {
               </h4>
 
               {/* Horizontal slider container */}
-              <div className="flex gap-4 h-108.5 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-4">
-                {/* Map the eagerly loaded drinks from the join field */}
-                {(category.drinks?.docs ?? []).filter(isCocktail).map((drink) => {
-                  const image = isMedia(drink.image) ? drink.image : null
-                  const imageUrl = image?.url
-                    ? image.url.startsWith('http')
-                      ? image.url
-                      : `${baseUrl}${image.url}`
-                    : '/placeholder.png'
-                  const imageAlt = image?.alt || drink.name
-
-                  return (
-                    <div
-                      key={drink.id}
-                      className="flex flex-col gap-2 min-w-70 md:min-w-75 flex-1 h-full snap-start shrink-0"
-                    >
-                      {/* Replaced bg-url with next/image for dynamic db images */}
-                      <div className="relative w-full h-full bg-gray-100 rounded-sm overflow-hidden">
-                        <Image
-                          src={imageUrl}
-                          alt={imageAlt}
-                          fill
-                          sizes="(min-width: 768px) 300px, 280px"
-                          className="object-cover"
-                        />
-                      </div>
-                      <p className={`${playfair.className} text-black text-xl font-medium`}>
-                        {drink.name}
-                      </p>
-                    </div>
-                  )
-                })}
-              </div>
+              <CocktailCarousel 
+                drinks = {(category.drinks?.docs ?? []).filter(isCocktail)}
+                baseUrl = {baseUrl}
+              />
             </div>
           ))}
         </div>
