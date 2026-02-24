@@ -7,6 +7,7 @@ import { BrandCarousel } from '@/app/components/BrandCarousel'
 import { getPayload } from 'payload'
 import type { Cocktail, Media, Testimonial } from '@/payload-types'
 import { CocktailCarousel } from '../components/CocktailCarousel';
+import { TestimonialCarousel } from '../components/TestimonialCarousel';
 
 function isPopulated<T extends object>(value: unknown): value is T {
   return typeof value === 'object' && value !== null
@@ -212,41 +213,10 @@ export default async function HomePage() {
             </h2>
           </div>
 
-          <div className="flex gap-3 h-133">
-            {testimonials.map((t: Testimonial) => {
-              const avatar = t.avatar && typeof t.avatar === 'object' ? t.avatar : null
-              const avatarUrl = avatar?.url
-                ? avatar.url.startsWith('http')
-                  ? avatar.url
-                  : `${baseUrl}${avatar.url}`
-                : '/placeholder.png'
-
-              return (
-                <div
-                  key={t.id}
-                  className="flex flex-col justify-between flex-1 h-full bg-primary rounded-sm p-11"
-                >
-                  <div className="flex flex-col gap-9">
-                    <div className="relative w-14 h-14 rounded-full overflow-hidden bg-gray-300 mb-4">
-                      <Image
-                        src={avatarUrl}
-                        alt={avatar?.alt || t.clientName}
-                        fill
-                        sizes="56px"
-                        className="object-cover"
-                      />
-                    </div>
-                    <p className="font-medium text-md text-white leading-relaxed">"{t.quote}"</p>
-                  </div>
-
-                  <div className="flex flex-col text-white">
-                    <p className="font-semibold text-md">{t.clientName}</p>
-                    {t.clientRole ? <p className="text-sm">{t.clientRole}</p> : null}
-                  </div>
-                </div>
-              )
-            })}
-          </div>
+          <TestimonialCarousel 
+            testimonial={testimonials}
+            baseUrl = {baseUrl}
+          />
         </div>
       </div>
     </>
