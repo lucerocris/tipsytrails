@@ -2,8 +2,8 @@ import React from 'react'
 import '../global.css'
 import { Inter } from 'next/font/google'
 import type { Metadata } from 'next'
-import { Navbar } from '@/app/components/Navbar'
-import { InquiryForm } from '@/app/components/InquiryForm'
+import { Navbar } from '@/app/(frontend)/components/Navbar'
+import { InquiryForm } from '@/app/(frontend)/components/InquiryForm'
 
 const inter = Inter({ subsets: ['latin'] })
 

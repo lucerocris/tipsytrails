@@ -84,7 +84,7 @@ export function Navbar() {
         {/* CHANGED: Added h-full, removed items-center to allow stretching */}
         <div className="hidden md:flex w-full h-full justify-between">
           {/* CHANGED: Added flex items-center h-full to center logo vertically */}
-          <Link href="/" className="navbar-logo flex items-center h-full">
+          <Link href="/public" className="navbar-logo flex items-center h-full">
             <img src="/logo.svg" alt="Logo" className="w-28" />
           </Link>
 
@@ -92,7 +92,7 @@ export function Navbar() {
           <ul className="navbar-links h-full">
             <li className="h-full">
               {/* CHANGED: Added flex items-center h-full px-2 to make link full height */}
-              <Link href="/" className="flex items-center h-full px-2">
+              <Link href="/public" className="flex items-center h-full px-2">
                 Home
               </Link>
             </li>
@@ -114,7 +114,7 @@ export function Navbar() {
 
             {/* CHANGED: Added self-center so the button doesn't stretch to full height */}
             <Link
-              href="/"
+              href="/public"
               className="self-center inline-flex w-fit items-center justify-center px-5 py-3 font-medium !text-white bg-primary rounded-sm"
             >
               Get My Custom Quote
@@ -132,7 +132,7 @@ export function Navbar() {
             <span className="hamburger-line hamburger-line-top" />
             <span className="hamburger-line hamburger-line-bottom" />
           </button>
-          <Link href="/" className="navbar-logo">
+          <Link href="/public" className="navbar-logo">
             Logo
           </Link>
           <div style={{ width: '35px' }} /> {/* Spacer for centering */}
@@ -144,7 +144,7 @@ export function Navbar() {
         <div className="mobile-menu">
           <ul>
             <li>
-              <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link href="/public" onClick={() => setIsMobileMenuOpen(false)}>
                 Home
               </Link>
             </li>

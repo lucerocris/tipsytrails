@@ -1,13 +1,13 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { parrisienne, playfair } from './fonts'
+import { playfair } from './fonts'
 import configPromise from '@/payload.config';
-import { BrandCarousel } from '@/app/components/BrandCarousel'
+import { BrandCarousel } from '@/app/(frontend)/components/BrandCarousel'
 import { getPayload } from 'payload'
 import type { Cocktail, Media, Testimonial } from '@/payload-types'
-import { CocktailCarousel } from '../components/CocktailCarousel';
-import { TestimonialCarousel } from '../components/TestimonialCarousel';
+import { CocktailCarousel } from '@/app/(frontend)/components/CocktailCarousel';
+import { TestimonialCarousel } from '@/app/(frontend)/components/TestimonialCarousel';
 
 function isPopulated<T extends object>(value: unknown): value is T {
   return typeof value === 'object' && value !== null
@@ -37,7 +37,7 @@ export default async function HomePage() {
   const { docs: testimonials } = await payload.find({
     collection: 'testimonials',
     depth: 1,
-    limit: 3,
+    limit: 12,
     sort: '-createdAt',
   })
 
@@ -180,26 +180,17 @@ export default async function HomePage() {
 
       {/*  menu  */}
       <div className="py-20">
-        <div className="flex flex-col max-w-7xl mx-auto gap-20 overflow-hidden">
-          {featuredCategories.map((category) => (
-            <div key={category.id} className="flex flex-col gap-6">
-              <h4 className="flex gap-3">
-                {/* Dynamically display the category name (e.g., 'Signature' / 'cocktails') */}
-                <span className={`${parrisienne.className} text-5xl text-primary`}>
-                  {category.name.split(' ')[0]}
-                </span>{' '}
-                <span className={`${playfair.className} text-4xl text-black`}>
-                  {category.name.split(' ').slice(1).join(' ')}
-                </span>
-              </h4>
-
-              {/* Horizontal slider container */}
-              <CocktailCarousel 
-                drinks = {(category.drinks?.docs ?? []).filter(isCocktail)}
-                baseUrl = {baseUrl}
+        <div className="flex flex-col max-w-7xl mx-auto gap-20">
+          {featuredCategories.map((category) => {
+            return (
+              <CocktailCarousel
+                key={category.id}
+                categoryName={category.name}
+                drinks={(category.drinks?.docs ?? []).filter(isCocktail)}
+                baseUrl={baseUrl}
               />
-            </div>
-          ))}
+            )
+          })}
         </div>
       </div>
       {/* testimonials */}
