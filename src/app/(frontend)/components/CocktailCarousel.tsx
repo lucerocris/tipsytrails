@@ -8,6 +8,7 @@ interface CocktailCarouselProps {
   drinks: any[]
   baseUrl: string
   categoryName?: string
+  cardsPerView?: number
 }
 
 function ArrowIcon({ direction }: { direction: 'left' | 'right' }) {
@@ -39,7 +40,7 @@ function ArrowIcon({ direction }: { direction: 'left' | 'right' }) {
   )
 }
 
-export function CocktailCarousel({ drinks, baseUrl, categoryName }: CocktailCarouselProps) {
+export function CocktailCarousel({ drinks, baseUrl, categoryName, cardsPerView = 4 }: CocktailCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
     align: 'start',
@@ -124,7 +125,10 @@ export function CocktailCarousel({ drinks, baseUrl, categoryName }: CocktailCaro
             return (
               <div
                 key={`${drink.id}-${idx}`}
-                className="min-w-0 flex-[0_0_calc(25%-12px)]"
+                className="min-w-0"
+                style={{
+                  flex: `0 0 calc((100% - ${(cardsPerView - 1) * 16}px) / ${cardsPerView})`,
+                }}
               >
                 <div className="flex flex-col gap-2 flex-1 h-full">
                   <div
