@@ -8,7 +8,12 @@ interface CocktailCarouselProps {
   drinks: any[]
   baseUrl: string
   categoryName?: string
-  cardsPerView?: number
+  cardsPerView?: 3 | 4
+}
+
+const cardBasisClass: Record<3 | 4, string> = {
+  3: 'min-w-0 flex-[0_0_80%] md:flex-[0_0_calc(50%_-_0.5rem)] lg:flex-[0_0_calc(33.333%_-_0.667rem)]',
+  4: 'min-w-0 flex-[0_0_80%] md:flex-[0_0_calc(50%_-_0.5rem)] lg:flex-[0_0_calc(25%_-_0.75rem)]',
 }
 
 function ArrowIcon({ direction }: { direction: 'left' | 'right' }) {
@@ -74,13 +79,13 @@ export function CocktailCarousel({ drinks, baseUrl, categoryName, cardsPerView =
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-end justify-between">
+      <div className="flex flex-wrap items-end justify-between gap-3">
         {categoryName ? (
-          <h4 className="flex gap-3">
-            <span className={`${parrisienne.className} text-5xl text-primary`}>
+          <h4 className="flex gap-2 md:gap-3 items-baseline">
+            <span className={`${parrisienne.className} text-3xl md:text-5xl text-primary`}>
               {categoryName.split(' ')[0]}
             </span>{' '}
-            <span className={`${playfair.className} text-4xl text-black`}>
+            <span className={`${playfair.className} text-2xl md:text-4xl text-black`}>
               {categoryName.split(' ').slice(1).join(' ')}
             </span>
           </h4>
@@ -88,7 +93,7 @@ export function CocktailCarousel({ drinks, baseUrl, categoryName, cardsPerView =
           <div />
         )}
 
-        <div className="flex items-center gap-2">
+        <div className="hidden sm:flex items-center gap-2">
           <button
             type="button"
             onClick={scrollPrev}
@@ -125,10 +130,7 @@ export function CocktailCarousel({ drinks, baseUrl, categoryName, cardsPerView =
             return (
               <div
                 key={`${drink.id}-${idx}`}
-                className="min-w-0"
-                style={{
-                  flex: `0 0 calc((100% - ${(cardsPerView - 1) * 16}px) / ${cardsPerView})`,
-                }}
+                className={cardBasisClass[cardsPerView]}
               >
                 <div className="flex flex-col gap-2 flex-1 h-full">
                   <div

@@ -159,8 +159,8 @@ export default function MenuPage() {
 
   const [isBaseSpiritOpen, setIsBaseSpiritOpen] = useState(true)
   const [isMenuOpen, setIsMenuOpen] = useState(true)
-  const [selectedBaseSpirits, setSelectedBaseSpirits] = useState<BaseSpirit[]>(['RUM'])
-  const [selectedMenu, setSelectedMenu] = useState<MenuFilter | null>('PREMIUM')
+  const [selectedBaseSpirits, setSelectedBaseSpirits] = useState<BaseSpirit[]>([])
+  const [selectedMenu, setSelectedMenu] = useState<MenuFilter | null>(null)
 
   const toggleBaseSpirit = (baseSpirit: BaseSpirit) => {
     setSelectedBaseSpirits((prev) => {
@@ -234,8 +234,8 @@ export default function MenuPage() {
 
       <div className="py-20">
         <div className="flex gap-10 max-w-7xl mx-auto">
-          <div className="w-66">
-            <div className="flex flex-col w-full gap-2">
+          <div className="w-66 shrink-0">
+            <div className="sticky top-20 flex flex-col w-full gap-2 pt-4">
               <p className="text-sm text-[#5E6366]">FILTERS</p>
 
               <div className="flex flex-col w-full">
