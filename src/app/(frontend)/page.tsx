@@ -1,13 +1,13 @@
 import React from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Button } from '@/app/(frontend)/components/Button'
 import { playfair } from './fonts'
-import configPromise from '@/payload.config';
+import configPromise from '@/payload.config'
 import { BrandCarousel } from '@/app/(frontend)/components/BrandCarousel'
 import { getPayload } from 'payload'
 import type { Cocktail, Media, Testimonial } from '@/payload-types'
-import { CocktailCarousel } from '@/app/(frontend)/components/CocktailCarousel';
-import { TestimonialCarousel } from '@/app/(frontend)/components/TestimonialCarousel';
+import { CocktailCarousel } from '@/app/(frontend)/components/CocktailCarousel'
+import { TestimonialCarousel } from '@/app/(frontend)/components/TestimonialCarousel'
 
 function isPopulated<T extends object>(value: unknown): value is T {
   return typeof value === 'object' && value !== null
@@ -22,7 +22,7 @@ function isMedia(value: number | Media): value is Media {
 }
 
 export default async function HomePage() {
-  const payload = await getPayload({config: configPromise});
+  const payload = await getPayload({ config: configPromise })
   const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
 
   const { docs: featuredCategories } = await payload.find({
@@ -44,7 +44,7 @@ export default async function HomePage() {
   return (
     <>
       {/* hero */}
-      <div className="relative h-screen w-full overflow-hidden text-foreground px-24 py-16 flex justify-center">
+      <div className="relative h-screen w-full overflow-hidden text-foreground px-4 md:px-8 lg:px-24 py-16 flex justify-center">
         {/* The Background Image */}
         <Image
           src="/placeholder.png"
@@ -52,7 +52,7 @@ export default async function HomePage() {
           fill
           unoptimized
           priority
-          className="object-cover -z-10" // Moves image behind content
+          className="object-cover -z-10" 
           sizes="100vw"
         />
 
@@ -62,37 +62,31 @@ export default async function HomePage() {
             <div className="flex flex-col gap-8">
               <div className="flex flex-col gap-3.5">
                 <h1
-                  className={`${playfair.className} text-6xl font-semibold flex flex-col gap-2 text-black`}
+                  className={`${playfair.className} text-4xl md:text-5xl lg:text-6xl font-semibold flex flex-col gap-2 text-black`}
                 >
                   Cebu's Premium <span className="text-primary!">Mobile Cocktail Bar</span>{' '}
                 </h1>
-                <p className="text-lg text-black max-w-lg">
+                <p className="text-md lg:text-lg text-black max-w-lg">
                   We bring the bar, you bring the guests. Elevated cocktails & full service for
                   weddings and events.
                 </p>
               </div>
 
-              <div className="flex gap-3">
-                <Link
-                  href="/"
-                  className="inline-flex w-fit items-center justify-center px-5 py-3 text-md font-medium text-white bg-primary rounded-sm"
-                >
-                  Get My Custom Quote
-                </Link>
-
-                <Link
-                  href="/"
-                  className="inline-flex w-fit items-center justify-center px-5 py-3 text-md font-medium text-primary border-primary border rounded-sm"
-                >
-                  Book a Tasting Session
-                </Link>
+              <div className="flex flex-row md:flex-col gap-3">
+                <Button href="/" className="flex-1 w-full text-center">
+                  Get My
+                  <br className="md:hidden" /> Custom Quote
+                </Button>
+                <Button href="/" variant="skeleton" className="flex-1 w-full text-center">
+                  Book a<br className="md:hidden" /> Tasting Session
+                </Button>
               </div>
             </div>
           </div>
         </div>
       </div>
       {/* brands worked with section */}
-      <div className="py-20 pt-30">
+      <div className="py-14 lg:py-20 pt-24 lg:pt-30 px-4 md:px-8">
         {/* content */}
         <div className="w-full h-full flex flex-col justify-center gap-4 max-w-7xl mx-auto">
           <h4 className={`font-medium text-2xl text-black text-center`}>
@@ -105,13 +99,13 @@ export default async function HomePage() {
         </div>
       </div>
 
-      <div className="py-20">
+      <div className="py-14 md:py-20 px-4 md:px-8">
         <div className="w-full h-fit flex flex-col justify-center gap-10 max-w-7xl mx-auto">
           <div className="flex flex-col gap-10">
-            <div className="flex justify-between items-end w-full">
+            <div className="flex flex-col gap-6 lg:flex-row lg:justify-between lg:items-end w-full">
               <div className="flex flex-col gap-2">
-                <p>THE TIPSY TRAILS EXPERIENCE</p>
-                <h2 className="flex flex-col gap-1 text-5xl font-medium">
+                <p className="text-sm lg:text-base">THE TIPSY TRAILS EXPERIENCE</p>
+                <h2 className="flex flex-col gap-1 text-2xl md:text-4xl lg:text-5xl font-medium">
                   Why Cebu's Top Brands
                   <span>
                     & Planners
@@ -120,7 +114,7 @@ export default async function HomePage() {
                 </h2>
               </div>
 
-              <div className="grid grid-cols-3 gap-18 max-w-150">
+              <div className="grid grid-cols-3 gap-4 lg:gap-18 w-full lg:max-w-150 lg:w-auto">
                 {/* Stat 1 */}
                 <div className="flex flex-col items-center justify-start gap-1">
                   <p className="text-primary font-semibold text-4xl">50+</p>
@@ -146,9 +140,9 @@ export default async function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="flex gap-9">
-              <div className="flex-1 h-150 w-full bg-[url('/placeholder.png')] bg-cover bg-center bg-no-repeat"></div>{' '}
-              <div className="flex-1 grid grid-cols-2 grid-rows-2 gap-3">
+            <div className="flex flex-col lg:flex-row gap-9">
+              <div className="flex-1 h-72 lg:h-150 w-full bg-[url('/placeholder.png')] bg-cover bg-center bg-no-repeat"></div>{' '}
+              <div className="flex-1 grid grid-cols-2 grid-rows-2 gap-3 min-h-72">
                 <div className="w-full h-full bg-gray-200"></div>
                 <div className="w-full h-full bg-gray-200"></div>
                 <div className="w-full h-full bg-gray-200"></div>
@@ -159,27 +153,22 @@ export default async function HomePage() {
         </div>
       </div>
 
-      <div className="py-20">
-        {/* Content Container (z-10 puts it above the overlay) */}
+      <div className="py-14 md:py-20 px-4 md:px-8">
+        {/* Content Container */}
         <div className="flex flex-col gap-6 justify-center items-center bg-[url('/placeholder.png')] bg-cover bg-center bg-no-repeat h-[65vh]  rounded-sm w-full max-w-7xl mx-auto">
-          <div className="relative z-10 flex flex-col gap-2 text-center text-black">
-            <p className="tracking-widest text-sm font-semibold uppercase ">COCKTAIL TASTING</p>
+          <div className="relative z-10 flex flex-col gap-2 text-center text-black px-4">
+            <p className="text-sm lg:text-base tracking-widest uppercase ">COCKTAIL TASTING</p>
 
-            <h2 className="flex flex-col gap-1 text-5xl font-medium max-w-xl">
+            <h2 className="flex flex-col gap-1 text-2xl md:text-4xl lg:text-5xl font-medium max-w-xl">
               Don't Just Guess. Taste Your Menu First.
             </h2>
           </div>
-          <Link
-            href="/"
-            className="inline-flex w-fit items-center justify-center px-5 py-3 text-md font-medium text-white bg-primary rounded-sm"
-          >
-            Book a tasting session
-          </Link>
+          <Button href="/">Book a tasting session</Button>
         </div>
       </div>
 
       {/*  menu  */}
-      <div className="py-20">
+      <div className="py-14 md:py-20 px-4 md:px-8">
         <div className="flex flex-col max-w-7xl mx-auto gap-20">
           {featuredCategories.map((category) => {
             return (
@@ -194,20 +183,17 @@ export default async function HomePage() {
         </div>
       </div>
       {/* testimonials */}
-      <div className="py-20">
+      <div className="py-14 md:py-20 px-4 md:px-8">
         <div className="flex flex-col max-w-7xl mx-auto gap-10">
           <div className="flex flex-col gap-2">
-            <p>TESTIMONIALS</p>
-            <h2 className="flex flex-col gap-1 text-5xl font-medium">
+            <p className="text-sm lg:text-base">TESTIMONIALS</p>
+            <h2 className="flex flex-col gap-1 text-2xl md:text-4xl lg:text-5xl font-medium">
               Don't take our word for it!
               <span>Hear it from our Clients.</span>
             </h2>
           </div>
 
-          <TestimonialCarousel 
-            testimonial={testimonials}
-            baseUrl = {baseUrl}
-          />
+          <TestimonialCarousel testimonial={testimonials} baseUrl={baseUrl} />
         </div>
       </div>
     </>
