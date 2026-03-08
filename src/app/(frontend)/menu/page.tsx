@@ -2,9 +2,9 @@
 
 import Image from 'next/image'
 import { parrisienne, playfair } from '@/app/(frontend)/fonts'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, SlidersHorizontal, X } from 'lucide-react'
 import { CocktailCarousel } from '@/app/(frontend)/components/CocktailCarousel'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
 
@@ -152,77 +152,126 @@ const menuCategories: MenuCategory[] = [
 ]
 
 export default function MenuPage() {
-  const toggleTransitionStyle = {
-    transition:
-      'transform 0.8s cubic-bezier(0.18, 0.71, 0.11, 1), background-color 0.8s cubic-bezier(0.18, 0.71, 0.11, 1)',
-  }
-
-  const [isBaseSpiritOpen, setIsBaseSpiritOpen] = useState(true)
-  const [isMenuOpen, setIsMenuOpen] = useState(true)
-  const [selectedBaseSpirits, setSelectedBaseSpirits] = useState<BaseSpirit[]>([])
-  const [selectedMenu, setSelectedMenu] = useState<MenuFilter | null>(null)
-
+  const [isBaseSpiritOpen, setIsBaseSpiritOpen] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(true);
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
+  const [selectedBaseSpirits, setSelectedBaseSpirits] = useState<BaseSpirit[]>([]);
+  const [selectedMenu, setSelectedMenu] = useState<MenuFilter | null>(null);
+  
+  useEffect(() => {
+    const nav = document.querySelector('nav');
+    if (isMobileFilterOpen) {
+      document.body.style.overflow = 'hidden';
+      if (nav) nav.style.display = 'none';
+    } else {
+      document.body.style.overflow = 'unset';
+      if (nav) nav.style.display = 'flex';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+      if (nav) nav.style.display = 'flex';
+    };
+  }, [isMobileFilterOpen]);
+  
   const toggleBaseSpirit = (baseSpirit: BaseSpirit) => {
-    setSelectedBaseSpirits((prev) => {
-      if (prev.includes(baseSpirit)) {
-        return prev.filter((item) => item !== baseSpirit)
-      }
-
-      return [...prev, baseSpirit]
-    })
+    setSelectedBaseSpirits((prev) =>
+      prev.includes(baseSpirit) ? prev.filter((item) => item !== baseSpirit) : [...prev, baseSpirit]
+    );
   }
-
+  
   const toggleMenu = (menu: MenuFilter) => {
-    setSelectedMenu((prev) => (prev === menu ? null : menu))
+    setSelectedMenu((prev) => (prev === menu ? null : menu));
   }
-
+  
   const filteredDrinks = useMemo(() => {
     const drinks = menuCategories
       .filter((category) => (selectedMenu ? category.menuType === selectedMenu : true))
-      .flatMap((category) => category.drinks)
-
-    if (!selectedBaseSpirits.length) {
-      return drinks
-    }
-
-    return drinks.filter((drink) => selectedBaseSpirits.includes(drink.baseSpirit))
-  }, [selectedBaseSpirits, selectedMenu])
-
+      .flatMap((category) => category.drinks);
+    return !selectedBaseSpirits.length ? drinks : drinks.filter((drink) => selectedBaseSpirits.includes(drink.baseSpirit))
+  }, [selectedBaseSpirits, selectedMenu]);
+  
   const selectedFilterTitle = useMemo(() => {
     const labels = [
-      ...selectedBaseSpirits.map((value) => value.toLowerCase().replace(/(^|[-\s])\w/g, (match) => match.toUpperCase())),
-      ...(selectedMenu
-        ? [selectedMenu.toLowerCase().replace(/(^|[-\s])\w/g, (match) => match.toUpperCase())]
-        : []),
-    ]
-
-    return labels.length ? labels.join(', ') : 'All Cocktails'
-  }, [selectedBaseSpirits, selectedMenu])
-
-  const hasActiveFilters = selectedBaseSpirits.length > 0 || Boolean(selectedMenu)
-
+      ...selectedBaseSpirits.map((s) => s.charAt(0) + s.slice(1).toLowerCase()),
+      ...(selectedMenu ? [selectedMenu.charAt(0) + selectedMenu.slice(1).toLowerCase()] : []),
+    ];
+    return labels.length ? labels.join(', ') : "All Cocktails";
+  }, [selectedBaseSpirits, selectedMenu]);
+  
+  const hasActiveFilters = selectedBaseSpirits.length > 0 || Boolean(selectedMenu);
+  
+  const FilterContent = () => (
+    <div className="flex flex-col w-full gap-2">
+      
+      <div className = "flex justify-end">
+        {hasActiveFilters && (
+          <button
+            onClick={() => {
+              setSelectedBaseSpirits([]);
+              setSelectedMenu(null);
+            }}
+            className = "text-xs font-bold text-black underline underline-offset-4 hover:text-primary transition-colors justify-self-end"
+          >
+            CLEAR ALL
+          </button>
+        )}
+      </div>
+      
+      <div className="border-b-[0.5px] border-[#C2C4C7] py-4">
+        <button onClick={() => setIsBaseSpiritOpen(!isBaseSpiritOpen)} className="flex items-center justify-between w-full">
+          <p className="text-xs text-[#9A9A9A] tracking-wider font-semibold">BASE SPIRIT</p>
+          <ChevronDown className={`size-4 transition-transform ${isBaseSpiritOpen ? '' : '-rotate-90'}`} />
+        </button>
+        
+        <div className={`overflow-hidden transition-all ${isBaseSpiritOpen ? 'max-h-80 opacity-100 pt-4' : 'max-h-0 opacity-0'}`}>
+          <div className="flex flex-col gap-3">
+            {baseSpirits.map((spirit) => (
+              <button key={spirit} onClick={() => toggleBaseSpirit(spirit)} className={`text-left text-xs ${selectedBaseSpirits.includes(spirit) ? 'font-bold text-black' : 'text-[#3E3E3E]'}`}>
+                {spirit}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+      
+      <div className="border-b-[0.5px] border-[#C2C4C7] py-4">
+        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="flex items-center justify-between w-full">
+          <p className="text-xs text-[#9A9A9A] tracking-wider font-semibold">MENU</p>
+          <ChevronDown className={`size-4 transition-transform ${isMenuOpen ? '' : '-rotate-90'}`} />
+        </button>
+        <div className={`overflow-hidden transition-all ${isMenuOpen ? 'max-h-80 opacity-100 pt-4' : 'max-h-0 opacity-0'}`}>
+          <div className="flex flex-col gap-3">
+            {menuFilters.map((filter) => (
+              <button key={filter} onClick={() => toggleMenu(filter)} className={`text-left text-xs ${selectedMenu === filter ? 'font-bold text-black' : 'text-[#3E3E3E]'}`}>
+                {filter}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+  
   return (
     <>
-      <div className="relative h-screen w-full overflow-hidden text-foreground px-24 py-16 pt-30 flex justify-center">
-        {/* The Background Image */}
-        <Image
-          src="/placeholder.png"
-          alt="Hero background"
-          fill
-          unoptimized
-          priority
-          className="object-cover -z-10"
-          sizes="100vw"
-        />
-
-        {/* The Content Overlay */}
-        <div className="relative z-10 flex h-full w-full max-w-7xl">
-          <div className="flex h-auto flex-col gap-1 lg:gap-3">
-            <div className="flex flex-col gap-8">
-              <div className="flex flex-col gap-3.5">
-                <h1 className={`text-6xl font-semibold flex flex-col gap-2 text-black`}>
+      {/* Hero Section */}
+      <div className="relative h-screen lg:h-screen w-full overflow-hidden flex items-center justify-center">
+      <Image
+        src="/placeholder.png"
+        alt="Hero Background"
+        fill
+        unoptimized
+        priority
+        className="object-cover -z-10"
+        sizes = "100vw"
+      />
+        <div className = "relative z-10 flex-h-full w-full max-w-7xl">
+          <div className = "flex h-auto flex-col gap-1 lg:gap-3">
+            <div className = "flex flex-col gap-8">
+              <div className = "flex flex-col gap-3.5">
+                <h1 className = {`text-5xl sm:text-5xl md:text-5xl lg:text-6xl font-semibold flex flex-col gap-2 text-black`}>
                   MEET OUR
-                  <span className={`${parrisienne.className} text-primary text-8xl leading-14`}>
+                  <span className = {`${parrisienne.className} text-primary text-6xl sm:text-5xl md:text-6xl lg:text-8xl leading-tight`}>
                     menu
                   </span>
                 </h1>
@@ -232,132 +281,89 @@ export default function MenuPage() {
         </div>
       </div>
 
-      <div className="py-20">
-        <div className="flex gap-10 max-w-7xl mx-auto">
-          <div className="w-66 shrink-0">
-            <div className="sticky top-20 flex flex-col w-full gap-2 pt-4">
-              <p className="text-sm text-[#5E6366]">FILTERS</p>
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 lg:py-20">
+        <div className="flex flex-col lg:flex-row gap-12">
+          
+          {/* Desktop Sidebar */}
+          <aside className="hidden lg:block w-64 shrink-0 sticky top-24 self-start">
+            <FilterContent />
+          </aside>
 
-              <div className="flex flex-col w-full">
-                <div className="border-b-[0.5px] border-[#C2C4C7] py-2.5">
-                  <button
-                    type="button"
-                    onClick={() => setIsBaseSpiritOpen((prev) => !prev)}
-                    className="self-center inline-flex items-center justify-between w-full px-1 bg-transparent cursor-pointer"
-                    style={toggleTransitionStyle}
-                  >
-                    <p className="text-xs text-[#9A9A9A]">BASE SPIRIT</p>
-                    <ChevronDown
-                      strokeWidth={1}
-                      width={18}
-                      className={`text-[#9A9A9A] ${isBaseSpiritOpen ? '' : '-rotate-90'}`}
-                      style={toggleTransitionStyle}
-                    />
-                  </button>
-
-                  <div
-                    className={`overflow-hidden transition-[max-height,opacity] duration-[800ms] ${
-                      isBaseSpiritOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
-                    }`}
-                    style={{ transitionTimingFunction: 'cubic-bezier(0.18, 0.71, 0.11, 1)' }}
-                  >
-                    <div className="flex flex-col gap-2 px-1 pt-4 pb-2">
-                      {baseSpirits.map((baseSpirit) => (
-                        <button
-                          key={baseSpirit}
-                          type="button"
-                          onClick={() => toggleBaseSpirit(baseSpirit)}
-                          className={`text-left text-xs leading-normal text-black ${
-                            selectedBaseSpirits.includes(baseSpirit)
-                              ? 'font-semibold text-[#3E3E3E]'
-                              : 'font-normal text-black'
-                          }`}
-                        >
-                          {baseSpirit}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+          {/* Main Drink Display */}
+          <main className="flex-1">
+            {/* Mobile Filter Trigger */}
+            <button 
+              onClick={() => setIsMobileFilterOpen(true)}
+              className="lg:hidden flex items-center gap-2 px-6 py-3 border border-black mb-8"
+            >
+              <SlidersHorizontal className="w-4 h-4" />
+              <span className="text-sm font-medium">Filters</span>
+              {hasActiveFilters && (
+                <div className="flex items-center justify-center size-6 bg-black rounded-full">
+                  <h1 className = "text-white text-xs">
+                    {filteredDrinks.length}  
+                  </h1>
                 </div>
+              )}
+            </button>
 
-                <div className="border-b-[0.5px] border-[#C2C4C7] py-2.5">
-                  <button
-                    type="button"
-                    onClick={() => setIsMenuOpen((prev) => !prev)}
-                    className="self-center inline-flex items-center justify-between w-full px-1 bg-transparent cursor-pointer"
-                    style={toggleTransitionStyle}
-                  >
-                    <p className="text-xs text-[#9A9A9A]">MENU</p>
-                    <ChevronDown
-                      strokeWidth={1}
-                      width={18}
-                      className={`text-[#9A9A9A] ${isMenuOpen ? '' : '-rotate-90'}`}
-                      style={toggleTransitionStyle}
-                    />
-                  </button>
-
-                  <div
-                    className={`overflow-hidden transition-[max-height,opacity] duration-[800ms] ${
-                      isMenuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
-                    }`}
-                    style={{ transitionTimingFunction: 'cubic-bezier(0.18, 0.71, 0.11, 1)' }}
-                  >
-                    <div className="flex flex-col gap-2 px-1 pt-4 pb-2">
-                      {menuFilters.map((menuType) => (
-                        <button
-                          key={menuType}
-                          type="button"
-                          onClick={() => toggleMenu(menuType)}
-                          className={`text-left text-xs leading-normal text-black ${
-                            selectedMenu === menuType
-                              ? 'font-semibold text-[#3E3E3E]'
-                              : 'font-normal text-black'
-                          }`}
-                        >
-                          {menuType}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          {hasActiveFilters ? (
-            <div className="flex w-full flex-col gap-8">
-              <h2 className="text-4xl text-[#3E3E3E] font-medium">{selectedFilterTitle}</h2>
-
-              {filteredDrinks.length > 0 ? (
-                <div className="grid grid-cols-3 gap-4">
+            {hasActiveFilters ? (
+              <div className="flex flex-col gap-8">
+                <h2 className="text-3xl lg:text-4xl text-[#3E3E3E] font-medium">{selectedFilterTitle}</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
                   {filteredDrinks.map((drink) => (
-                    <div key={drink.id} className="flex flex-col gap-2 h-[434px]">
-                      <div
-                        className="w-full h-full bg-[url('/menu/mangoStickyRice.webp')] bg-cover bg-center bg-no-repeat"
-                        style={{ backgroundImage: `url('${drink.image.url}')` }}
-                      />
-                      <p className={`${playfair.className} text-black text-xl font-medium`}>{drink.name}</p>
+                    <div key={drink.id} className="group cursor-pointer">
+                      <div className="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+                        <img src={drink.image.url} alt={drink.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      </div>
+                      <p className={`${playfair.className} text-xl lg:text-2xl text-black`}>{drink.name}</p>
                     </div>
                   ))}
                 </div>
-              ) : (
-                <p className="text-base text-[#5E6366]">No cocktails available for this filter yet.</p>
-              )}
-            </div>
-          ) : (
-            <div className="flex w-full flex-col gap-20">
-              {menuCategories.map((category) => (
-                <CocktailCarousel
-                  key={category.name}
-                  categoryName={category.name}
-                  drinks={category.drinks}
-                  baseUrl={baseUrl}
-                  cardsPerView={3}
-                />
-              ))}
-            </div>
-          )}
+              </div>
+            ) : (
+              <div className="flex flex-col gap-16 lg:gap-24">
+                {menuCategories.map((cat) => (
+                  <CocktailCarousel key={cat.name} categoryName={cat.name} drinks={cat.drinks} baseUrl={baseUrl} cardsPerView={3} />
+                ))}
+              </div>
+            )}
+          </main>
+        </div>
+      </div>
+
+      {/* FILTER DRAWER */}
+      <div 
+        className={`fixed inset-0 z-200 lg:hidden bg-white flex flex-col transition-transform duration-500 ease-in-out ${
+          isMobileFilterOpen ? 'translate-y-0' : 'translate-y-full'
+        }`}
+      >
+        {/* Header */}
+        <div className="flex justify-between items-center p-6 border-b border-gray-100">
+          <h3 className="text-xl font-bold text-black uppercase tracking-tight">Filters</h3>
+          <button 
+            onClick={() => setIsMobileFilterOpen(false)}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          >
+            <X className="size-6 text-black" />
+          </button>
+        </div>
+        
+        {/* Content Area */}
+        <div className="flex-1 overflow-y-auto p-6 pt-8">
+          <FilterContent />
+        </div>
+        
+        {/* Footer Action */}
+        <div className="p-6 border-t border-gray-100">
+          <button 
+            onClick={() => setIsMobileFilterOpen(false)}
+            className="w-full bg-black text-white py-4 rounded-md font-semibold tracking-wide hover:bg-zinc-800 transition-colors active:scale-[0.98]"
+          >
+            Show {filteredDrinks.length} Results
+          </button>
         </div>
       </div>
     </>
-  )
+    )
 }
