@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import type { Metadata } from 'next'
 import { Navbar } from '@/app/(frontend)/components/Navbar'
 import { InquiryForm } from '@/app/(frontend)/components/InquiryForm'
+import Footer from './components/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,16 +24,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
         <InquiryForm />
 
-        {/* footer */}
-        <div className="bg-primary flex flex-col min-h-[50vh] lg:h-screen py-10 lg:py-20">
-          <div className="flex flex-col justify-end w-full max-w-7xl mx-auto gap-10 flex-grow px-4 md:px-0">
-            <img
-              src="/logoLarge.svg"
-              alt="Tipsy Trails logo"
-              className="w-full h-auto object-contain"
-            />
-          </div>
-        </div>
+        <Footer />
       </body>
     </html>
   )
