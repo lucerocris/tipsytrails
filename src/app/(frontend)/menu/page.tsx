@@ -202,55 +202,112 @@ export default function MenuPage() {
   
   const FilterContent = () => (
     <div className="flex flex-col w-full gap-2">
-      
-      <div className = "flex justify-end">
-        {hasActiveFilters && (
-          <button
-            onClick={() => {
-              setSelectedBaseSpirits([]);
-              setSelectedMenu(null);
-            }}
-            className = "text-xs font-bold text-black underline underline-offset-4 hover:text-primary transition-colors justify-self-end"
-          >
-            CLEAR ALL
-          </button>
-        )}
-      </div>
-      
-      <div className="border-b-[0.5px] border-[#C2C4C7] py-4">
-        <button onClick={() => setIsBaseSpiritOpen(!isBaseSpiritOpen)} className="flex items-center justify-between w-full">
-          <p className="text-xs text-[#9A9A9A] tracking-wider font-semibold">BASE SPIRIT</p>
-          <ChevronDown className={`size-4 transition-transform ${isBaseSpiritOpen ? '' : '-rotate-90'}`} />
+  
+      {/* CLEAR ALL */}
+      <div className="flex justify-end">
+        <button
+          onClick={() => {
+            setSelectedBaseSpirits([])
+            setSelectedMenu(null)
+          }}
+          className={`text-xs font-bold text-black underline underline-offset-4 hover:text-primary transition-opacity duration-500 ${
+            hasActiveFilters ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+        >
+          CLEAR ALL
         </button>
-        
-        <div className={`overflow-hidden transition-all ${isBaseSpiritOpen ? 'max-h-80 opacity-100 pt-4' : 'max-h-0 opacity-0'}`}>
-          <div className="flex flex-col gap-3">
-            {baseSpirits.map((spirit) => (
-              <button key={spirit} onClick={() => toggleBaseSpirit(spirit)} className={`text-left text-xs ${selectedBaseSpirits.includes(spirit) ? 'font-bold text-black' : 'text-[#3E3E3E]'}`}>
-                {spirit}
-              </button>
-            ))}
+      </div>
+  
+      {/* BASE SPIRIT */}
+      <div className="border-b-[0.5px] border-[#C2C4C7] py-4">
+        <button
+          onClick={() => setIsBaseSpiritOpen(!isBaseSpiritOpen)}
+          className="flex items-center justify-between w-full"
+        >
+          <p className="text-xs text-[#9A9A9A] tracking-wider font-semibold uppercase">
+            Base Spirit
+          </p>
+  
+          <ChevronDown
+            className={`size-4 transition-transform duration-300 ease-in-out ${
+              isBaseSpiritOpen ? "rotate-0" : "-rotate-90"
+            }`}
+          />
+        </button>
+  
+        <div
+          className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
+            isBaseSpiritOpen
+              ? "grid-rows-[1fr] opacity-100"
+              : "grid-rows-[0fr] opacity-0"
+          }`}
+        >
+          <div className="overflow-hidden">
+            <div className="flex flex-col gap-3 pt-4">
+              {baseSpirits.map((spirit) => (
+                <button
+                  key={spirit}
+                  onClick={() => toggleBaseSpirit(spirit)}
+                  className={`text-left text-xs transition-colors duration-200 ${
+                    selectedBaseSpirits.includes(spirit)
+                      ? "font-bold text-black"
+                      : "text-[#3E3E3E] hover:text-black"
+                  }`}
+                >
+                  {spirit}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-      
+  
+      {/* MENU */}
       <div className="border-b-[0.5px] border-[#C2C4C7] py-4">
-        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="flex items-center justify-between w-full">
-          <p className="text-xs text-[#9A9A9A] tracking-wider font-semibold">MENU</p>
-          <ChevronDown className={`size-4 transition-transform ${isMenuOpen ? '' : '-rotate-90'}`} />
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="flex items-center justify-between w-full"
+        >
+          <p className="text-xs text-[#9A9A9A] tracking-wider font-semibold uppercase">
+            Menu
+          </p>
+  
+          <ChevronDown
+            className={`size-4 transition-transform duration-300 ease-in-out ${
+              isMenuOpen ? "rotate-0" : "-rotate-90"
+            }`}
+          />
         </button>
-        <div className={`overflow-hidden transition-all ${isMenuOpen ? 'max-h-80 opacity-100 pt-4' : 'max-h-0 opacity-0'}`}>
-          <div className="flex flex-col gap-3">
-            {menuFilters.map((filter) => (
-              <button key={filter} onClick={() => toggleMenu(filter)} className={`text-left text-xs ${selectedMenu === filter ? 'font-bold text-black' : 'text-[#3E3E3E]'}`}>
-                {filter}
-              </button>
-            ))}
+  
+        <div
+          className={`grid transition-[grid-template-rows,opacity,transform] duration-300 ease-in-out ${
+            isMenuOpen
+              ? "grid-rows-[1fr] opacity-100 translate-y-0"
+              : "grid-rows-[0fr] opacity-0 -translate-y-1"
+          }`}
+        >
+          <div className="overflow-hidden">
+            <div className="flex flex-col gap-3 pt-4">
+              {menuFilters.map((filter) => (
+                <button
+                  key={filter}
+                  onClick={() => toggleMenu(filter)}
+                  className={`text-left text-xs transition-colors duration-200 ${
+                    selectedMenu === filter
+                      ? "font-bold text-black"
+                      : "text-[#3E3E3E] hover:text-black"
+                  }`}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
+  
     </div>
-  );
+  )
   
   return (
     <>
@@ -358,9 +415,13 @@ export default function MenuPage() {
         <div className="p-6 border-t border-gray-100">
           <button 
             onClick={() => setIsMobileFilterOpen(false)}
-            className="w-full bg-black text-white py-4 rounded-md font-semibold tracking-wide hover:bg-zinc-800 transition-colors active:scale-[0.98]"
+            disabled={!hasActiveFilters}
+            className={`w-full bg-green-600 disabled:bg-green-600/40 text-white py-4 rounded-md font-semibold tracking-wide hover:bg-green-600/90 transition-colors active:scale-[0.98] ${hasActiveFilters ? '' : 'disabled'}`}
           >
-            Show {filteredDrinks.length} Results
+            {hasActiveFilters ? 
+              `Show ${filteredDrinks.length} result${filteredDrinks.length > 1 ? 's' : ''}`
+              : `Show Drinks`
+            }
           </button>
         </div>
       </div>
