@@ -1,10 +1,13 @@
 'use client'
-
 import React, { useRef } from 'react'
-
 export function InquiryForm() {
   const dateInputRef = useRef<HTMLInputElement>(null)
   const [displayDate, setDisplayDate] = React.useState('')
+  const [preferredContact, setPreferredContact] = React.useState('Viber')
+  const [guestCount, setGuestCount] = React.useState(0)
+  const [isLoading, setIsLoading] = React.useState(false)
+  const [isSuccess, setIsSuccess] = React.useState(false)
+  const [error, setError] = React.useState<string | null>(null)
 
   const handleDateClick = () => {
     if (dateInputRef.current) {
@@ -24,6 +27,53 @@ export function InquiryForm() {
       setDisplayDate(formatted)
     } else {
       setDisplayDate('')
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsLoading(true)
+    setError(null)
+
+    const formData = new FormData(e.currentTarget)
+
+    const rawDate = formData.get('date') as string
+    let eventDate: string | undefined
+    if (rawDate) {
+      eventDate = new Date(rawDate).toISOString()
+    }
+
+    const data = {
+      firstName: formData.get('firstName') as string,
+      lastName: formData.get('lastName') as string,
+      email: formData.get('email') as string,
+      mobileViber: formData.get('phone') as string,
+      preferredContact: formData.get('preferredContact') as string,
+      messengerUsername: (formData.get('messengerUsername') as string) || undefined,
+      eventDate,
+      eventType: formData.get('type') as string,
+      venue: formData.get('venue') as string,
+      guestCount: Number(formData.get('guests')),
+      specialRequests: formData.get('message') as string,
+    }
+
+    try {
+      const res = await fetch('/api/inquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}))
+        throw new Error(body?.errors?.[0]?.message || `Request failed (${res.status})`)
+      }
+
+      setIsSuccess(true)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -51,7 +101,17 @@ export function InquiryForm() {
         <div className="px-4">
           {/* form */}
           <div className="z-20 relative rounded-sm flex flex-col max-w-7xl mx-auto gap-10 bg-[#FFFDF9] shadow-xl h-auto px-6 py-10 md:px-16 md:py-12 lg:px-40 lg:py-15">
-            <form className="grid grid-cols-1 md:grid-cols-2 w-full gap-4 md:gap-6">
+            {isSuccess ? (
+              <div className="flex flex-col items-center justify-center gap-4 py-16 text-center">
+                <div className="text-5xl">🎉</div>
+                <h3 className="text-2xl font-semibold text-primary">Inquiry Sent!</h3>
+                <p className="text-gray-600 max-w-md text-base">
+                  We&apos;ll reach out to you via your preferred contact method shortly. Thank you
+                  for choosing Tipsy Trails!
+                </p>
+              </div>
+            ) : (
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 w-full gap-4 md:gap-6">
               {/* Field 1: First Name */}
               <div className="flex flex-col gap-1 border border-gray-400/50 rounded-sm py-2 px-4 w-full h-auto focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
                 <label htmlFor="firstName" className="text-xs font-medium text-gray-600">
@@ -99,14 +159,62 @@ export function InquiryForm() {
                 <label htmlFor="phone" className="text-xs font-medium text-gray-600">
                   Mobile / Viber Number
                 </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  placeholder="+1 (555) 000-0000"
-                  className="w-full text-md text-gray-900 placeholder:text-gray-500 bg-transparent border-none outline-none p-0 focus:ring-0"
-                />
+                <div className="flex items-center">
+                  <span className="text-gray-400 text-md select-none whitespace-nowrap">+63</span>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="912 345 6789"
+                    maxLength={12}
+                    onKeyDown={(e) => {
+                      const allowed = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab']
+                      if (!allowed.includes(e.key) && !/^\d$/.test(e.key)) e.preventDefault()
+                    }}
+                    onChange={(e) => {
+                      e.target.value = e.target.value.replace(/^0+/, '')
+                    }}
+                    className="flex-1 text-md text-gray-900 placeholder:text-gray-500 bg-transparent border-none outline-none p-0 focus:ring-0 ml-1"
+                  />
+                </div>
               </div>
+
+              {/* Field 4b: Preferred Contact Method */}
+              <div className="flex flex-col gap-1 border border-gray-400/50 rounded-sm py-2 px-4 w-full h-auto focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+                <label htmlFor="preferredContact" className="text-xs font-medium text-gray-600">
+                  Preferred Contact Method
+                </label>
+                <select
+                  id="preferredContact"
+                  name="preferredContact"
+                  value={preferredContact}
+                  onChange={(e) => setPreferredContact(e.target.value)}
+                  className="w-full text-md text-gray-900 bg-transparent border-none outline-none p-0 focus:ring-0 appearance-none"
+                >
+                  <option value="Viber">Viber</option>
+                  <option value="Facebook Messenger">Facebook Messenger</option>
+                  <option value="Email">Email</option>
+                </select>
+              </div>
+
+              {/* Field 4c: Messenger Username (conditional) */}
+              {preferredContact === 'Facebook Messenger' && (
+                <div className="flex flex-col gap-1 border border-gray-400/50 rounded-sm py-2 px-4 w-full h-auto focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+                  <label htmlFor="messengerUsername" className="text-xs font-medium text-gray-600">
+                    Messenger Username
+                  </label>
+                  <div className="flex items-center">
+                    <span className="text-gray-400 text-md select-none whitespace-nowrap">m.me/</span>
+                    <input
+                      type="text"
+                      id="messengerUsername"
+                      name="messengerUsername"
+                      placeholder="your.username"
+                      className="flex-1 text-md text-gray-900 placeholder:text-gray-500 bg-transparent border-none outline-none p-0 focus:ring-0"
+                    />
+                  </div>
+                </div>
+              )}
 
               {/* Field 5: Event Date */}
               <div className="flex flex-row items-stretch border border-gray-400/50 rounded-sm w-full h-auto focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all overflow-hidden relative">
@@ -202,7 +310,8 @@ export function InquiryForm() {
                     type="number"
                     id="guests"
                     name="guests"
-                    placeholder="0"
+                    value={guestCount}
+                    onChange={(e) => setGuestCount(Math.max(0, Number(e.target.value)))}
                     className="w-full text-md text-gray-900 placeholder:text-gray-500 bg-transparent border-none outline-none p-0 focus:ring-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                   />
                 </div>
@@ -210,6 +319,7 @@ export function InquiryForm() {
                 <div className="flex flex-col border-l border-gray-400/50 w-10">
                   <button
                     type="button"
+                    onClick={() => setGuestCount((c) => c + 1)}
                     className="flex-1 hover:bg-black/5 flex items-center justify-center text-gray-500 hover:text-primary transition-colors"
                     aria-label="Increase guest count"
                   >
@@ -228,6 +338,7 @@ export function InquiryForm() {
                   </button>
                   <button
                     type="button"
+                    onClick={() => setGuestCount((c) => Math.max(0, c - 1))}
                     className="flex-1 border-t border-gray-400/50 hover:bg-black/5 flex items-center justify-center text-gray-500 hover:text-primary transition-colors"
                     aria-label="Decrease guest count"
                   >
@@ -262,15 +373,22 @@ export function InquiryForm() {
               </div>
 
               {/* Submit Button */}
-              <div className="md:col-span-2 mt-4">
+              <div className="md:col-span-2 mt-4 flex flex-col gap-3">
+                {error && (
+                  <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-sm px-4 py-2">
+                    {error}
+                  </p>
+                )}
                 <button
                   type="submit"
-                  className="px-5 py-3 bg-primary text-white text-md rounded-sm hover:bg-opacity-90 transition-all"
+                  disabled={isLoading}
+                  className="px-5 py-3 bg-primary text-white text-md rounded-sm hover:bg-opacity-90 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Send Inquiry
+                  {isLoading ? 'Sending...' : 'Send Inquiry'}
                 </button>
               </div>
             </form>
+            )}
           </div>
         </div>
       </div>

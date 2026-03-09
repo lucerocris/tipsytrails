@@ -4,7 +4,7 @@ export const Cocktails: CollectionConfig = {
   slug: 'cocktails',
   admin: {
     useAsTitle: 'name',
-    group: 'Content',
+    group: 'Website Content',
   },
   fields: [
     {
