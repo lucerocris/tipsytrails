@@ -169,8 +169,8 @@ export default function MenuPage() {
             setSelectedBaseSpirits([])
             setSelectedMenu(null)
           }}
-          className={`text-xs font-bold text-black underline underline-offset-4 hover:text-primary transition-opacity duration-500 ${
-            hasActiveFilters ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          className={`text-xs font-bold text-black underline underline-offset-4 transition-colors duration-500 ${
+            hasActiveFilters ? 'text-primary' : 'text-primary/40 disabled'
           }`}
         >
           CLEAR ALL
@@ -221,7 +221,7 @@ export default function MenuPage() {
   return (
     <>
       {/* Hero Section */}
-      <div className="relative h-screen w-full overflow-hidden text-foreground px-24 py-16 pt-30 flex justify-center">
+      <div className="relative min-h-screen md:h-[80vh] lg:h-screen w-full overflow-hidden text-foreground px-6 py-20 md:px-12 lg:px-24 pt-32 flex justify-center">
         {/* The Background Image */}
         <Image
           src="/placeholder.png"
@@ -235,16 +235,22 @@ export default function MenuPage() {
 
         {/* The Content Overlay */}
         <div className="relative z-10 flex h-full w-full max-w-7xl">
-          <div className="flex h-auto flex-col gap-1 lg:gap-3">
-            <div className="flex flex-col gap-8">
-              <div className="flex flex-col gap-3.5">
-                <h1 className={`text-6xl font-semibold flex flex-col gap-2 text-black`}>
-                  MEET OUR
-                  <span className={`${parrisienne.className} text-primary text-8xl leading-14`}>
-                    menu
-                  </span>
-                </h1>
-              </div>
+          <div className="flex h-auto flex-col items-start text-left">
+            <div className="flex flex-col">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold flex flex-col text-black leading-[0.8]">
+                MEET OUR
+                <span 
+                  className={`
+                    ${parrisienne.className} 
+                    text-primary 
+                    text-6xl md:text-7xl lg:text-8xl 
+                    leading-none 
+                    -mt-2 md:-mt-4 lg:-mt-6
+                  `}
+                >
+                  menu
+                </span>
+              </h1>
             </div>
           </div>
         </div>
@@ -337,7 +343,7 @@ export default function MenuPage() {
           <button
             onClick={() => setIsMobileFilterOpen(false)}
             disabled={!hasActiveFilters}
-            className={`w-full bg-green-600 disabled:bg-green-600/40 text-white py-4 rounded-md font-semibold tracking-wide hover:bg-green-600/90 transition-colors active:scale-[0.98] ${hasActiveFilters ? '' : 'disabled'}`}
+            className={`w-full bg-primary disabled:bg-primary/40 text-white py-4 rounded-md font-semibold tracking-wide hover:bg-primary/90 transition-colors active:scale-[0.98] ${hasActiveFilters ? '' : 'disabled'}`}
           >
             {hasActiveFilters
               ? `Show ${filteredDrinks.length} result${filteredDrinks.length > 1 ? 's' : ''}`

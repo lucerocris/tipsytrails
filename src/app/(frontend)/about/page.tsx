@@ -7,7 +7,7 @@ export default function AboutPage() {
   return (
     <main>
       {/* --- HERO SECTION --- */}
-      <div className="relative h-screen w-full overflow-hidden text-foreground px-24 py-16 pt-30 flex justify-center">
+      <div className="relative min-h-screen md:h-[80vh] lg:h-screen w-full overflow-hidden text-foreground px-6 py-20 md:px-12 lg:px-24 pt-32 flex justify-center">
         {/* The Background Image */}
         <Image
           src="/placeholder.png"
@@ -21,16 +21,22 @@ export default function AboutPage() {
 
         {/* The Content Overlay */}
         <div className="relative z-10 flex h-full w-full max-w-7xl">
-          <div className="flex h-auto flex-col gap-1 lg:gap-3">
-            <div className="flex flex-col gap-8">
-              <div className="flex flex-col gap-3.5">
-                <h1 className={`text-6xl font-semibold flex flex-col gap-2 text-black`}>
-                  MEET OUR
-                  <span className={`${parrisienne.className} text-primary text-8xl leading-14`}>
-                    journey
-                  </span>
-                </h1>
-              </div>
+          <div className="flex h-auto flex-col items-start text-left">
+            <div className="flex flex-col">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold flex flex-col text-black leading-[0.8]">
+                KNOW OUR
+                <span 
+                  className={`
+                    ${parrisienne.className} 
+                    text-primary 
+                    text-6xl md:text-7xl lg:text-8xl 
+                    leading-none 
+                    -mt-2 md:-mt-4 lg:-mt-6 ml-2
+                  `}
+                >
+                  journey
+                </span>
+              </h1>
             </div>
           </div>
         </div>
