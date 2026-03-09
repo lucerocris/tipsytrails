@@ -9,7 +9,12 @@ const nextConfig = {
         hostname: 'localhost',
         port: '3000',
       },
-
+      {
+        protocol: 'https',
+        hostname: 'lucerocris.sgp1.cdn.digitaloceanspaces.com',
+        port: '',
+        pathname: '/**', // This allows all image paths from this bucket
+      },
     ],
   },
   // Your Next.js config here

@@ -37,19 +37,23 @@ export default buildConfig({
   sharp,
     plugins: [
     s3Storage({
+      acl: 'public-read',
       collections: {
         media: {
           prefix: 'tipsytrails',
+          generateFileURL: ({ filename, prefix }: { filename: string; prefix?: string }) =>
+            `https://${process.env.DO_SPACE_NAME}.sgp1.cdn.digitaloceanspaces.com/${prefix}/${filename}`,
         }, 
       },
       bucket: process.env.DO_SPACE_NAME!,
       config: {
-        endpoint: process.env.DO_SPACE_ENDPOINT,
+        endpoint: 'https://sgp1.digitaloceanspaces.com',
         credentials: {
           accessKeyId: process.env.DO_ACCESS_KEY_ID!,
           secretAccessKey: process.env.DO_SECRET_ACCESS_KEY!,
         },
-        region: process.env.DO_SPACE_REGION,
+        region: 'sgp1',
+        forcePathStyle: false,
       },
     }),
   ],
