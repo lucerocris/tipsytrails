@@ -72,7 +72,7 @@ export default async function HomePage() {
                 </p>
               </div>
 
-              <div className="flex flex-row md:flex-col gap-3">
+              <div className="flex flex-row gap-3">
                 <Button href="/" className="flex-1 w-full text-center">
                   Get My
                   <br className="md:hidden" /> Custom Quote

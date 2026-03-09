@@ -1,10 +1,12 @@
 import Image from 'next/image'
 import { parrisienne } from '@/app/(frontend)/fonts'
 import React from 'react'
+import InteractiveTimeline from '@/app/(frontend)/components/InteractiveTimeline'
 
 export default function AboutPage() {
   return (
-    <>
+    <main>
+      {/* --- HERO SECTION --- */}
       <div className="relative h-screen w-full overflow-hidden text-foreground px-24 py-16 pt-30 flex justify-center">
         {/* The Background Image */}
         <Image
@@ -25,7 +27,7 @@ export default function AboutPage() {
                 <h1 className={`text-6xl font-semibold flex flex-col gap-2 text-black`}>
                   MEET OUR
                   <span className={`${parrisienne.className} text-primary text-8xl leading-14`}>
-                    menu
+                    journey
                   </span>
                 </h1>
               </div>
@@ -33,6 +35,8 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
-    </>
+
+      <InteractiveTimeline />
+    </main>
   )
 }
