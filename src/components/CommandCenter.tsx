@@ -64,6 +64,18 @@ export async function CommandCenter({
       user={user}
       visibleEntities={initPageResult.visibleEntities}
     >
+      <style>{`
+        .cc-dashboard-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+        @media (min-width: 768px) {
+          .cc-dashboard-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+      `}</style>
       <Gutter>
         {/* Header */}
         <div
@@ -100,13 +112,7 @@ export async function CommandCenter({
         </div>
 
         {/* 3-Column Dashboard Grid */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '1.5rem',
-          }}
-        >
+        <div className="cc-dashboard-grid">
 
           {/* Column 1: Action Required — New Leads */}
           <div
