@@ -67,13 +67,28 @@ export async function CommandCenter({
       <Gutter>
         {/* Header */}
         <div
-          className="mb-8 pb-6"
-          style={{ borderBottom: '1px solid var(--theme-elevation-150)' }}
+          style={{
+            marginBottom: '2rem',
+            paddingBottom: '1.5rem',
+            borderBottom: '1px solid var(--theme-elevation-150)',
+          }}
         >
-          <h1 className="text-3xl font-bold" style={{ color: 'var(--theme-elevation-800)' }}>
+          <h1
+            style={{
+              fontSize: '1.875rem',
+              fontWeight: 700,
+              color: 'var(--theme-elevation-800)',
+            }}
+          >
             Tipsy Trails Command Center 🍸
           </h1>
-          <p className="mt-1 text-sm" style={{ color: 'var(--theme-elevation-500)' }}>
+          <p
+            style={{
+              marginTop: '0.25rem',
+              fontSize: '0.875rem',
+              color: 'var(--theme-elevation-500)',
+            }}
+          >
             Your daily operational overview &mdash;{' '}
             {new Date().toLocaleDateString('en-US', {
               weekday: 'long',
@@ -85,30 +100,53 @@ export async function CommandCenter({
         </div>
 
         {/* 3-Column Dashboard Grid */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: '1.5rem',
+          }}
+        >
 
           {/* Column 1: Action Required — New Leads */}
           <div
-            className="flex flex-col rounded-lg"
             style={{
+              display: 'flex',
+              flexDirection: 'column',
+              borderRadius: '0.5rem',
               border: '1px solid var(--theme-elevation-150)',
               background: 'var(--theme-elevation-50)',
               boxShadow: '0 2px 2px -1px rgba(0,0,0,0.1)',
             }}
           >
             <div
-              className="flex items-center justify-between rounded-t-lg px-4 py-3"
               style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                borderRadius: '0.5rem 0.5rem 0 0',
+                padding: '0.75rem 1rem',
                 background: 'var(--theme-error-50)',
                 borderBottom: '1px solid var(--theme-elevation-150)',
               }}
             >
-              <h2 className="text-sm font-semibold" style={{ color: 'var(--theme-error-700)' }}>
+              <h2
+                style={{
+                  fontSize: '0.875rem',
+                  fontWeight: 600,
+                  color: 'var(--theme-error-700)',
+                }}
+              >
                 🚨 Action Required
               </h2>
               <span
-                className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold"
                 style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  borderRadius: '9999px',
+                  padding: '0.125rem 0.625rem',
+                  fontSize: '0.75rem',
+                  fontWeight: 700,
                   background: 'var(--theme-error-100)',
                   color: 'var(--theme-error-600)',
                 }}
@@ -117,14 +155,30 @@ export async function CommandCenter({
               </span>
             </div>
 
-            <div className="flex-1 p-0" style={{ background: 'var(--theme-elevation-0)' }}>
+            <div style={{ flex: 1, padding: 0, background: 'var(--theme-elevation-0)' }}>
               {newLeads.docs.length === 0 ? (
-                <div className="flex flex-col items-center justify-center px-4 py-10 text-center">
-                  <span className="text-3xl">✅</span>
-                  <p className="mt-2 text-sm font-medium" style={{ color: 'var(--theme-elevation-600)' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '2.5rem 1rem',
+                    textAlign: 'center',
+                  }}
+                >
+                  <span style={{ fontSize: '1.875rem' }}>✅</span>
+                  <p
+                    style={{
+                      marginTop: '0.5rem',
+                      fontSize: '0.875rem',
+                      fontWeight: 500,
+                      color: 'var(--theme-elevation-600)',
+                    }}
+                  >
                     All caught up!
                   </p>
-                  <p className="text-xs" style={{ color: 'var(--theme-elevation-400)' }}>
+                  <p style={{ fontSize: '0.75rem', color: 'var(--theme-elevation-400)' }}>
                     No new leads right now.
                   </p>
                 </div>
@@ -132,23 +186,32 @@ export async function CommandCenter({
                 newLeads.docs.map((lead, i) => (
                   <div
                     key={lead.id}
-                    className="flex items-center justify-between px-4 py-3"
                     style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '0.75rem 1rem',
                       borderTop: i > 0 ? '1px solid var(--theme-elevation-100)' : undefined,
                     }}
                   >
-                    <div className="min-w-0 flex-1">
+                    <div style={{ minWidth: 0, flex: 1 }}>
                       <p
-                        className="truncate text-sm font-medium"
-                        style={{ color: 'var(--theme-elevation-800)' }}
+                        style={{
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                          fontSize: '0.875rem',
+                          fontWeight: 500,
+                          color: 'var(--theme-elevation-800)',
+                        }}
                       >
                         {lead.fullName}
                       </p>
-                      <p className="text-xs" style={{ color: 'var(--theme-elevation-500)' }}>
+                      <p style={{ fontSize: '0.75rem', color: 'var(--theme-elevation-500)' }}>
                         {formatDate(lead.eventDate)}
                       </p>
                     </div>
-                    <div className="ml-3 shrink-0">
+                    <div style={{ marginLeft: '0.75rem', flexShrink: 0 }}>
                       <Button
                         el="link"
                         to={`/admin/collections/inquiries/${lead.id}`}
@@ -165,8 +228,9 @@ export async function CommandCenter({
 
             {newLeads.totalDocs > 5 && (
               <div
-                className="rounded-b-lg px-4 py-2"
                 style={{
+                  borderRadius: '0 0 0.5rem 0.5rem',
+                  padding: '0.5rem 1rem',
                   borderTop: '1px solid var(--theme-elevation-100)',
                   background: 'var(--theme-elevation-0)',
                 }}
@@ -183,26 +247,43 @@ export async function CommandCenter({
 
           {/* Column 2: Upcoming Gigs */}
           <div
-            className="flex flex-col rounded-lg"
             style={{
+              display: 'flex',
+              flexDirection: 'column',
+              borderRadius: '0.5rem',
               border: '1px solid var(--theme-elevation-150)',
               background: 'var(--theme-elevation-50)',
               boxShadow: '0 2px 2px -1px rgba(0,0,0,0.1)',
             }}
           >
             <div
-              className="flex items-center justify-between rounded-t-lg px-4 py-3"
               style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                borderRadius: '0.5rem 0.5rem 0 0',
+                padding: '0.75rem 1rem',
                 background: 'var(--theme-success-50)',
                 borderBottom: '1px solid var(--theme-elevation-150)',
               }}
             >
-              <h2 className="text-sm font-semibold" style={{ color: 'var(--theme-success-700)' }}>
+              <h2
+                style={{
+                  fontSize: '0.875rem',
+                  fontWeight: 600,
+                  color: 'var(--theme-success-700)',
+                }}
+              >
                 🗓️ Upcoming Gigs
               </h2>
               <span
-                className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold"
                 style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  borderRadius: '9999px',
+                  padding: '0.125rem 0.625rem',
+                  fontSize: '0.75rem',
+                  fontWeight: 700,
                   background: 'var(--theme-success-100)',
                   color: 'var(--theme-success-600)',
                 }}
@@ -211,14 +292,30 @@ export async function CommandCenter({
               </span>
             </div>
 
-            <div className="flex-1 p-0" style={{ background: 'var(--theme-elevation-0)' }}>
+            <div style={{ flex: 1, padding: 0, background: 'var(--theme-elevation-0)' }}>
               {upcomingGigs.docs.length === 0 ? (
-                <div className="flex flex-col items-center justify-center px-4 py-10 text-center">
-                  <span className="text-3xl">📅</span>
-                  <p className="mt-2 text-sm font-medium" style={{ color: 'var(--theme-elevation-600)' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '2.5rem 1rem',
+                    textAlign: 'center',
+                  }}
+                >
+                  <span style={{ fontSize: '1.875rem' }}>📅</span>
+                  <p
+                    style={{
+                      marginTop: '0.5rem',
+                      fontSize: '0.875rem',
+                      fontWeight: 500,
+                      color: 'var(--theme-elevation-600)',
+                    }}
+                  >
                     Calendar is clear
                   </p>
-                  <p className="text-xs" style={{ color: 'var(--theme-elevation-400)' }}>
+                  <p style={{ fontSize: '0.75rem', color: 'var(--theme-elevation-400)' }}>
                     No upcoming events scheduled.
                   </p>
                 </div>
@@ -226,26 +323,43 @@ export async function CommandCenter({
                 upcomingGigs.docs.map((event, i) => (
                   <div
                     key={event.id}
-                    className="flex items-center justify-between px-4 py-3"
                     style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '0.75rem 1rem',
                       borderTop: i > 0 ? '1px solid var(--theme-elevation-100)' : undefined,
                     }}
                   >
-                    <div className="min-w-0 flex-1">
+                    <div style={{ minWidth: 0, flex: 1 }}>
                       <p
-                        className="truncate text-sm font-medium"
-                        style={{ color: 'var(--theme-elevation-800)' }}
+                        style={{
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                          fontSize: '0.875rem',
+                          fontWeight: 500,
+                          color: 'var(--theme-elevation-800)',
+                        }}
                       >
                         {event.eventName}
                       </p>
-                      <p className="text-xs" style={{ color: 'var(--theme-elevation-500)' }}>
+                      <p style={{ fontSize: '0.75rem', color: 'var(--theme-elevation-500)' }}>
                         {formatDate(event.eventDate)}
                       </p>
-                      <p className="truncate text-xs" style={{ color: 'var(--theme-elevation-400)' }}>
+                      <p
+                        style={{
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                          fontSize: '0.75rem',
+                          color: 'var(--theme-elevation-400)',
+                        }}
+                      >
                         {event.venue}
                       </p>
                     </div>
-                    <div className="ml-3 shrink-0">
+                    <div style={{ marginLeft: '0.75rem', flexShrink: 0 }}>
                       <Button
                         el="link"
                         to={`/admin/collections/events/${event.id}`}
@@ -262,8 +376,9 @@ export async function CommandCenter({
 
             {upcomingGigs.totalDocs > 5 && (
               <div
-                className="rounded-b-lg px-4 py-2"
                 style={{
+                  borderRadius: '0 0 0.5rem 0.5rem',
+                  padding: '0.5rem 1rem',
                   borderTop: '1px solid var(--theme-elevation-100)',
                   background: 'var(--theme-elevation-0)',
                 }}
@@ -280,26 +395,43 @@ export async function CommandCenter({
 
           {/* Column 3: Pending Payments */}
           <div
-            className="flex flex-col rounded-lg"
             style={{
+              display: 'flex',
+              flexDirection: 'column',
+              borderRadius: '0.5rem',
               border: '1px solid var(--theme-elevation-150)',
               background: 'var(--theme-elevation-50)',
               boxShadow: '0 2px 2px -1px rgba(0,0,0,0.1)',
             }}
           >
             <div
-              className="flex items-center justify-between rounded-t-lg px-4 py-3"
               style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                borderRadius: '0.5rem 0.5rem 0 0',
+                padding: '0.75rem 1rem',
                 background: 'var(--theme-warning-50)',
                 borderBottom: '1px solid var(--theme-elevation-150)',
               }}
             >
-              <h2 className="text-sm font-semibold" style={{ color: 'var(--theme-warning-700)' }}>
+              <h2
+                style={{
+                  fontSize: '0.875rem',
+                  fontWeight: 600,
+                  color: 'var(--theme-warning-700)',
+                }}
+              >
                 💰 Pending Payments
               </h2>
               <span
-                className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold"
                 style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  borderRadius: '9999px',
+                  padding: '0.125rem 0.625rem',
+                  fontSize: '0.75rem',
+                  fontWeight: 700,
                   background: 'var(--theme-warning-100)',
                   color: 'var(--theme-warning-600)',
                 }}
@@ -308,14 +440,30 @@ export async function CommandCenter({
               </span>
             </div>
 
-            <div className="flex-1 p-0" style={{ background: 'var(--theme-elevation-0)' }}>
+            <div style={{ flex: 1, padding: 0, background: 'var(--theme-elevation-0)' }}>
               {pendingDeposits.docs.length === 0 ? (
-                <div className="flex flex-col items-center justify-center px-4 py-10 text-center">
-                  <span className="text-3xl">💵</span>
-                  <p className="mt-2 text-sm font-medium" style={{ color: 'var(--theme-elevation-600)' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '2.5rem 1rem',
+                    textAlign: 'center',
+                  }}
+                >
+                  <span style={{ fontSize: '1.875rem' }}>💵</span>
+                  <p
+                    style={{
+                      marginTop: '0.5rem',
+                      fontSize: '0.875rem',
+                      fontWeight: 500,
+                      color: 'var(--theme-elevation-600)',
+                    }}
+                  >
                     All deposits collected!
                   </p>
-                  <p className="text-xs" style={{ color: 'var(--theme-elevation-400)' }}>
+                  <p style={{ fontSize: '0.75rem', color: 'var(--theme-elevation-400)' }}>
                     No pending payments right now.
                   </p>
                 </div>
@@ -323,21 +471,35 @@ export async function CommandCenter({
                 pendingDeposits.docs.map((event, i) => (
                   <div
                     key={event.id}
-                    className="flex items-center justify-between px-4 py-3"
                     style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '0.75rem 1rem',
                       borderTop: i > 0 ? '1px solid var(--theme-elevation-100)' : undefined,
                     }}
                   >
-                    <div className="min-w-0 flex-1">
+                    <div style={{ minWidth: 0, flex: 1 }}>
                       <p
-                        className="truncate text-sm font-medium"
-                        style={{ color: 'var(--theme-elevation-800)' }}
+                        style={{
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                          fontSize: '0.875rem',
+                          fontWeight: 500,
+                          color: 'var(--theme-elevation-800)',
+                        }}
                       >
                         {event.eventName}
                       </p>
                       <span
-                        className="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium"
                         style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          borderRadius: '9999px',
+                          padding: '0.125rem 0.5rem',
+                          fontSize: '0.75rem',
+                          fontWeight: 500,
                           background: 'var(--theme-warning-100)',
                           color: 'var(--theme-warning-600)',
                         }}
@@ -345,7 +507,7 @@ export async function CommandCenter({
                         Awaiting Deposit
                       </span>
                     </div>
-                    <div className="ml-3 shrink-0">
+                    <div style={{ marginLeft: '0.75rem', flexShrink: 0 }}>
                       <Button
                         el="link"
                         to={`/admin/collections/events/${event.id}`}
@@ -362,8 +524,9 @@ export async function CommandCenter({
 
             {pendingDeposits.totalDocs > 50 && (
               <div
-                className="rounded-b-lg px-4 py-2"
                 style={{
+                  borderRadius: '0 0 0.5rem 0.5rem',
+                  padding: '0.5rem 1rem',
                   borderTop: '1px solid var(--theme-elevation-100)',
                   background: 'var(--theme-elevation-0)',
                 }}
