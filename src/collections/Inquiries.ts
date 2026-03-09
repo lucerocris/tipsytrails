@@ -5,16 +5,16 @@ export const Inquiries: CollectionConfig = {
   admin: {
     useAsTitle: 'fullName',
     defaultColumns: ['fullName', 'eventDate', 'status', 'createdAt'],
-    group: 'CRM',
+    group: 'CRM & Sales',
   },
   access: {
-    create: () => true,
+    create: () => true, 
     read: ({ req: { user } }) => !!user,
     update: ({ req: { user } }) => !!user,
     delete: ({ req: { user } }) => !!user,
   },
   fields: [
-    // --- CRM STATUS (Admin Only) ---
+    // --- CRM STATUS & UI (Admin Only Sidebar) ---
     {
       name: 'status',
       type: 'select',
@@ -31,6 +31,16 @@ export const Inquiries: CollectionConfig = {
       ],
     },
     {
+      name: 'quickMessageUI',
+      type: 'ui',
+      admin: {
+        position: 'sidebar',
+        components: {
+          Field: '@/components/QuickMessage#QuickMessage',
+        },
+      },
+    },
+    {
       name: 'adminNotes',
       type: 'textarea',
       admin: {
@@ -41,14 +51,14 @@ export const Inquiries: CollectionConfig = {
 
     // --- CLIENT DETAILS (From Form) ---
     {
-      type: 'row', // Groups fields side-by-side in the admin panel
+      type: 'row', 
       fields: [
         { name: 'firstName', type: 'text', required: true },
         { name: 'lastName', type: 'text', required: true },
       ],
     },
     {
-      name: 'fullName', // A hidden field to use as the title in the admin list
+      name: 'fullName', 
       type: 'text',
       admin: { hidden: true },
       hooks: {
@@ -68,13 +78,37 @@ export const Inquiries: CollectionConfig = {
         { name: 'mobileViber', type: 'text', required: true },
       ],
     },
+    
+   
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'preferredContact',
+          type: 'select',
+          defaultValue: 'Viber',
+          options: [
+            { label: 'Viber', value: 'Viber' },
+            { label: 'Facebook Messenger', value: 'Facebook Messenger' },
+            { label: 'Email', value: 'Email' },
+          ],
+        },
+        {
+          name: 'messengerUsername',
+          type: 'text',
+          admin: {
+            condition: (data) => data.preferredContact === 'Facebook Messenger',
+            description: 'Username without the m.me/ prefix',
+          },
+        },
+      ],
+    },
 
-    // --- EVENT DETAILS (From Form) ---
     {
       type: 'row',
       fields: [
         { name: 'eventDate', type: 'date', required: true },
-        { name: 'eventType', type: 'text' }, // Can be changed to 'select' if you have fixed types
+        { name: 'eventType', type: 'text' }, 
       ],
     },
     {

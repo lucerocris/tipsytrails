@@ -12,6 +12,9 @@ import { Inquiries } from '@/collections/Inquiries'
 import { Cocktails } from '@/collections/Cocktails'
 import { Testimonials } from '@/collections/Testimonials'
 import { Categories } from '@/collections/Categories'
+import { Clients } from '@/collections/Clients'
+import { Events } from '@/collections/Events'
+import { Packages } from '@/collections/Packages'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -22,8 +25,29 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+
+    components: {
+      views: {
+        tipsyCommandCenter: {
+          Component: '/components/CommandCenter#CommandCenter',
+          path: '/command-center',
+          exact: true,
+        },
+      },
+      beforeNavLinks: ['/components/CommandCenterLink#CommandCenterLink'],
+    },
   },
-  collections: [Users, Media, Inquiries, Cocktails, Testimonials, Categories],
+  collections: [
+    Users,
+    Media,
+    Inquiries,
+    Cocktails,
+    Testimonials,
+    Categories,
+    Clients,
+    Events,
+    Packages,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -35,7 +59,7 @@ export default buildConfig({
     },
   }),
   sharp,
-    plugins: [
+  plugins: [
     s3Storage({
       acl: 'public-read',
       collections: {
@@ -43,7 +67,7 @@ export default buildConfig({
           prefix: 'tipsytrails',
           generateFileURL: ({ filename, prefix }: { filename: string; prefix?: string }) =>
             `https://${process.env.DO_SPACE_NAME}.sgp1.cdn.digitaloceanspaces.com/${prefix}/${filename}`,
-        }, 
+        },
       },
       bucket: process.env.DO_SPACE_NAME!,
       config: {

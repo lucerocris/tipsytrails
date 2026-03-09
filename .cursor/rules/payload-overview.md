@@ -79,7 +79,7 @@ export async function GET() {
   return Response.json(posts)
 }
 
-// In Server Components
+// In Server components
 import { getPayload } from 'payload'
 import config from '@payload-config'
 

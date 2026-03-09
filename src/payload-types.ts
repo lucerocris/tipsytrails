@@ -73,6 +73,9 @@ export interface Config {
     cocktails: Cocktail;
     testimonials: Testimonial;
     categories: Category;
+    clients: Client;
+    events: Event;
+    packages: Package;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -90,6 +93,9 @@ export interface Config {
     cocktails: CocktailsSelect<false> | CocktailsSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    clients: ClientsSelect<false> | ClientsSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
+    packages: PackagesSelect<false> | PackagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -187,6 +193,11 @@ export interface Inquiry {
   fullName?: string | null;
   email?: string | null;
   mobileViber: string;
+  preferredContact?: ('Viber' | 'Facebook Messenger' | 'Email') | null;
+  /**
+   * Username without the m.me/ prefix
+   */
+  messengerUsername?: string | null;
   eventDate: string;
   eventType?: string | null;
   venue: string;
@@ -254,6 +265,77 @@ export interface Testimonial {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clients".
+ */
+export interface Client {
+  id: number;
+  clientType?: ('individual' | 'corporate' | 'coordinator') | null;
+  /**
+   * e.g., Aboitiz, San Miguel, etc.
+   */
+  companyName?: string | null;
+  firstName: string;
+  lastName: string;
+  fullName?: string | null;
+  email?: string | null;
+  mobileViber: string;
+  totalSpent?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  eventName: string;
+  client: number | Client;
+  paymentStatus?: ('deposit_pending' | 'deposit_paid' | 'fully_paid') | null;
+  eventDate: string;
+  setupTime?: string | null;
+  venue: string;
+  packageBooked?: (number | null) | Package;
+  /**
+   * Final price if negotiated differently from the base package price.
+   */
+  agreedPrice?: number | null;
+  operationsNotes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "packages".
+ */
+export interface Package {
+  id: number;
+  name: string;
+  basePrice: number;
+  /**
+   * List the liquors, mixers, and hours included.
+   */
+  inclusions?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -299,6 +381,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'categories';
         value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'clients';
+        value: number | Client;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: number | Event;
+      } | null)
+    | ({
+        relationTo: 'packages';
+        value: number | Package;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -395,6 +489,8 @@ export interface InquiriesSelect<T extends boolean = true> {
   fullName?: T;
   email?: T;
   mobileViber?: T;
+  preferredContact?: T;
+  messengerUsername?: T;
   eventDate?: T;
   eventType?: T;
   venue?: T;
@@ -435,6 +531,51 @@ export interface CategoriesSelect<T extends boolean = true> {
   featuredOnLanding?: T;
   order?: T;
   drinks?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "clients_select".
+ */
+export interface ClientsSelect<T extends boolean = true> {
+  clientType?: T;
+  companyName?: T;
+  firstName?: T;
+  lastName?: T;
+  fullName?: T;
+  email?: T;
+  mobileViber?: T;
+  totalSpent?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  eventName?: T;
+  client?: T;
+  paymentStatus?: T;
+  eventDate?: T;
+  setupTime?: T;
+  venue?: T;
+  packageBooked?: T;
+  agreedPrice?: T;
+  operationsNotes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "packages_select".
+ */
+export interface PackagesSelect<T extends boolean = true> {
+  name?: T;
+  basePrice?: T;
+  inclusions?: T;
+  isActive?: T;
   updatedAt?: T;
   createdAt?: T;
 }

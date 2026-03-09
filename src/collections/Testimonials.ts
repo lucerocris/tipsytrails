@@ -4,7 +4,7 @@ export const Testimonials: CollectionConfig = {
   slug: 'testimonials',
   admin: {
     useAsTitle: 'clientName',
-    group: 'Content',
+    group: 'Website Content',
   },
   fields: [
     {
