@@ -221,23 +221,26 @@ export default function MenuPage() {
   return (
     <>
       {/* Hero Section */}
-      <div className="relative h-screen lg:h-screen w-full overflow-hidden flex items-center justify-center">
+      <div className="relative h-screen w-full overflow-hidden text-foreground px-24 py-16 pt-30 flex justify-center">
+        {/* The Background Image */}
         <Image
           src="/placeholder.png"
-          alt="Hero Background"
+          alt="Hero background"
           fill
           unoptimized
           priority
           className="object-cover -z-10"
           sizes="100vw"
         />
-        <div className="relative z-10 flex-h-full w-full max-w-7xl">
+
+        {/* The Content Overlay */}
+        <div className="relative z-10 flex h-full w-full max-w-7xl">
           <div className="flex h-auto flex-col gap-1 lg:gap-3">
             <div className="flex flex-col gap-8">
               <div className="flex flex-col gap-3.5">
-                <h1 className="text-5xl sm:text-5xl md:text-5xl lg:text-6xl font-semibold flex flex-col gap-2 text-black">
+                <h1 className={`text-6xl font-semibold flex flex-col gap-2 text-black`}>
                   MEET OUR
-                  <span className={`${parrisienne.className} text-primary text-6xl sm:text-5xl md:text-6xl lg:text-8xl leading-tight`}>
+                  <span className={`${parrisienne.className} text-primary text-8xl leading-14`}>
                     menu
                   </span>
                 </h1>
@@ -249,7 +252,6 @@ export default function MenuPage() {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 lg:py-20">
         <div className="flex flex-col lg:flex-row gap-12">
-
           {/* Filter Desktop (desktop) */}
           <aside className="hidden lg:block w-64 shrink-0 sticky top-24 self-start">
             {filterSections}
@@ -273,7 +275,9 @@ export default function MenuPage() {
 
             {hasActiveFilters ? (
               <div className="flex flex-col gap-8">
-                <h2 className="text-3xl lg:text-4xl text-[#3E3E3E] font-medium">{selectedFilterTitle}</h2>
+                <h2 className="text-3xl lg:text-4xl text-[#3E3E3E] font-medium">
+                  {selectedFilterTitle}
+                </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
                   {filteredDrinks.map((drink) => (
                     <div key={drink.id} className="group cursor-pointer">
@@ -284,7 +288,9 @@ export default function MenuPage() {
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                       </div>
-                      <p className={`${playfair.className} text-xl lg:text-2xl text-black`}>{drink.name}</p>
+                      <p className={`${playfair.className} text-xl lg:text-2xl text-black`}>
+                        {drink.name}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -324,9 +330,7 @@ export default function MenuPage() {
         </div>
 
         {/* Content Area */}
-        <div className="flex-1 overflow-y-auto p-6 pt-8">
-          {filterSections}
-        </div>
+        <div className="flex-1 overflow-y-auto p-6 pt-8">{filterSections}</div>
 
         {/* Footer Action */}
         <div className="p-6 border-t border-gray-100">

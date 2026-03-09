@@ -59,13 +59,13 @@ export function Navbar() {
         <div className="navbar-content">
           {/* Desktop Navigation */}
           <div className="hidden md:flex w-full h-full justify-between">
-            <Link href="/public" className="navbar-logo flex items-center h-full">
+            <Link href="/" className="navbar-logo flex items-center h-full">
               <img src="/logo.svg" alt="Logo" className="w-28" />
             </Link>
 
             <ul className="navbar-links h-full">
               <li className="h-full">
-                <Link href="/public" className="flex items-center h-full px-2">
+                <Link href="/" className="flex items-center h-full px-2">
                   Home
                 </Link>
               </li>
