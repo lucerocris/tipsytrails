@@ -12,8 +12,8 @@ interface CocktailCarouselProps {
 }
 
 const cardBasisClass: Record<3 | 4, string> = {
-  3: 'min-w-0 flex-[0_0_80%] md:flex-[0_0_calc(50%_-_0.5rem)] lg:flex-[0_0_calc(33.333%_-_0.667rem)]',
-  4: 'min-w-0 flex-[0_0_80%] md:flex-[0_0_calc(50%_-_0.5rem)] lg:flex-[0_0_calc(25%_-_0.75rem)]',
+  3: 'min-w-0 flex-[0_0_80%] md:md:flex-[0_0_calc((100%_-_3rem)/2)] lg:flex-[0_0_calc(33.333%_-_0.667rem)]',
+  4: 'min-w-0 flex-[0_0_85%] md:md:flex-[0_0_calc((100%_-_3rem)/2)] lg:flex-[0_0_calc(25%_-_0.75rem)]',
 }
 
 function ArrowIcon({ direction }: { direction: 'left' | 'right' }) {
@@ -118,7 +118,7 @@ export function CocktailCarousel({ drinks, baseUrl, categoryName, cardsPerView =
       {/* carousel viewport */}
       <div className="overflow-hidden" ref={emblaRef}>
         {/* carousel container: keep this structure + css */}
-        <div className="flex gap-4 h-[434px]">
+        <div className="flex gap-6 h-[434px]">
           {drinks.map((drink, idx) => {
             const image = drink.image && typeof drink.image === 'object' ? drink.image : null
             const imageUrl = image?.url
