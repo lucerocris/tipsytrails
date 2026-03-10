@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { HeroBlock } from '@/blocks/Hero'
+import { HeroBlockUI } from '@/blocks/HeroUI'
 
 type BlockRendererProps = {
   blocks: any[]
@@ -18,7 +18,7 @@ export const BlockRenderer = ({ blocks }: BlockRendererProps) => {
         switch (block.blockType) {
           
           case 'hero':
-            return <HeroBlock key={index} {...block} />
+            return <HeroBlockUI key={index} {...block} />
             
           
           default:
