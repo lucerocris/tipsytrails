@@ -7,7 +7,8 @@ import { getPayload } from 'payload'
 import type { Cocktail } from '@/payload-types'
 import { CocktailCarousel } from '@/app/(frontend)/components/CocktailCarousel'
 import { TestimonialCarousel } from '@/app/(frontend)/components/TestimonialCarousel'
-import { HeroBlockUI } from '@/blocks/HeroUI'
+import { notFound } from 'next/navigation'
+import { PageClient } from './PageClient'
 
 function isPopulated<T extends object>(value: unknown): value is T {
   return typeof value === 'object' && value !== null
@@ -20,6 +21,18 @@ function isCocktail(value: number | Cocktail): value is Cocktail {
 export default async function HomePage() {
   const payload = await getPayload({ config: configPromise })
   const baseUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
+
+  const { docs: pageDocs } = await payload.find({
+    collection: 'pages',
+    depth: 2,
+    where: {
+      slug: { equals: 'home' },
+    },
+  })
+
+  const pageData = pageDocs[0]
+
+  if (!pageData) return notFound()
 
   const { docs: featuredCategories } = await payload.find({
     collection: 'categories',
@@ -39,15 +52,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <HeroBlockUI
-        heading="Cebu's Premium"
-        headingHighlight="Mobile Cocktail Bar"
-        description="We bring the bar, you bring the guests. Elevated cocktails & full service for weddings and events."
-        primaryButtonText="Get My Custom Quote"
-        primaryButtonLink="/"
-        secondaryButtonText="Book a Tasting Session"
-        secondaryButtonLink="/"
-      />
+      <PageClient page={pageData} />
       {/* brands worked with section */}
       <div className="py-14 lg:py-20 pt-24 lg:pt-30 px-4 md:px-8">
         {/* content */}
