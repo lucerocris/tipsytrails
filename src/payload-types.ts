@@ -76,6 +76,7 @@ export interface Config {
     clients: Client;
     events: Event;
     packages: Package;
+    pages: Page;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -96,6 +97,7 @@ export interface Config {
     clients: ClientsSelect<false> | ClientsSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
     packages: PackagesSelect<false> | PackagesSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -336,6 +338,35 @@ export interface Package {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  title: string;
+  slug: string;
+  layout?:
+    | {
+        heading: string;
+        /**
+         * This text will appear in the primary brand color next to the main heading.
+         */
+        headingHighlight?: string | null;
+        description?: string | null;
+        backgroundImage: number | Media;
+        primaryButtonText?: string | null;
+        primaryButtonLink?: string | null;
+        secondaryButtonText?: string | null;
+        secondaryButtonLink?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hero';
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -393,6 +424,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'packages';
         value: number | Package;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -576,6 +611,34 @@ export interface PackagesSelect<T extends boolean = true> {
   basePrice?: T;
   inclusions?: T;
   isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  layout?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              heading?: T;
+              headingHighlight?: T;
+              description?: T;
+              backgroundImage?: T;
+              primaryButtonText?: T;
+              primaryButtonLink?: T;
+              secondaryButtonText?: T;
+              secondaryButtonLink?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
 }
