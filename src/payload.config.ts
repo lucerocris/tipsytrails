@@ -15,6 +15,7 @@ import { Categories } from '@/collections/Categories'
 import { Clients } from '@/collections/Clients'
 import { Events } from '@/collections/Events'
 import { Packages } from '@/collections/Packages'
+import { Pages } from './collections/Pages'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -24,6 +25,20 @@ export default buildConfig({
     user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
+    },
+
+    livePreview: {
+      url: ({ data }) => {
+        const baseURL = process.env.NEXT_PUBLIC_PAYLOAD_SERVER_URL ?? 'http://localhost:3000'
+        const slug = data?.slug as string | undefined
+        return slug && slug !== 'home' ? `${baseURL}/${slug}` : baseURL
+      },
+      collections: ['pages'],
+      breakpoints: [
+        { label: 'Mobile', name: 'mobile', width: 375, height: 667 },
+        { label: 'Tablet', name: 'tablet', width: 768, height: 1024 },
+        { label: 'Desktop', name: 'desktop', width: 1440, height: 900 },
+      ],
     },
 
     components: {
@@ -47,6 +62,7 @@ export default buildConfig({
     Clients,
     Events,
     Packages,
+    Pages,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
