@@ -45,59 +45,43 @@ export function Navbar() {
 
   const navbarClasses = useMemo(() => {
     let classes = hasMounted ? 'navbar is-visible' : 'navbar is-hidden'
-
     if (scrollY >= heroMidPoint) classes += ' is-white'
-
     if (isMobileMenuOpen) classes += ' is-menu-open'
-
     return classes
   }, [scrollY, windowHeight, hasMounted, isMobileMenuOpen, heroMidPoint])
 
   return (
     <>
       <nav className={navbarClasses}>
-        <div className="navbar-content">
+        <div className="navbar-content px-4 lg:px-10">
           {/* Desktop Navigation */}
-          <div className="hidden md:flex w-full h-full justify-between">
-            <Link href="/" className="navbar-logo flex items-center h-full">
-              <img src="/logo.svg" alt="Logo" className="w-28" />
+          <div className="hidden md:flex w-full h-full justify-between items-center gap-4">
+            <Link href="/" className="navbar-logo flex items-center shrink-0">
+              <img src="/logo.svg" alt="Logo" className="w-24 lg:w-32" /> 
             </Link>
 
-            <ul className="navbar-links h-full">
-              <li className="h-full">
-                <Link href="/" className="flex items-center h-full px-2">
-                  Home
-                </Link>
-              </li>
-              <li className="h-full">
-                <Link href="/about" className="flex items-center h-full px-2">
-                  Our Story
-                </Link>
-              </li>
-              <li className="h-full">
-                <Link href="/menu" className="flex items-center h-full px-2">
-                  Our Menu
-                </Link>
-              </li>
-              <li className="h-full">
-                <Link href="/cocktail-tasting" className="flex items-center h-full px-2">
-                  Cocktail Tasting
-                </Link>
-              </li>
+            {/* Links Container */}
+            <div className="flex items-center gap-4 lg:gap-10">
+              <ul className="navbar-links flex items-center gap-3 lg:gap-8 text-sm lg:text-lg font-medium whitespace-nowrap">
+                <li><Link href="/" className="px-1 hover:text-primary transition-colors">Home</Link></li>
+                <li><Link href="/about" className="px-1 hover:text-primary transition-colors">Our Story</Link></li>
+                <li><Link href="/menu" className="px-1 hover:text-primary transition-colors">Our Menu</Link></li>
+                <li><Link href="/cocktail-tasting" className="px-1 hover:text-primary transition-colors">Tasting</Link></li>
+              </ul>
 
               <Link
                 href="/public"
-                className="self-center inline-flex w-fit items-center justify-center px-5 py-3 font-medium !text-white bg-primary rounded-sm"
+                className="inline-flex items-center justify-center px-4 py-2 lg:px-6 lg:py-3 font-medium !text-white bg-primary rounded-sm text-xs lg:text-base whitespace-nowrap"
               >
                 Get My Custom Quote
               </Link>
-            </ul>
+            </div>
           </div>
 
           {/* Mobile Navigation */}
-          <div className="flex md:hidden w-full items-center justify-between px-4">
+          <div className="flex md:hidden w-full h-full items-center justify-between">
             <Link href="/" className="navbar-logo flex items-center">
-              <img src="logo.svg" alt="Tipsy Trails" className="w-22" />
+              <img src="logo.svg" alt="Tipsy Trails" className="w-20" />
             </Link>
             <button
               className={`navbar-hamburger ${isMobileMenuOpen ? 'open' : ''}`}
@@ -114,35 +98,16 @@ export function Navbar() {
       {/* Mobile Menu Drawer */}
       <div className="mobile-menu-wrapper">
         <div className={`mobile-menu${isMobileMenuOpen ? ' is-open' : ''}`}>
-          <div className="flex flex-col gap-8 w-full">
-            <ul>
-              <li>
-                <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" onClick={() => setIsMobileMenuOpen(false)}>
-                  Our Journey
-                </Link>
-              </li>
-              <li>
-                <Link href="/menu" onClick={() => setIsMobileMenuOpen(false)}>
-                  Our Menu
-                </Link>
-              </li>
-              <li>
-                <Link href="/cocktail-tasting" onClick={() => setIsMobileMenuOpen(false)}>
-                  Cocktail Tasting
-                </Link>
-              </li>
+          <div className="flex flex-col gap-10 w-full px-8 pt-24">
+            <ul className="flex flex-col gap-6 text-4xl font-serif">
+              <li><Link href="/" onClick={() => setIsMobileMenuOpen(false)}>Home</Link></li>
+              <li><Link href="/about" onClick={() => setIsMobileMenuOpen(false)}>Our Journey</Link></li>
+              <li><Link href="/menu" onClick={() => setIsMobileMenuOpen(false)}>Our Menu</Link></li>
+              <li><Link href="/cocktail-tasting" onClick={() => setIsMobileMenuOpen(false)}>Cocktail Tasting</Link></li>
             </ul>
-            <div className="flex flex-col gap-3 w-full">
-              <Button href="/" className="w-full justify-center">
+            <div className="flex flex-col gap-4 w-full">
+              <Button href="/" className="w-full justify-center py-5 text-xl" onClick={() => setIsMobileMenuOpen(false)}>
                 Get My Custom Quote
-              </Button>
-              <Button href="/" variant="skeleton" className="w-full justify-center">
-                Book a Tasting Session
               </Button>
             </div>
           </div>

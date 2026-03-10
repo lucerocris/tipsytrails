@@ -108,15 +108,18 @@ export default async function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col lg:flex-row gap-9">
-              <div className="flex-1 h-72 lg:h-150 w-full bg-[url('/placeholder.png')] bg-cover bg-center bg-no-repeat"></div>{' '}
-              <div className="flex-1 grid grid-cols-2 grid-rows-2 gap-3 min-h-72">
-                <div className="w-full h-full bg-gray-200"></div>
-                <div className="w-full h-full bg-gray-200"></div>
-                <div className="w-full h-full bg-gray-200"></div>
-                <div className="w-full h-full bg-gray-200"></div>
-              </div>
-            </div>
+<div className="flex flex-col lg:flex-row gap-9">
+  {/* Main Square */}
+  <div className="flex-1 aspect-square w-full bg-[url('/placeholder.png')] bg-cover bg-center bg-no-repeat"></div>
+
+  {/* Grid of 4 Squares */}
+  <div className="flex-1 grid grid-cols-2 grid-rows-2 gap-3">
+    <div className="w-full aspect-square bg-gray-200"></div>
+    <div className="w-full aspect-square bg-gray-200"></div>
+    <div className="w-full aspect-square bg-gray-200"></div>
+    <div className="w-full aspect-square bg-gray-200"></div>
+  </div>
+</div>
           </div>
         </div>
       </div>
