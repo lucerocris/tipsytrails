@@ -1,6 +1,8 @@
 
 import React from 'react'
 import { HeroBlockUI } from '@/blocks/HeroUI'
+import { StatsBlockUI } from '@/blocks/StatsUI'
+import { CocktailTastingBlockUI } from '@/blocks/CocktailTastingUI'
 
 type BlockRendererProps = {
   blocks: any[]
@@ -19,6 +21,12 @@ export const BlockRenderer = ({ blocks }: BlockRendererProps) => {
           
           case 'hero':
             return <HeroBlockUI key={index} {...block} />
+          
+          case 'stats':
+            return <StatsBlockUI key={index} {...block} />
+          
+          case 'cocktailTasting':
+            return <CocktailTastingBlockUI key={index} {...block} />
             
           
           default:

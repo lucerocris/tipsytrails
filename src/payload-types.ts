@@ -345,22 +345,74 @@ export interface Page {
   title: string;
   slug: string;
   layout?:
-    | {
-        heading: string;
-        /**
-         * This text will appear in the primary brand color next to the main heading.
-         */
-        headingHighlight?: string | null;
-        description?: string | null;
-        backgroundImage: number | Media;
-        primaryButtonText?: string | null;
-        primaryButtonLink?: string | null;
-        secondaryButtonText?: string | null;
-        secondaryButtonLink?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'hero';
-      }[]
+    | (
+        | {
+            heading: string;
+            /**
+             * This text will appear in the primary brand color next to the main heading.
+             */
+            headingHighlight?: string | null;
+            description?: string | null;
+            backgroundImage: number | Media;
+            primaryButtonText?: string | null;
+            primaryButtonLink?: string | null;
+            secondaryButtonText?: string | null;
+            secondaryButtonLink?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            /**
+             * The small uppercase label above the heading
+             */
+            eyebrow: string;
+            heading: string;
+            /**
+             * Second line before the highlighted word
+             */
+            headingContinued?: string | null;
+            headingHighlight?: string | null;
+            stats?:
+              | {
+                  /**
+                   * e.g., 50+, 100%
+                   */
+                  value: string;
+                  /**
+                   * e.g., Events Served
+                   */
+                  label: string;
+                  id?: string | null;
+                }[]
+              | null;
+            /**
+             * First image is the large featured square. 4 more will fill the 2x2 grid
+             */
+            images?:
+              | {
+                  image: number | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'stats';
+          }
+        | {
+            /**
+             * The small uppsercase label above the heading
+             */
+            eyebrow: string;
+            heading: string;
+            backgroundImage: number | Media;
+            buttonText?: string | null;
+            buttonLink?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'cocktailTasting';
+          }
+      )[]
     | null;
   updatedAt: string;
   createdAt: string;
@@ -635,6 +687,40 @@ export interface PagesSelect<T extends boolean = true> {
               primaryButtonLink?: T;
               secondaryButtonText?: T;
               secondaryButtonLink?: T;
+              id?: T;
+              blockName?: T;
+            };
+        stats?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              headingContinued?: T;
+              headingHighlight?: T;
+              stats?:
+                | T
+                | {
+                    value?: T;
+                    label?: T;
+                    id?: T;
+                  };
+              images?:
+                | T
+                | {
+                    image?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        cocktailTasting?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              backgroundImage?: T;
+              buttonText?: T;
+              buttonLink?: T;
               id?: T;
               blockName?: T;
             };
