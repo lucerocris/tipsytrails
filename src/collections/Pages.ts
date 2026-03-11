@@ -1,4 +1,6 @@
 import { HeroBlock } from '@/blocks/Hero'
+import { StatsBlock } from '@/blocks/Stats'
+import { CocktailTastingBlock } from '@/blocks/CocktailTasting'
 import { NullifyLocaleField } from '@payloadcms/ui'
 import { CollectionConfig } from 'payload'
 
@@ -25,7 +27,7 @@ export const Pages: CollectionConfig = {
     {
       name: 'layout',
       type: 'blocks',
-      blocks: [HeroBlock],
+      blocks: [HeroBlock, StatsBlock, CocktailTastingBlock],
     },
   ],
 }
