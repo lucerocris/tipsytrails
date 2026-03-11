@@ -78,7 +78,7 @@ export function InquiryForm() {
   }
 
   return (
-    <div>
+    <div id="inquiry">
       {/* header section */}
       <div className="py-14 lg:py-20 px-4">
         <div className="flex flex-col max-w-7xl mx-auto gap-10">
@@ -111,7 +111,7 @@ export function InquiryForm() {
                 </p>
               </div>
             ) : (
-            <form id="inquiry" onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 w-full gap-4 md:gap-6">
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 w-full gap-4 md:gap-6">
               {/* Field 1: First Name */}
               <div className="flex flex-col gap-1 border border-gray-400/50 rounded-sm py-2 px-4 w-full h-auto focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
                 <label htmlFor="firstName" className="text-xs font-medium text-gray-600">

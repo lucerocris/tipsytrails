@@ -17,14 +17,6 @@ export const PageClient: React.FC<PageClientProps> = ({ page: initialPage }) => 
     depth: 2,
   })
 
-  if (isLoading) {
-    return (
-      <main className="flex items-center justify-center min-h-screen">
-        <p className="text-gray-500 animate-pulse">Loading preview…</p>
-      </main>
-    )
-  }
-
   return (
     <main>
       <BlockRenderer blocks={data?.layout} />
