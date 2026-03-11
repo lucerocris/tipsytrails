@@ -28,17 +28,6 @@ export const HeroBlockUI = ({
     ? backgroundImage.url 
     : '/placeholder.png'; 
 
-  const renderButtonTextWithBreak = (text: string) => {
-    const words = text.split(' ');
-    const middleIndex = Math.floor(words.length / 2);
-    
-    return words.map((word, index) => (
-      <span key={index}>
-        {word}{' '}
-        {index === middleIndex - 1 && <br className="md:hidden" />}
-      </span>
-    ));
-  };
 
   return (
     <div className="relative h-screen w-full overflow-hidden text-foreground px-4 md:px-8 lg:px-24 py-16 flex justify-center">
@@ -76,17 +65,16 @@ export const HeroBlockUI = ({
             <div className="flex flex-row gap-3">
               {primaryButtonText && primaryButtonLink && (
                 <Button href={primaryButtonLink} className="flex-1 w-full text-center">
-                  {renderButtonTextWithBreak(primaryButtonText)}
+                  {primaryButtonText}
                 </Button>
               )}
               
               {secondaryButtonText && secondaryButtonLink && (
                 <Button href={secondaryButtonLink} variant="skeleton" className="flex-1 w-full text-center">
-                  {renderButtonTextWithBreak(secondaryButtonText)}
+                  {secondaryButtonText}
                 </Button>
               )}
             </div>
-            
           </div>
         </div>
       </div>

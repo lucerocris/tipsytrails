@@ -111,7 +111,7 @@ export function InquiryForm() {
                 </p>
               </div>
             ) : (
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 w-full gap-4 md:gap-6">
+            <form id="inquiry" onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 w-full gap-4 md:gap-6">
               {/* Field 1: First Name */}
               <div className="flex flex-col gap-1 border border-gray-400/50 rounded-sm py-2 px-4 w-full h-auto focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
                 <label htmlFor="firstName" className="text-xs font-medium text-gray-600">
