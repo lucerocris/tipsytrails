@@ -3,6 +3,7 @@ import React from 'react'
 import { HeroBlockUI } from '@/blocks/HeroUI'
 import { StatsBlockUI } from '@/blocks/StatsUI'
 import { CocktailTastingBlockUI } from '@/blocks/CocktailTastingUI'
+import { TestimonialBlockUI } from '@/blocks/TestimonialUI'
 
 type BlockRendererProps = {
   blocks: any[]
@@ -27,8 +28,10 @@ export const BlockRenderer = ({ blocks }: BlockRendererProps) => {
           
           case 'cocktailTasting':
             return <CocktailTastingBlockUI key={index} {...block} />
-            
           
+          case 'testimonial':
+            return <TestimonialBlockUI key={index} {...block} />
+            
           default:
             return (
               <div key={index} className="p-4 bg-red-100 text-red-800 border border-red-300 text-center">

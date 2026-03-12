@@ -4,7 +4,7 @@ import { playfair } from './fonts'
 import configPromise from '@/payload.config'
 import { BrandCarousel } from '@/app/(frontend)/components/BrandCarousel'
 import { getPayload } from 'payload'
-import type { Cocktail } from '@/payload-types'
+import type { Cocktail, Testimonial } from '@/payload-types'
 import { CocktailCarousel } from '@/app/(frontend)/components/CocktailCarousel'
 import { TestimonialCarousel } from '@/app/(frontend)/components/TestimonialCarousel'
 import { notFound } from 'next/navigation'
@@ -16,6 +16,50 @@ function isPopulated<T extends object>(value: unknown): value is T {
 
 function isCocktail(value: number | Cocktail): value is Cocktail {
   return isPopulated<Cocktail>(value)
+}
+
+function isTestimonial(value: number | Testimonial): value is Testimonial {
+  return isPopulated<Testimonial>(value);
+}
+
+async function resolveTestimonialsForBlocks(
+  layout: any[],
+  payload: Awaited<ReturnType<typeof getPayload>>,
+): Promise<Record<number, Testimonial[]>> {
+  const result: Record<number, Testimonial[]> = {};
+  
+  await Promise.all(
+    layout.map(async (block, index) => {
+      if (block.blockType !== 'testimonials') return;
+      
+      const refs: (number | Testimonial)[] = block.testimonials ?? [];
+      
+      if (refs.length > 0) {
+        const populated = refs.filter(isTestimonial)
+        if (populated.length > 0) {
+          result[index] = populated;
+        } else {
+          const ids = refs.filter((r): r is number => typeof r === 'number')
+          const { docs } = await payload.find({
+            collection: 'testimonials',
+            where: { id: { in: ids } },
+            depth: 1,
+            limit: ids.length,
+          });
+          result[index] = docs;
+        }
+      } else {
+        const { docs } = await payload.find({
+          collection: 'testimonials',
+          depth: 1,
+          limit: 12,
+          sort: '-createdAt',
+        });
+        result[index] = docs;
+      }
+    }),
+  )
+  return result
 }
 
 export default async function HomePage() {
@@ -49,6 +93,10 @@ export default async function HomePage() {
     limit: 12,
     sort: '-createdAt',
   })
+  
+  const resolvedTestimonials = pageData.layout
+    ? await resolveTestimonialsForBlocks(pageData.layout, payload)
+    : {};
 
   return (
     <>
@@ -83,7 +131,7 @@ export default async function HomePage() {
         </div>
       </div>
       {/* testimonials */}
-      <div className="py-14 md:py-20 px-4 md:px-8">
+      {/*<div className="py-14 md:py-20 px-4 md:px-8">
         <div className="flex flex-col max-w-7xl mx-auto gap-10">
           <div className="flex flex-col gap-2">
             <p className="text-sm lg:text-base">TESTIMONIALS</p>
@@ -95,7 +143,7 @@ export default async function HomePage() {
 
           <TestimonialCarousel testimonial={testimonials} baseUrl={baseUrl} />
         </div>
-      </div>
+      </div>*/}
     </>
   )
 }
