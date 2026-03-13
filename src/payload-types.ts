@@ -427,6 +427,19 @@ export interface Page {
             blockName?: string | null;
             blockType: 'testimonial';
           }
+        | {
+            heading: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'brands';
+          }
+        | {
+            categories?: (number | Category)[] | null;
+            cardsPerView?: ('3' | '4') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'menu';
+          }
       )[]
     | null;
   updatedAt: string;
@@ -746,6 +759,21 @@ export interface PagesSelect<T extends boolean = true> {
               headingLine1?: T;
               headingLine2?: T;
               testimonials?: T;
+              id?: T;
+              blockName?: T;
+            };
+        brands?:
+          | T
+          | {
+              heading?: T;
+              id?: T;
+              blockName?: T;
+            };
+        menu?:
+          | T
+          | {
+              categories?: T;
+              cardsPerView?: T;
               id?: T;
               blockName?: T;
             };
