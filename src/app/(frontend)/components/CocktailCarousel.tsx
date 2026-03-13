@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useCallback, useEffect, useState } from "react"
-import useEmblaCarousel from "embla-carousel-react"
+import React, { useCallback, useEffect, useState } from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
 import { parrisienne, playfair } from '@/app/(frontend)/fonts'
 // Define types based on your Payload structure
 interface CocktailCarouselProps {
@@ -18,12 +18,7 @@ const cardBasisClass: Record<3 | 4, string> = {
 
 function ArrowIcon({ direction }: { direction: 'left' | 'right' }) {
   return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      aria-hidden="true"
-      className="h-5 w-5"
-    >
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="h-5 w-5">
       {direction === 'left' ? (
         <path
           d="M15 18l-6-6 6-6"
@@ -45,7 +40,12 @@ function ArrowIcon({ direction }: { direction: 'left' | 'right' }) {
   )
 }
 
-export function CocktailCarousel({ drinks, baseUrl, categoryName, cardsPerView = 4 }: CocktailCarouselProps) {
+export function CocktailCarousel({
+  drinks,
+  baseUrl,
+  categoryName,
+  cardsPerView = 4,
+}: CocktailCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: false,
     align: 'start',
@@ -75,7 +75,7 @@ export function CocktailCarousel({ drinks, baseUrl, categoryName, cardsPerView =
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi])
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi])
 
-  if (!drinks.length) return null;
+  if (!drinks.length) return null
 
   return (
     <div className="flex flex-col gap-6">
@@ -120,7 +120,20 @@ export function CocktailCarousel({ drinks, baseUrl, categoryName, cardsPerView =
         {/* carousel container: keep this structure + css */}
         <div className="flex gap-6 h-[434px]">
           {drinks.map((drink, idx) => {
+            // Resolve the image when it's populated (object) or not (number/undefined)
             const image = drink.image && typeof drink.image === 'object' ? drink.image : null
+
+            // Debug: warn during development when image is not populated
+            if (!image && process.env.NODE_ENV !== 'production') {
+              // eslint-disable-next-line no-console
+              console.warn('[CocktailCarousel] cocktail missing populated image:', {
+                id: drink?.id,
+                name: drink?.name,
+                rawImage: drink?.image,
+                index: idx,
+              })
+            }
+
             const imageUrl = image?.url
               ? image.url.startsWith('http')
                 ? image.url
@@ -128,13 +141,10 @@ export function CocktailCarousel({ drinks, baseUrl, categoryName, cardsPerView =
               : '/placeholder.png'
 
             return (
-              <div
-                key={`${drink.id}-${idx}`}
-                className={cardBasisClass[cardsPerView]}
-              >
+              <div key={`${drink.id ?? idx}-${idx}`} className={cardBasisClass[cardsPerView]}>
                 <div className="flex flex-col gap-2 flex-1 h-full">
                   <div
-                    className="w-full h-full bg-[url('/menu/mangoStickyRice.webp')] bg-cover bg-center bg-no-repeat"
+                    className="w-full h-full bg-cover bg-center bg-no-repeat"
                     style={{ backgroundImage: `url('${imageUrl}')` }}
                   />
                   <p className={`${playfair.className} text-black text-xl font-medium`}>
@@ -147,5 +157,5 @@ export function CocktailCarousel({ drinks, baseUrl, categoryName, cardsPerView =
         </div>
       </div>
     </div>
-  );
+  )
 }

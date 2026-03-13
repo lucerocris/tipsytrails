@@ -412,6 +412,34 @@ export interface Page {
             blockName?: string | null;
             blockType: 'cocktailTasting';
           }
+        | {
+            /**
+             * The small uppercase label above the heading
+             */
+            eyebrow: string;
+            headingLine1: string;
+            headingLine2?: string | null;
+            /**
+             * Select the testimonials to display. Leave empty to show all.
+             */
+            testimonials?: (number | Testimonial)[] | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'testimonial';
+          }
+        | {
+            heading: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'brands';
+          }
+        | {
+            categories?: (number | Category)[] | null;
+            cardsPerView?: ('3' | '4') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'menu';
+          }
       )[]
     | null;
   updatedAt: string;
@@ -721,6 +749,31 @@ export interface PagesSelect<T extends boolean = true> {
               backgroundImage?: T;
               buttonText?: T;
               buttonLink?: T;
+              id?: T;
+              blockName?: T;
+            };
+        testimonial?:
+          | T
+          | {
+              eyebrow?: T;
+              headingLine1?: T;
+              headingLine2?: T;
+              testimonials?: T;
+              id?: T;
+              blockName?: T;
+            };
+        brands?:
+          | T
+          | {
+              heading?: T;
+              id?: T;
+              blockName?: T;
+            };
+        menu?:
+          | T
+          | {
+              categories?: T;
+              cardsPerView?: T;
               id?: T;
               blockName?: T;
             };
