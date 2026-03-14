@@ -429,6 +429,18 @@ export interface Page {
           }
         | {
             heading: string;
+            /**
+             * Upload brand/partner logos. They will be split in two rows and auto-scrolled
+             */
+            logos: {
+              image: number | Media;
+              /**
+               * Accessible label for the logo.
+               */
+              alt?: string | null;
+              height?: ('h-5' | 'h-6' | 'h-8' | 'h-10' | 'h-12') | null;
+              id?: string | null;
+            }[];
             id?: string | null;
             blockName?: string | null;
             blockType: 'brands';
@@ -766,6 +778,14 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               heading?: T;
+              logos?:
+                | T
+                | {
+                    image?: T;
+                    alt?: T;
+                    height?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };
