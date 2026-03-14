@@ -454,6 +454,33 @@ export interface Page {
             blockName?: string | null;
             blockType: 'menu';
           }
+        | {
+            heading: string;
+            headingScript: string;
+            backgroundImage: number | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'aboutPageHero';
+          }
+        | {
+            /**
+             * Each entry is a milestone on the timeline.
+             */
+            entries?:
+              | {
+                  /**
+                   * e.g. Jan 2022
+                   */
+                  dateLabel: string;
+                  description: string;
+                  image: number | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'timeline';
+          }
       )[]
     | null;
   updatedAt: string;
@@ -843,6 +870,29 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               categories?: T;
               cardsPerView?: T;
+              id?: T;
+              blockName?: T;
+            };
+        aboutPageHero?:
+          | T
+          | {
+              heading?: T;
+              headingScript?: T;
+              backgroundImage?: T;
+              id?: T;
+              blockName?: T;
+            };
+        timeline?:
+          | T
+          | {
+              entries?:
+                | T
+                | {
+                    dateLabel?: T;
+                    description?: T;
+                    image?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };

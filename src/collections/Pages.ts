@@ -4,6 +4,8 @@ import { CocktailTastingBlock } from '@/blocks/Landing/CocktailTasting/config'
 import { TestimonialBlock } from '@/blocks/Landing/Testimonial/config'
 import { BrandsBlock } from '@/blocks/Landing/Brands/config'
 import { MenuBlock } from '@/blocks/Landing/Menu/config'
+import { TimelineBlock } from '@/blocks/About/Timeline/config'
+import { AboutHeroBlock } from '@/blocks/About/AboutHero/config'
 import { NullifyLocaleField } from '@payloadcms/ui'
 import { CollectionConfig } from 'payload'
 
@@ -37,6 +39,8 @@ export const Pages: CollectionConfig = {
         TestimonialBlock,
         BrandsBlock,
         MenuBlock,
+        AboutHeroBlock,
+        TimelineBlock,
       ],
     },
   ],
