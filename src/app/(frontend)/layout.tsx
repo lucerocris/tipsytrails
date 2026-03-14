@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google'
 import type { Metadata } from 'next'
 import { Navbar } from '@/app/(frontend)/components/Navbar'
 import { InquiryForm } from '@/app/(frontend)/components/InquiryForm'
-import { FooterBlockUI } from '@/blocks/FooterUI'
+import { FooterBlockUI } from '@/blocks/Footer/UI'
 
 const inter = Inter({ subsets: ['latin'] })
 

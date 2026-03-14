@@ -1,10 +1,10 @@
 import React from 'react'
-import { HeroBlockUI } from '@/blocks/HeroUI'
-import { StatsBlockUI } from '@/blocks/StatsUI'
-import { CocktailTastingBlockUI } from '@/blocks/CocktailTastingUI'
-import { TestimonialBlockUI } from '@/blocks/TestimonialUI'
-import { BrandsBlockUI } from '@/blocks/BrandsUI'
-import { MenuBlockUI } from '@/blocks/MenuUI'
+import { HeroBlockUI } from '@/blocks/Landing/MainHero/UI'
+import { StatsBlockUI } from '@/blocks/Landing/Stats/UI'
+import { CocktailTastingBlockUI } from '@/blocks/Landing/CocktailTasting/UI'
+import { TestimonialBlockUI } from '@/blocks/Landing/Testimonial/UI'
+import { BrandsBlockUI } from '@/blocks/Landing/Brands/UI'
+import { MenuBlockUI } from '@/blocks/Landing/Menu/UI'
 
 type BlockRendererProps = {
   blocks: any[]
