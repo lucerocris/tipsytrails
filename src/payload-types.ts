@@ -77,6 +77,7 @@ export interface Config {
     events: Event;
     packages: Package;
     pages: Page;
+    footers: Footer;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -98,6 +99,7 @@ export interface Config {
     events: EventsSelect<false> | EventsSelect<true>;
     packages: PackagesSelect<false> | PackagesSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    footers: FootersSelect<false> | FootersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -458,6 +460,49 @@ export interface Page {
   createdAt: string;
 }
 /**
+ * Controls the site-wide footer content. Only one footer record is used.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footers".
+ */
+export interface Footer {
+  id: number;
+  /**
+   * short tagline shown next to the small martini logo.
+   */
+  tagline: string;
+  /**
+   * Navigation links shown under the "Explore" column
+   */
+  exploreLinks?:
+    | {
+        label: string;
+        /**
+         * e.g. /about or https://example.com
+         */
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Links shown under the "Socials" column
+   */
+  socialLinks?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Name shown in "© Name, Year".
+   */
+  copyrightName?: string | null;
+  locationText?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -520,6 +565,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'footers';
+        value: number | Footer;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -798,6 +847,31 @@ export interface PagesSelect<T extends boolean = true> {
               blockName?: T;
             };
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footers_select".
+ */
+export interface FootersSelect<T extends boolean = true> {
+  tagline?: T;
+  exploreLinks?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  copyrightName?: T;
+  locationText?: T;
   updatedAt?: T;
   createdAt?: T;
 }

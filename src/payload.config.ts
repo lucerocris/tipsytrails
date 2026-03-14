@@ -15,7 +15,8 @@ import { Categories } from '@/collections/Categories'
 import { Clients } from '@/collections/Clients'
 import { Events } from '@/collections/Events'
 import { Packages } from '@/collections/Packages'
-import { Pages } from './collections/Pages'
+import { Pages } from '@/collections/Pages'
+import { Footer } from '@/collections/Footers'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -63,6 +64,7 @@ export default buildConfig({
     Events,
     Packages,
     Pages,
+    Footer,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
