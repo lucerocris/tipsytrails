@@ -77,6 +77,7 @@ export interface Config {
     events: Event;
     packages: Package;
     pages: Page;
+    footers: Footer;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -98,6 +99,7 @@ export interface Config {
     events: EventsSelect<false> | EventsSelect<true>;
     packages: PackagesSelect<false> | PackagesSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    footers: FootersSelect<false> | FootersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -429,6 +431,18 @@ export interface Page {
           }
         | {
             heading: string;
+            /**
+             * Upload brand/partner logos. They will be split in two rows and auto-scrolled
+             */
+            logos: {
+              image: number | Media;
+              /**
+               * Accessible label for the logo.
+               */
+              alt?: string | null;
+              height?: ('h-5' | 'h-6' | 'h-8' | 'h-10' | 'h-12') | null;
+              id?: string | null;
+            }[];
             id?: string | null;
             blockName?: string | null;
             blockType: 'brands';
@@ -440,8 +454,78 @@ export interface Page {
             blockName?: string | null;
             blockType: 'menu';
           }
+        | {
+            heading: string;
+            headingScript: string;
+            backgroundImage: number | Media;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'pageHero';
+          }
+        | {
+            /**
+             * Each entry is a milestone on the timeline.
+             */
+            entries?:
+              | {
+                  /**
+                   * e.g. Jan 2022
+                   */
+                  dateLabel: string;
+                  description: string;
+                  image: number | Media;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'timeline';
+          }
       )[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Controls the site-wide footer content. Only one footer record is used.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footers".
+ */
+export interface Footer {
+  id: number;
+  /**
+   * short tagline shown next to the small martini logo.
+   */
+  tagline: string;
+  /**
+   * Navigation links shown under the "Explore" column
+   */
+  exploreLinks?:
+    | {
+        label: string;
+        /**
+         * e.g. /about or https://example.com
+         */
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Links shown under the "Socials" column
+   */
+  socialLinks?:
+    | {
+        label: string;
+        href: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Name shown in "© Name, Year".
+   */
+  copyrightName?: string | null;
+  locationText?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -508,6 +592,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'footers';
+        value: number | Footer;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -766,6 +854,14 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               heading?: T;
+              logos?:
+                | T
+                | {
+                    image?: T;
+                    alt?: T;
+                    height?: T;
+                    id?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -777,7 +873,55 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        pageHero?:
+          | T
+          | {
+              heading?: T;
+              headingScript?: T;
+              backgroundImage?: T;
+              id?: T;
+              blockName?: T;
+            };
+        timeline?:
+          | T
+          | {
+              entries?:
+                | T
+                | {
+                    dateLabel?: T;
+                    description?: T;
+                    image?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footers_select".
+ */
+export interface FootersSelect<T extends boolean = true> {
+  tagline?: T;
+  exploreLinks?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        label?: T;
+        href?: T;
+        id?: T;
+      };
+  copyrightName?: T;
+  locationText?: T;
   updatedAt?: T;
   createdAt?: T;
 }

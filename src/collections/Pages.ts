@@ -1,9 +1,11 @@
-import { HeroBlock } from '@/blocks/Hero'
-import { StatsBlock } from '@/blocks/Stats'
-import { CocktailTastingBlock } from '@/blocks/CocktailTasting'
-import { TestimonialBlock } from '@/blocks/Testimonial'
-import { BrandsBlock } from '@/blocks/Brands'
-import { MenuBlock } from '@/blocks/Menu'
+import { HeroBlock } from '@/blocks/Landing/MainHero/config'
+import { StatsBlock } from '@/blocks/Landing/Stats/config'
+import { CocktailTastingBlock } from '@/blocks/Landing/CocktailTasting/config'
+import { TestimonialBlock } from '@/blocks/Landing/Testimonial/config'
+import { BrandsBlock } from '@/blocks/Landing/Brands/config'
+import { MenuBlock } from '@/blocks/Landing/Menu/config'
+import { TimelineBlock } from '@/blocks/About/Timeline/config'
+import { AboutHeroBlock } from '@/blocks/PageHero/config'
 import { NullifyLocaleField } from '@payloadcms/ui'
 import { CollectionConfig } from 'payload'
 
@@ -37,6 +39,8 @@ export const Pages: CollectionConfig = {
         TestimonialBlock,
         BrandsBlock,
         MenuBlock,
+        AboutHeroBlock,
+        TimelineBlock,
       ],
     },
   ],
