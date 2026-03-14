@@ -460,7 +460,7 @@ export interface Page {
             backgroundImage: number | Media;
             id?: string | null;
             blockName?: string | null;
-            blockType: 'aboutPageHero';
+            blockType: 'pageHero';
           }
         | {
             /**
@@ -873,7 +873,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        aboutPageHero?:
+        pageHero?:
           | T
           | {
               heading?: T;

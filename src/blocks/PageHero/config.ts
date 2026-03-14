@@ -1,7 +1,7 @@
 import type { Block } from "payload";
 
 export const AboutHeroBlock: Block = {
-    slug: 'aboutPageHero',
+    slug: 'pageHero',
     labels: {
         singular: 'Page Hero',
         plural: 'Page Heroes',

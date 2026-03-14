@@ -5,7 +5,7 @@ import { CocktailTastingBlockUI } from '@/blocks/Landing/CocktailTasting/UI'
 import { TestimonialBlockUI } from '@/blocks/Landing/Testimonial/UI'
 import { BrandsBlockUI } from '@/blocks/Landing/Brands/UI'
 import { MenuBlockUI } from '@/blocks/Landing/Menu/UI'
-import { AboutHeroUI } from '@/blocks/About/AboutHero/UI'
+import { PageHeroUI } from '@/blocks/PageHero/UI'
 import { TimelineBlockUI } from '@/blocks/About/Timeline/UI'
 
 type BlockRendererProps = {
@@ -39,8 +39,8 @@ export const BlockRenderer = ({ blocks }: BlockRendererProps) => {
           case 'menu':
             return <MenuBlockUI key={index} {...block} />
 
-          case 'aboutPageHero':
-            return <AboutHeroUI key={index} {...block} />
+          case 'pageHero':
+            return <PageHeroUI key={index} {...block} />
 
           case 'timeline':
             return <TimelineBlockUI key={index} {...block} />

@@ -5,7 +5,7 @@ import { TestimonialBlock } from '@/blocks/Landing/Testimonial/config'
 import { BrandsBlock } from '@/blocks/Landing/Brands/config'
 import { MenuBlock } from '@/blocks/Landing/Menu/config'
 import { TimelineBlock } from '@/blocks/About/Timeline/config'
-import { AboutHeroBlock } from '@/blocks/About/AboutHero/config'
+import { AboutHeroBlock } from '@/blocks/PageHero/config'
 import { NullifyLocaleField } from '@payloadcms/ui'
 import { CollectionConfig } from 'payload'
 

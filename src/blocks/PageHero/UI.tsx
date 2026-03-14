@@ -1,17 +1,17 @@
 import Image from "next/image";
 import { parrisienne } from "@/app/(frontend)/fonts";
 
-type AboutHeroProps = {
+type PageHeroProps = {
     heading: string
     headingScript: string
     backgroundImage: any
 }
 
-export function AboutHeroUI({
+export function PageHeroUI({
     heading,
     headingScript,
     backgroundImage,
-}: AboutHeroProps) {
+}: PageHeroProps) {
     const bgUrl = typeof backgroundImage === 'object' && backgroundImage?.url
         ? backgroundImage.url
         : '/placeholder.png';
