@@ -44,6 +44,9 @@ export default buildConfig({
 
     components: {
       views: {
+        dashboard: {
+          Component: '/components/DashboardRedirect#DashboardRedirect',
+        },
         tipsyCommandCenter: {
           Component: '/components/CommandCenter#CommandCenter',
           path: '/command-center',

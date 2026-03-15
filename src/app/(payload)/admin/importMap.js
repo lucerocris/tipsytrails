@@ -25,6 +25,7 @@ import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { CommandCenterLink as CommandCenterLink_4fde34c199d4f1d7ee53e2009d499378 } from '../../../components/CommandCenterLink'
 import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
+import { DashboardRedirect as DashboardRedirect_489ee51988aa7ec3152889ef8bc657ae } from '../../../components/DashboardRedirect'
 import { CommandCenter as CommandCenter_36b3f4a6ed831ad3e84839ac052d63cc } from '../../../components/CommandCenter'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
@@ -56,6 +57,7 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "/components/CommandCenterLink#CommandCenterLink": CommandCenterLink_4fde34c199d4f1d7ee53e2009d499378,
   "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24,
+  "/components/DashboardRedirect#DashboardRedirect": DashboardRedirect_489ee51988aa7ec3152889ef8bc657ae,
   "/components/CommandCenter#CommandCenter": CommandCenter_36b3f4a6ed831ad3e84839ac052d63cc,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }
