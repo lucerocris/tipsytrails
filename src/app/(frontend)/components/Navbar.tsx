@@ -53,25 +53,44 @@ export function Navbar() {
   return (
     <>
       <nav className={navbarClasses}>
-        <div className="navbar-content px-4 lg:px-10">
+        <div className="navbar-content px-4 md:px-8 lg:px-8 xl:px-0">
           {/* Desktop Navigation */}
           <div className="hidden md:flex w-full h-full justify-between items-center gap-4">
             <Link href="/" className="navbar-logo flex items-center shrink-0">
-              <img src="/logo.svg" alt="Logo" className="w-24 lg:w-32" /> 
+              <img src="/logo.svg" alt="Logo" className="w-24 lg:w-32" />
             </Link>
 
             {/* Links Container */}
             <div className="flex items-center gap-4 lg:gap-10">
-              <ul className="navbar-links flex items-center gap-3 lg:gap-8 text-sm lg:text-lg font-medium whitespace-nowrap">
-                <li><Link href="/" className="px-1 hover:text-primary transition-colors">Home</Link></li>
-                <li><Link href="/about" className="px-1 hover:text-primary transition-colors">Our Story</Link></li>
-                <li><Link href="/menu" className="px-1 hover:text-primary transition-colors">Our Menu</Link></li>
-                <li><Link href="/cocktail-tasting" className="px-1 hover:text-primary transition-colors">Tasting</Link></li>
+              <ul className="navbar-links flex items-center gap-4! lg:gap-8 text-sm! md:text-base! lg:text-lg! lg:font-medium whitespace-nowrap">
+                <li>
+                  <Link href="/" className="px-1 hover:text-primary transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/about" className="px-1 hover:text-primary transition-colors">
+                    Our Story
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/menu" className="px-1 hover:text-primary transition-colors">
+                    Our Menu
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/cocktail-tasting"
+                    className="px-1 hover:text-primary transition-colors"
+                  >
+                    Tasting
+                  </Link>
+                </li>
               </ul>
 
               <Link
-                href="/public"
-                className="inline-flex items-center justify-center px-4 py-2 lg:px-6 lg:py-3 font-medium !text-white bg-primary rounded-sm text-xs lg:text-base whitespace-nowrap"
+                href="#inquiry"
+                className="inline-flex items-center justify-center px-6 py-3 lg:px-6 lg:py-3 font-base! lg:font-medium !text-white bg-primary rounded-sm text-sm md:text-base! lg:text-base whitespace-nowrap"
               >
                 Get My Custom Quote
               </Link>
@@ -81,7 +100,7 @@ export function Navbar() {
           {/* Mobile Navigation */}
           <div className="flex md:hidden w-full h-full items-center justify-between">
             <Link href="/" className="navbar-logo flex items-center">
-              <img src="logo.svg" alt="Tipsy Trails" className="w-20" />
+              <img src="logo.svg" alt="Tipsy Trails" className="w-24" />
             </Link>
             <button
               className={`navbar-hamburger ${isMobileMenuOpen ? 'open' : ''}`}
@@ -98,15 +117,35 @@ export function Navbar() {
       {/* Mobile Menu Drawer */}
       <div className="mobile-menu-wrapper">
         <div className={`mobile-menu${isMobileMenuOpen ? ' is-open' : ''}`}>
-          <div className="flex flex-col gap-10 w-full px-8 pt-24">
-            <ul className="flex flex-col gap-6 text-4xl font-serif">
-              <li><Link href="/" onClick={() => setIsMobileMenuOpen(false)}>Home</Link></li>
-              <li><Link href="/about" onClick={() => setIsMobileMenuOpen(false)}>Our Journey</Link></li>
-              <li><Link href="/menu" onClick={() => setIsMobileMenuOpen(false)}>Our Menu</Link></li>
-              <li><Link href="/cocktail-tasting" onClick={() => setIsMobileMenuOpen(false)}>Cocktail Tasting</Link></li>
+          <div className="flex flex-col gap-10 w-full">
+            <ul className="flex flex-col gap-6 text-5xl">
+              <li>
+                <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" onClick={() => setIsMobileMenuOpen(false)}>
+                  Our Journey
+                </Link>
+              </li>
+              <li>
+                <Link href="/menu" onClick={() => setIsMobileMenuOpen(false)}>
+                  Our Menu
+                </Link>
+              </li>
+              <li>
+                <Link href="/cocktail-tasting" onClick={() => setIsMobileMenuOpen(false)}>
+                  Cocktail Tasting
+                </Link>
+              </li>
             </ul>
             <div className="flex flex-col gap-4 w-full">
-              <Button href="/" className="w-full justify-center py-5 text-xl" onClick={() => setIsMobileMenuOpen(false)}>
+              <Button
+                href="/"
+                className="w-full justify-center py-5 text-xl font-base"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
                 Get My Custom Quote
               </Button>
             </div>
