@@ -1,3 +1,4 @@
+import { StatusBadge as StatusBadge_86c977c677230d19a6e677b8bc520028 } from '@/components/StatusBadge'
 import { QuickMessage as QuickMessage_d84a0a0895793a6be9d3cfcc69411b0f } from '@/components/QuickMessage'
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
@@ -28,6 +29,7 @@ import { CommandCenter as CommandCenter_36b3f4a6ed831ad3e84839ac052d63cc } from 
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 export const importMap = {
+  "@/components/StatusBadge#StatusBadge": StatusBadge_86c977c677230d19a6e677b8bc520028,
   "@/components/QuickMessage#QuickMessage": QuickMessage_d84a0a0895793a6be9d3cfcc69411b0f,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,

@@ -1,4 +1,61 @@
-import { CollectionConfig } from 'payload'
+import type { CollectionAfterChangeHook, CollectionConfig } from 'payload'
+
+const autoCreateClientAndEvent: CollectionAfterChangeHook = async ({
+  doc,
+  previousDoc,
+  operation,
+  req,
+  context,
+}) => {
+  if (operation !== 'update' || doc.status !== 'booked' || previousDoc?.status === 'booked') {
+    return doc
+  }
+  if (context.skipAutoCreate) return doc
+
+  const { payload } = req
+
+  try {
+    const newClient = await payload.create({
+      collection: 'clients',
+      data: {
+        firstName: doc.firstName,
+        lastName: doc.lastName,
+        email: doc.email ?? undefined,
+        mobileViber: doc.mobileViber,
+      },
+      req,
+      context: { skipAutoCreate: true },
+    })
+
+    const packageId =
+      doc.selectedPackage && typeof doc.selectedPackage === 'object'
+        ? doc.selectedPackage.id
+        : doc.selectedPackage
+
+    await payload.create({
+      collection: 'events',
+      data: {
+        eventName: `${doc.firstName}'s ${doc.eventType || 'Event'}`,
+        client: newClient.id,
+        eventDate: doc.eventDate,
+        venue: doc.venue,
+        paymentStatus: 'deposit_pending',
+        operationsNotes: doc.specialRequests,
+        ...(packageId ? { packageBooked: packageId } : {}),
+        ...(doc.agreedPrice != null ? { agreedPrice: doc.agreedPrice } : {}),
+      },
+      req,
+      context: { skipAutoCreate: true },
+    })
+  } catch (err) {
+    req.payload.logger.error({
+      err,
+      msg: 'autoCreateClientAndEvent: failed to automatically create Client or Event record',
+    })
+  }
+
+  return doc
+}
 
 export const Inquiries: CollectionConfig = {
   slug: 'inquiries',
@@ -13,6 +70,9 @@ export const Inquiries: CollectionConfig = {
     update: ({ req: { user } }) => !!user,
     delete: ({ req: { user } }) => !!user,
   },
+  hooks: {
+    afterChange: [autoCreateClientAndEvent],
+  },
   fields: [
     // --- CRM STATUS & UI (Admin Only Sidebar) ---
     {
@@ -21,6 +81,9 @@ export const Inquiries: CollectionConfig = {
       defaultValue: 'new',
       admin: {
         position: 'sidebar',
+        components: {
+          Cell: '@/components/StatusBadge#StatusBadge',
+        },
       },
       options: [
         { label: 'New Inquiry', value: 'new' },
@@ -29,6 +92,22 @@ export const Inquiries: CollectionConfig = {
         { label: 'Booked / Confirmed', value: 'booked' },
         { label: 'Lost / Cancelled', value: 'lost' },
       ],
+    },
+    {
+      name: 'selectedPackage',
+      type: 'relationship',
+      relationTo: 'packages',
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'agreedPrice',
+      type: 'number',
+      admin: {
+        position: 'sidebar',
+        description: 'Final negotiated price (PHP)',
+      },
     },
     {
       name: 'quickMessageUI',

@@ -30,28 +30,85 @@ export async function CommandCenter({
   }
 
   const payload = initPageResult.req.payload
-  const today = new Date().toISOString()
+  const now = new Date()
+  const today = now.toISOString()
+  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString()
+  const endOfMonth = new Date(
+    now.getFullYear(),
+    now.getMonth() + 1,
+    0,
+    23,
+    59,
+    59,
+    999,
+  ).toISOString()
 
-  const [newLeads, upcomingGigs, pendingDeposits] = await Promise.all([
-    payload.find({
-      collection: 'inquiries',
-      where: { status: { equals: 'new' } },
-      limit: 5,
-      sort: '-createdAt',
-    }),
-    payload.find({
-      collection: 'events',
-      where: { eventDate: { greater_than_equal: today } },
-      limit: 5,
-      sort: 'eventDate',
-    }),
-    payload.find({
-      collection: 'events',
-      where: { paymentStatus: { equals: 'deposit_pending' } },
-      limit: 50,
-      sort: 'eventDate',
-    }),
-  ])
+  const [newLeads, upcomingGigs, pendingDeposits, monthPaidEvents, monthAllEvents, monthInquiries] =
+    await Promise.all([
+      payload.find({
+        collection: 'inquiries',
+        where: { status: { equals: 'new' } },
+        limit: 5,
+        sort: '-createdAt',
+      }),
+      payload.find({
+        collection: 'events',
+        where: { eventDate: { greater_than_equal: today } },
+        limit: 5,
+        sort: 'eventDate',
+      }),
+      payload.find({
+        collection: 'events',
+        where: { paymentStatus: { equals: 'deposit_pending' } },
+        limit: 50,
+        sort: 'eventDate',
+      }),
+      payload.find({
+        collection: 'events',
+        where: {
+          and: [
+            { eventDate: { greater_than_equal: startOfMonth } },
+            { eventDate: { less_than_equal: endOfMonth } },
+            { paymentStatus: { in: ['deposit_paid', 'fully_paid'] } },
+          ],
+        },
+        limit: 100,
+      }),
+      payload.find({
+        collection: 'events',
+        where: {
+          and: [
+            { eventDate: { greater_than_equal: startOfMonth } },
+            { eventDate: { less_than_equal: endOfMonth } },
+          ],
+        },
+        limit: 1,
+      }),
+      payload.find({
+        collection: 'inquiries',
+        where: {
+          and: [
+            { createdAt: { greater_than_equal: startOfMonth } },
+            { createdAt: { less_than_equal: endOfMonth } },
+          ],
+        },
+        limit: 1,
+      }),
+    ])
+
+  const totalRevenueMTD = monthPaidEvents.docs.reduce((sum, event) => {
+    return sum + (typeof event.agreedPrice === 'number' ? event.agreedPrice : 0)
+  }, 0)
+  const eventsThisMonth = monthAllEvents.totalDocs
+  const newLeadsMTD = monthInquiries.totalDocs
+  const conversionRate =
+    newLeadsMTD > 0 ? ((eventsThisMonth / newLeadsMTD) * 100).toFixed(1) : '0.0'
+  const formattedRevenue = new Intl.NumberFormat('en-PH', {
+    style: 'currency',
+    currency: 'PHP',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(totalRevenueMTD)
 
   return (
     <DefaultTemplate
@@ -73,6 +130,17 @@ export async function CommandCenter({
         @media (min-width: 768px) {
           .cc-dashboard-grid {
             grid-template-columns: repeat(3, 1fr);
+          }
+        }
+        .cc-kpi-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
+          margin-bottom: 2rem;
+        }
+        @media (min-width: 1024px) {
+          .cc-kpi-grid {
+            grid-template-columns: repeat(4, 1fr);
           }
         }
       `}</style>
@@ -111,9 +179,115 @@ export async function CommandCenter({
           </p>
         </div>
 
+        {/* Financial & Operational KPIs */}
+        <div className="cc-kpi-grid">
+          {/* Total Revenue MTD */}
+          <div
+            style={{
+              backgroundColor: 'var(--theme-elevation-50)',
+              borderColor: 'var(--theme-elevation-150)',
+              borderWidth: '1px',
+              borderStyle: 'solid',
+              borderRadius: '8px',
+              padding: '16px',
+            }}
+          >
+            <span
+              style={{
+                color: 'var(--theme-elevation-500)',
+                fontSize: '12px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+                marginBottom: '8px',
+                display: 'block',
+              }}
+            >
+              📈 Total Revenue
+            </span>
+            <span style={{ fontSize: '24px', fontWeight: 'bold' }}>{formattedRevenue}</span>
+          </div>
+
+          {/* Events This Month */}
+          <div
+            style={{
+              backgroundColor: 'var(--theme-elevation-50)',
+              borderColor: 'var(--theme-elevation-150)',
+              borderWidth: '1px',
+              borderStyle: 'solid',
+              borderRadius: '8px',
+              padding: '16px',
+            }}
+          >
+            <span
+              style={{
+                color: 'var(--theme-elevation-500)',
+                fontSize: '12px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+                marginBottom: '8px',
+                display: 'block',
+              }}
+            >
+              📅 Gigs This Month
+            </span>
+            <span style={{ fontSize: '24px', fontWeight: 'bold' }}>{eventsThisMonth}</span>
+          </div>
+
+          {/* New Leads MTD */}
+          <div
+            style={{
+              backgroundColor: 'var(--theme-elevation-50)',
+              borderColor: 'var(--theme-elevation-150)',
+              borderWidth: '1px',
+              borderStyle: 'solid',
+              borderRadius: '8px',
+              padding: '16px',
+            }}
+          >
+            <span
+              style={{
+                color: 'var(--theme-elevation-500)',
+                fontSize: '12px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+                marginBottom: '8px',
+                display: 'block',
+              }}
+            >
+              🎯 New Leads
+            </span>
+            <span style={{ fontSize: '24px', fontWeight: 'bold' }}>{newLeadsMTD}</span>
+          </div>
+
+          {/* Conversion Rate */}
+          <div
+            style={{
+              backgroundColor: 'var(--theme-elevation-50)',
+              borderColor: 'var(--theme-elevation-150)',
+              borderWidth: '1px',
+              borderStyle: 'solid',
+              borderRadius: '8px',
+              padding: '16px',
+            }}
+          >
+            <span
+              style={{
+                color: 'var(--theme-elevation-500)',
+                fontSize: '12px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.05em',
+                marginBottom: '8px',
+                display: 'block',
+              }}
+            >
+              ⚡ Conversion
+            </span>
+            <span style={{ fontSize: '24px', fontWeight: 'bold' }}>{conversionRate}%</span>
+          </div>
+        </div>
+
         {/* 3-Column Dashboard Grid */}
         <div className="cc-dashboard-grid">
-
           {/* Column 1: Action Required — New Leads */}
           <div
             style={{
@@ -391,7 +565,11 @@ export async function CommandCenter({
               >
                 <Link
                   href="/admin/collections/events"
-                  style={{ color: 'var(--theme-success-500)', fontSize: '0.75rem', fontWeight: 500 }}
+                  style={{
+                    color: 'var(--theme-success-500)',
+                    fontSize: '0.75rem',
+                    fontWeight: 500,
+                  }}
                 >
                   View all {upcomingGigs.totalDocs} gigs &rarr;
                 </Link>
@@ -539,14 +717,17 @@ export async function CommandCenter({
               >
                 <Link
                   href="/admin/collections/events"
-                  style={{ color: 'var(--theme-warning-500)', fontSize: '0.75rem', fontWeight: 500 }}
+                  style={{
+                    color: 'var(--theme-warning-500)',
+                    fontSize: '0.75rem',
+                    fontWeight: 500,
+                  }}
                 >
                   View all {pendingDeposits.totalDocs} pending &rarr;
                 </Link>
               </div>
             )}
           </div>
-
         </div>
       </Gutter>
     </DefaultTemplate>
