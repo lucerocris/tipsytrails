@@ -60,42 +60,42 @@ interface TimelineEntryProps {
 
 // --- MAIN COMPONENT ---
 export default function InteractiveTimeline({ entries }: { entries: TimelineEntry[] }) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start center', 'end center'],
-  });
+  })
 
   const scaleY = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001,
-  });
+  })
 
-  if (!entries.length) return null;
+  if (!entries.length) return null
 
   return (
-    <div 
-      className = "relative bg-white text-slate-900 py-32 min-h-screen overflow-hidden"
-      ref = {containerRef}
+    <div
+      className="relative bg-white text-slate-900 py-32 min-h-screen overflow-hidden"
+      ref={containerRef}
     >
-      <div className = "max-w-7xl mx-auto px-4 relative">
-        <div className = "absolute left-[37px] top-0 bottom-0 w-[2px] bg-gray-200 md:left-1/2 md:-translate-x-1/2" />
+      <div className="max-w-7xl mx-auto px-4 md:px-8 xl:px-0 relative">
+        <div className="absolute left-[37px] top-0 bottom-0 w-[2px] bg-gray-200 md:left-1/2 md:-translate-x-1/2" />
 
         <motion.div
-          className = "absoluge left-[36px] top-0 bottom-0 w-[4px] bg-primary origin-top md:left-1/2 md:-translate-x-1/2"
-          style = {{ scaleY }}
+          className="absoluge left-[36px] top-0 bottom-0 w-[4px] bg-primary origin-top md:left-1/2 md:-translate-x-1/2"
+          style={{ scaleY }}
         />
 
-        <div className = "space-y-24 md:space-y-40">
+        <div className="space-y-24 md:space-y-40">
           {entries.map((item, index) => (
-            <TimelineItem key = {item.id ?? index} item = {item} index = {index} />
+            <TimelineItem key={item.id ?? index} item={item} index={index} />
           ))}
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 // --- INDIVIDUAL ITEM COMPONENT ---

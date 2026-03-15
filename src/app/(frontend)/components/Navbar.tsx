@@ -62,7 +62,7 @@ export function Navbar() {
 
             {/* Links Container */}
             <div className="flex items-center gap-4 lg:gap-10">
-              <ul className="navbar-links flex items-center gap-4! lg:gap-8 text-sm! md:text-base! lg:text-lg! lg:font-medium whitespace-nowrap">
+              <ul className="navbar-links flex items-center gap-4! lg:gap-8! text-sm! md:text-base! lg:text-lg! lg:font-medium whitespace-nowrap">
                 <li>
                   <Link href="/" className="px-1 hover:text-primary transition-colors">
                     Home
@@ -83,7 +83,7 @@ export function Navbar() {
                     href="/cocktail-tasting"
                     className="px-1 hover:text-primary transition-colors"
                   >
-                    Tasting
+                    Cocktail Tasting
                   </Link>
                 </li>
               </ul>

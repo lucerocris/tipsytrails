@@ -116,9 +116,9 @@ export function TestimonialCarousel({ testimonial, baseUrl }: TestimonialCarouse
                     return (
                         <div
                             key={`${t.id}-${idx}`}
-                            className="embla__slide flex-[0_0_85%] md:flex-[0_0_calc((100%_-_3rem)/2)] lg:flex-[0_0_calc((100%_-_3rem)/3)] min-w-0"
+                            className="embla__slide flex-[0_0_85%] md:flex-[0_0_calc(50%_-_0.75rem)] lg:flex-[0_0_calc((100%_-_3rem)/3)] min-w-0"
                         >
-                            <div className="flex flex-col justify-between h-112.5 bg-primary rounded-sm p-6 md:p-11">
+                            <div className="flex flex-col justify-between aspect-[3/4] bg-primary rounded-sm p-6 md:p-11">
                                 <div className="flex flex-col gap-6 md:gap-9">
                                     <div className="relative w-14 h-14 rounded-full overflow-hidden bg-gray-300 mb-4">
                                         <Image

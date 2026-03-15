@@ -314,7 +314,7 @@ export function MenuClient({ heroBlock }: { heroBlock: HeroBlock }) {
         backgroundImage={heroBlock?.backgroundImage}
       />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 lg:py-20">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-12 lg:py-20">
         <div className="flex flex-col lg:flex-row gap-12">
           <aside className="hidden lg:block w-64 shrink-0 sticky top-24 self-start">
             {filterSections}

@@ -12,8 +12,8 @@ interface CocktailCarouselProps {
 }
 
 const cardBasisClass: Record<3 | 4, string> = {
-  3: 'min-w-0 flex-[0_0_80%] md:md:flex-[0_0_calc((100%_-_3rem)/2)] lg:flex-[0_0_calc(33.333%_-_0.667rem)]',
-  4: 'min-w-0 flex-[0_0_85%] md:md:flex-[0_0_calc((100%_-_3rem)/2)] lg:flex-[0_0_calc(25%_-_0.75rem)]',
+  3: 'min-w-0 flex-[0_0_80%] md:flex-[0_0_calc(50%_-_0.75rem)] lg:flex-[0_0_calc(33.333%_-_1rem)]',
+  4: 'min-w-0 flex-[0_0_85%] md:flex-[0_0_calc(50%_-_0.75rem)] lg:flex-[0_0_calc(33.333%_-_1rem)] xl:flex-[0_0_calc(25%_-_1.125rem)]',
 }
 
 function ArrowIcon({ direction }: { direction: 'left' | 'right' }) {
@@ -118,7 +118,7 @@ export function CocktailCarousel({
       {/* carousel viewport */}
       <div className="overflow-hidden" ref={emblaRef}>
         {/* carousel container: keep this structure + css */}
-        <div className="flex gap-6 h-[434px]">
+        <div className="flex gap-6">
           {drinks.map((drink, idx) => {
             // Resolve the image when it's populated (object) or not (number/undefined)
             const image = drink.image && typeof drink.image === 'object' ? drink.image : null
@@ -142,9 +142,9 @@ export function CocktailCarousel({
 
             return (
               <div key={`${drink.id ?? idx}-${idx}`} className={cardBasisClass[cardsPerView]}>
-                <div className="flex flex-col gap-2 flex-1 h-full">
+                <div className="flex flex-col gap-2">
                   <div
-                    className="w-full h-full bg-cover bg-center bg-no-repeat"
+                    className="w-full aspect-[3/4] bg-cover bg-center bg-no-repeat"
                     style={{ backgroundImage: `url('${imageUrl}')` }}
                   />
                   <p className={`${playfair.className} text-black text-xl font-medium`}>
