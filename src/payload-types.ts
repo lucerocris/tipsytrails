@@ -188,6 +188,11 @@ export interface Media {
 export interface Inquiry {
   id: number;
   status?: ('new' | 'contacted' | 'proposal_sent' | 'booked' | 'lost') | null;
+  selectedPackage?: (number | null) | Package;
+  /**
+   * Final negotiated price (PHP)
+   */
+  agreedPrice?: number | null;
   /**
    * Internal notes for this client (e.g., agreed price, specific needs).
    */
@@ -207,6 +212,36 @@ export interface Inquiry {
   venue: string;
   guestCount: number;
   specialRequests?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "packages".
+ */
+export interface Package {
+  id: number;
+  name: string;
+  basePrice: number;
+  /**
+   * List the liquors, mixers, and hours included.
+   */
+  inclusions?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  isActive?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -305,36 +340,6 @@ export interface Event {
    */
   agreedPrice?: number | null;
   operationsNotes?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "packages".
- */
-export interface Package {
-  id: number;
-  name: string;
-  basePrice: number;
-  /**
-   * List the liquors, mixers, and hours included.
-   */
-  inclusions?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  isActive?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -686,6 +691,8 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface InquiriesSelect<T extends boolean = true> {
   status?: T;
+  selectedPackage?: T;
+  agreedPrice?: T;
   adminNotes?: T;
   firstName?: T;
   lastName?: T;
