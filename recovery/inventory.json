@@ -1,0 +1,1393 @@
+{
+ "media": [
+  {
+   "id": 32,
+   "alt": "Placeholder picture",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-10T11:08:23.074Z",
+   "createdAt": "2026-03-10T11:08:22.379Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/placeholder-1.png",
+   "thumbnailURL": null,
+   "filename": "placeholder-1.png",
+   "mimeType": "image/png",
+   "filesize": 6146,
+   "width": 1200,
+   "height": 800,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 35,
+   "alt": "Teleperformance logo",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-12T16:07:59.578Z",
+   "createdAt": "2026-03-12T16:07:58.403Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo1.svg",
+   "thumbnailURL": null,
+   "filename": "logo1.svg",
+   "mimeType": "image/svg+xml",
+   "filesize": 5228,
+   "width": 700,
+   "height": 120,
+   "focalX": null,
+   "focalY": null
+  },
+  {
+   "id": 36,
+   "alt": "Logo",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-12T16:08:32.850Z",
+   "createdAt": "2026-03-12T16:08:32.141Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo2.png",
+   "thumbnailURL": null,
+   "filename": "logo2.png",
+   "mimeType": "image/png",
+   "filesize": 45854,
+   "width": 2000,
+   "height": 412,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 37,
+   "alt": "Brand logo",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-12T16:10:54.826Z",
+   "createdAt": "2026-03-12T16:10:53.683Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo3.png",
+   "thumbnailURL": null,
+   "filename": "logo3.png",
+   "mimeType": "image/png",
+   "filesize": 47400,
+   "width": 2000,
+   "height": 1254,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 39,
+   "alt": "Brand logo",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-15T06:47:33.532Z",
+   "createdAt": "2026-03-15T06:47:32.759Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo4.png",
+   "thumbnailURL": null,
+   "filename": "logo4.png",
+   "mimeType": "image/png",
+   "filesize": 24029,
+   "width": 2000,
+   "height": 527,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 40,
+   "alt": "Brand logo",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-15T06:48:02.915Z",
+   "createdAt": "2026-03-15T06:48:02.399Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo6.webp",
+   "thumbnailURL": null,
+   "filename": "logo6.webp",
+   "mimeType": "image/webp",
+   "filesize": 10664,
+   "width": 502,
+   "height": 153,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 41,
+   "alt": "Brand logo",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-15T06:48:31.862Z",
+   "createdAt": "2026-03-15T06:48:31.159Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo5.png",
+   "thumbnailURL": null,
+   "filename": "logo5.png",
+   "mimeType": "image/png",
+   "filesize": 182916,
+   "width": 821,
+   "height": 829,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 42,
+   "alt": "Brand logo ",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-15T06:49:09.630Z",
+   "createdAt": "2026-03-15T06:49:09.056Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo7.png",
+   "thumbnailURL": null,
+   "filename": "logo7.png",
+   "mimeType": "image/png",
+   "filesize": 13137,
+   "width": 366,
+   "height": 133,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 43,
+   "alt": "Brand logo",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-15T06:53:58.078Z",
+   "createdAt": "2026-03-15T06:53:57.307Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo9.png",
+   "thumbnailURL": null,
+   "filename": "logo9.png",
+   "mimeType": "image/png",
+   "filesize": 62309,
+   "width": 1377,
+   "height": 257,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 44,
+   "alt": "Brand logo ",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-15T06:54:38.859Z",
+   "createdAt": "2026-03-15T06:54:38.238Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo10.png",
+   "thumbnailURL": null,
+   "filename": "logo10.png",
+   "mimeType": "image/png",
+   "filesize": 59618,
+   "width": 800,
+   "height": 274,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 45,
+   "alt": "KMC brand",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-15T06:56:36.163Z",
+   "createdAt": "2026-03-15T06:56:35.356Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo11.png",
+   "thumbnailURL": null,
+   "filename": "logo11.png",
+   "mimeType": "image/png",
+   "filesize": 40632,
+   "width": 2421,
+   "height": 574,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 46,
+   "alt": "Brand logo ",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-15T06:59:35.297Z",
+   "createdAt": "2026-03-15T06:59:34.636Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo12.png",
+   "thumbnailURL": null,
+   "filename": "logo12.png",
+   "mimeType": "image/png",
+   "filesize": 11289,
+   "width": 450,
+   "height": 89,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 47,
+   "alt": "Brand logo ",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-15T07:00:00.547Z",
+   "createdAt": "2026-03-15T07:00:00.019Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo13.png",
+   "thumbnailURL": null,
+   "filename": "logo13.png",
+   "mimeType": "image/png",
+   "filesize": 15278,
+   "width": 400,
+   "height": 79,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 49,
+   "alt": "Brand logo ",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-15T07:00:32.864Z",
+   "createdAt": "2026-03-15T07:00:32.270Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo15.png",
+   "thumbnailURL": null,
+   "filename": "logo15.png",
+   "mimeType": "image/png",
+   "filesize": 20371,
+   "width": 200,
+   "height": 174,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 33,
+   "alt": "pic",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-11T14:43:08.014Z",
+   "createdAt": "2026-03-11T14:43:07.267Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/placeholder-2.png",
+   "thumbnailURL": null,
+   "filename": "placeholder-2.png",
+   "mimeType": "image/png",
+   "filesize": 6146,
+   "width": 1200,
+   "height": 800,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 34,
+   "alt": "pic",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-11T15:10:42.056Z",
+   "createdAt": "2026-03-11T15:10:41.318Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/placeholder-3.png",
+   "thumbnailURL": null,
+   "filename": "placeholder-3.png",
+   "mimeType": "image/png",
+   "filesize": 6146,
+   "width": 1200,
+   "height": 800,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 38,
+   "alt": "JOSEEEEE",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-13T12:50:38.385Z",
+   "createdAt": "2026-03-13T12:50:37.496Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/_.jpeg",
+   "thumbnailURL": null,
+   "filename": "_.jpeg",
+   "mimeType": "image/jpeg",
+   "filesize": 68999,
+   "width": 735,
+   "height": 732,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 24,
+   "alt": "sdf",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-09T09:06:10.678Z",
+   "createdAt": "2026-03-09T09:06:09.923Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/Untitled design-3.png",
+   "thumbnailURL": null,
+   "filename": "Untitled design-3.png",
+   "mimeType": "image/png",
+   "filesize": 244972,
+   "width": 600,
+   "height": 600,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 22,
+   "alt": "sdf",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-09T09:05:33.204Z",
+   "createdAt": "2026-03-09T09:05:32.512Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/Untitled design-1.png",
+   "thumbnailURL": null,
+   "filename": "Untitled design-1.png",
+   "mimeType": "image/png",
+   "filesize": 244972,
+   "width": 600,
+   "height": 600,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 27,
+   "alt": "Mango Sticky Rice",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-09T12:19:30.946Z",
+   "createdAt": "2026-03-09T12:19:29.895Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/MangoStickyRicepng",
+   "thumbnailURL": null,
+   "filename": "MangoStickyRicepng",
+   "mimeType": "image/png",
+   "filesize": 448480,
+   "width": 508,
+   "height": 697,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 28,
+   "alt": "TepacheSour",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-09T12:20:38.011Z",
+   "createdAt": "2026-03-09T12:20:35.512Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/TepacheSour.png",
+   "thumbnailURL": null,
+   "filename": "TepacheSour.png",
+   "mimeType": "image/png",
+   "filesize": 426120,
+   "width": 508,
+   "height": 698,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 29,
+   "alt": "MatchaMartini",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-09T12:21:07.697Z",
+   "createdAt": "2026-03-09T12:21:06.325Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/MatchaMartini.png",
+   "thumbnailURL": null,
+   "filename": "MatchaMartini.png",
+   "mimeType": "image/png",
+   "filesize": 471914,
+   "width": 508,
+   "height": 708,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 30,
+   "alt": "Ube Cheese",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-09T12:21:39.903Z",
+   "createdAt": "2026-03-09T12:21:38.559Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/UbeCheese.png",
+   "thumbnailURL": null,
+   "filename": "UbeCheese.png",
+   "mimeType": "image/png",
+   "filesize": 469994,
+   "width": 518,
+   "height": 690,
+   "focalX": 50,
+   "focalY": 50
+  },
+  {
+   "id": 31,
+   "alt": "placeholder",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-10T10:58:55.191Z",
+   "createdAt": "2026-03-10T10:58:54.350Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/placeholder.png",
+   "thumbnailURL": null,
+   "filename": "placeholder.png",
+   "mimeType": "image/png",
+   "filesize": 6146,
+   "width": 1200,
+   "height": 800,
+   "focalX": 50,
+   "focalY": 50
+  }
+ ],
+ "testimonials": [
+  {
+   "id": 5,
+   "quote": "SHEEE TS BUSSIN",
+   "clientName": "Jose Miguel Carumba",
+   "clientRole": "Senior SWE, Surgestudio.tech",
+   "avatar": {
+    "id": 38,
+    "alt": "JOSEEEEE",
+    "prefix": "tipsytrails",
+    "updatedAt": "2026-03-13T12:50:38.385Z",
+    "createdAt": "2026-03-13T12:50:37.496Z",
+    "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/_.jpeg",
+    "thumbnailURL": null,
+    "filename": "_.jpeg",
+    "mimeType": "image/jpeg",
+    "filesize": 68999,
+    "width": 735,
+    "height": 732,
+    "focalX": 50,
+    "focalY": 50
+   },
+   "updatedAt": "2026-03-13T12:50:40.286Z",
+   "createdAt": "2026-03-13T12:50:40.286Z"
+  },
+  {
+   "id": 4,
+   "quote": "wooowww",
+   "clientName": "Simon Gementiza",
+   "clientRole": "Senior SWE, Surgestudio.tech",
+   "avatar": {
+    "id": 24,
+    "alt": "sdf",
+    "prefix": "tipsytrails",
+    "updatedAt": "2026-03-09T09:06:10.678Z",
+    "createdAt": "2026-03-09T09:06:09.923Z",
+    "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/Untitled design-3.png",
+    "thumbnailURL": null,
+    "filename": "Untitled design-3.png",
+    "mimeType": "image/png",
+    "filesize": 244972,
+    "width": 600,
+    "height": 600,
+    "focalX": 50,
+    "focalY": 50
+   },
+   "updatedAt": "2026-03-09T09:06:16.293Z",
+   "createdAt": "2026-02-25T02:41:52.481Z"
+  },
+  {
+   "id": 6,
+   "quote": "Hello test",
+   "clientName": "Jose Miguel Carumba",
+   "clientRole": "PE president",
+   "avatar": null,
+   "updatedAt": "2026-03-15T05:51:35.460Z",
+   "createdAt": "2026-03-15T05:51:35.460Z"
+  },
+  {
+   "id": 2,
+   "quote": "wowowwinnn",
+   "clientName": "Cris Lawrence Lucero",
+   "clientRole": "CEO, Surgestudio.tech",
+   "avatar": {
+    "id": 22,
+    "alt": "sdf",
+    "prefix": "tipsytrails",
+    "updatedAt": "2026-03-09T09:05:33.204Z",
+    "createdAt": "2026-03-09T09:05:32.512Z",
+    "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/Untitled design-1.png",
+    "thumbnailURL": null,
+    "filename": "Untitled design-1.png",
+    "mimeType": "image/png",
+    "filesize": 244972,
+    "width": 600,
+    "height": 600,
+    "focalX": 50,
+    "focalY": 50
+   },
+   "updatedAt": "2026-03-09T09:05:35.423Z",
+   "createdAt": "2026-02-25T01:09:54.225Z"
+  }
+ ],
+ "categories": [
+  {
+   "id": 1,
+   "name": "Signature Cocktails",
+   "featuredOnLanding": true,
+   "order": null,
+   "drinks": {
+    "docs": [
+     {
+      "id": 4,
+      "name": "Mango Sticky Rice",
+      "image": 27,
+      "category": 1,
+      "updatedAt": "2026-03-09T12:19:36.292Z",
+      "createdAt": "2026-02-25T01:04:36.470Z"
+     },
+     {
+      "id": 3,
+      "name": "Tepache Sour",
+      "image": 28,
+      "category": 1,
+      "updatedAt": "2026-03-09T12:20:42.218Z",
+      "createdAt": "2026-02-25T01:03:57.552Z"
+     },
+     {
+      "id": 2,
+      "name": "Matcha Martini",
+      "image": 29,
+      "category": 1,
+      "updatedAt": "2026-03-09T12:21:11.389Z",
+      "createdAt": "2026-02-25T01:03:31.643Z"
+     },
+     {
+      "id": 1,
+      "name": "Ube Cheese",
+      "image": 30,
+      "category": 1,
+      "updatedAt": "2026-03-09T12:21:42.888Z",
+      "createdAt": "2026-02-25T01:02:29.029Z"
+     }
+    ],
+    "hasNextPage": false
+   },
+   "updatedAt": "2026-03-12T15:45:46.874Z",
+   "createdAt": "2026-02-25T00:59:48.587Z"
+  }
+ ],
+ "cocktails": [
+  {
+   "id": 4,
+   "name": "Mango Sticky Rice",
+   "image": {
+    "id": 27,
+    "alt": "Mango Sticky Rice",
+    "prefix": "tipsytrails",
+    "updatedAt": "2026-03-09T12:19:30.946Z",
+    "createdAt": "2026-03-09T12:19:29.895Z",
+    "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/MangoStickyRicepng",
+    "thumbnailURL": null,
+    "filename": "MangoStickyRicepng",
+    "mimeType": "image/png",
+    "filesize": 448480,
+    "width": 508,
+    "height": 697,
+    "focalX": 50,
+    "focalY": 50
+   },
+   "category": {
+    "id": 1,
+    "name": "Signature Cocktails",
+    "featuredOnLanding": true,
+    "order": null,
+    "drinks": {
+     "docs": [
+      4,
+      3,
+      2,
+      1
+     ],
+     "hasNextPage": false
+    },
+    "updatedAt": "2026-03-12T15:45:46.874Z",
+    "createdAt": "2026-02-25T00:59:48.587Z"
+   },
+   "updatedAt": "2026-03-09T12:19:36.292Z",
+   "createdAt": "2026-02-25T01:04:36.470Z"
+  },
+  {
+   "id": 3,
+   "name": "Tepache Sour",
+   "image": {
+    "id": 28,
+    "alt": "TepacheSour",
+    "prefix": "tipsytrails",
+    "updatedAt": "2026-03-09T12:20:38.011Z",
+    "createdAt": "2026-03-09T12:20:35.512Z",
+    "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/TepacheSour.png",
+    "thumbnailURL": null,
+    "filename": "TepacheSour.png",
+    "mimeType": "image/png",
+    "filesize": 426120,
+    "width": 508,
+    "height": 698,
+    "focalX": 50,
+    "focalY": 50
+   },
+   "category": {
+    "id": 1,
+    "name": "Signature Cocktails",
+    "featuredOnLanding": true,
+    "order": null,
+    "drinks": {
+     "docs": [
+      4,
+      3,
+      2,
+      1
+     ],
+     "hasNextPage": false
+    },
+    "updatedAt": "2026-03-12T15:45:46.874Z",
+    "createdAt": "2026-02-25T00:59:48.587Z"
+   },
+   "updatedAt": "2026-03-09T12:20:42.218Z",
+   "createdAt": "2026-02-25T01:03:57.552Z"
+  },
+  {
+   "id": 2,
+   "name": "Matcha Martini",
+   "image": {
+    "id": 29,
+    "alt": "MatchaMartini",
+    "prefix": "tipsytrails",
+    "updatedAt": "2026-03-09T12:21:07.697Z",
+    "createdAt": "2026-03-09T12:21:06.325Z",
+    "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/MatchaMartini.png",
+    "thumbnailURL": null,
+    "filename": "MatchaMartini.png",
+    "mimeType": "image/png",
+    "filesize": 471914,
+    "width": 508,
+    "height": 708,
+    "focalX": 50,
+    "focalY": 50
+   },
+   "category": {
+    "id": 1,
+    "name": "Signature Cocktails",
+    "featuredOnLanding": true,
+    "order": null,
+    "drinks": {
+     "docs": [
+      4,
+      3,
+      2,
+      1
+     ],
+     "hasNextPage": false
+    },
+    "updatedAt": "2026-03-12T15:45:46.874Z",
+    "createdAt": "2026-02-25T00:59:48.587Z"
+   },
+   "updatedAt": "2026-03-09T12:21:11.389Z",
+   "createdAt": "2026-02-25T01:03:31.643Z"
+  },
+  {
+   "id": 1,
+   "name": "Ube Cheese",
+   "image": {
+    "id": 30,
+    "alt": "Ube Cheese",
+    "prefix": "tipsytrails",
+    "updatedAt": "2026-03-09T12:21:39.903Z",
+    "createdAt": "2026-03-09T12:21:38.559Z",
+    "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/UbeCheese.png",
+    "thumbnailURL": null,
+    "filename": "UbeCheese.png",
+    "mimeType": "image/png",
+    "filesize": 469994,
+    "width": 518,
+    "height": 690,
+    "focalX": 50,
+    "focalY": 50
+   },
+   "category": {
+    "id": 1,
+    "name": "Signature Cocktails",
+    "featuredOnLanding": true,
+    "order": null,
+    "drinks": {
+     "docs": [
+      4,
+      3,
+      2,
+      1
+     ],
+     "hasNextPage": false
+    },
+    "updatedAt": "2026-03-12T15:45:46.874Z",
+    "createdAt": "2026-02-25T00:59:48.587Z"
+   },
+   "updatedAt": "2026-03-09T12:21:42.888Z",
+   "createdAt": "2026-02-25T01:02:29.029Z"
+  }
+ ],
+ "pages": [
+  {
+   "id": 1,
+   "title": "Home",
+   "slug": "home",
+   "layout": [
+    {
+     "id": "69affb786ef5ff6697403d2f",
+     "heading": "Cebu's Premium ",
+     "headingHighlight": "Mobile Cocktail Bar",
+     "description": "We bring the bar, you bring the guests. Elevated cocktails & full service for weddings and events.",
+     "backgroundImage": {
+      "id": 32,
+      "alt": "Placeholder picture",
+      "prefix": "tipsytrails",
+      "updatedAt": "2026-03-10T11:08:23.074Z",
+      "createdAt": "2026-03-10T11:08:22.379Z",
+      "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/placeholder-1.png",
+      "thumbnailURL": null,
+      "filename": "placeholder-1.png",
+      "mimeType": "image/png",
+      "filesize": 6146,
+      "width": 1200,
+      "height": 800,
+      "focalX": 50,
+      "focalY": 50
+     },
+     "primaryButtonText": "Get My Custom Quote",
+     "primaryButtonLink": "#inquiry",
+     "secondaryButtonText": "Book a Tasting Session",
+     "secondaryButtonLink": "/cocktail-tasting",
+     "blockName": null,
+     "blockType": "hero"
+    },
+    {
+     "id": "69b2d6743202fe51a456c8a7",
+     "heading": "Trusted by Cebu event planners and brands",
+     "blockName": null,
+     "logos": [
+      {
+       "id": "69b50a2b227426ba994d9a91",
+       "image": {
+        "id": 35,
+        "alt": "Teleperformance logo",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-12T16:07:59.578Z",
+        "createdAt": "2026-03-12T16:07:58.403Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo1.svg",
+        "thumbnailURL": null,
+        "filename": "logo1.svg",
+        "mimeType": "image/svg+xml",
+        "filesize": 5228,
+        "width": 700,
+        "height": 120,
+        "focalX": null,
+        "focalY": null
+       },
+       "alt": null,
+       "height": "h-8"
+      },
+      {
+       "id": "69b50bac227426ba994d9a93",
+       "image": {
+        "id": 36,
+        "alt": "Logo",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-12T16:08:32.850Z",
+        "createdAt": "2026-03-12T16:08:32.141Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo2.png",
+        "thumbnailURL": null,
+        "filename": "logo2.png",
+        "mimeType": "image/png",
+        "filesize": 45854,
+        "width": 2000,
+        "height": 412,
+        "focalX": 50,
+        "focalY": 50
+       },
+       "alt": null,
+       "height": "h-8"
+      },
+      {
+       "id": "69b50bb8227426ba994d9a95",
+       "image": {
+        "id": 37,
+        "alt": "Brand logo",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-12T16:10:54.826Z",
+        "createdAt": "2026-03-12T16:10:53.683Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo3.png",
+        "thumbnailURL": null,
+        "filename": "logo3.png",
+        "mimeType": "image/png",
+        "filesize": 47400,
+        "width": 2000,
+        "height": 1254,
+        "focalX": 50,
+        "focalY": 50
+       },
+       "alt": null,
+       "height": "h-8"
+      },
+      {
+       "id": "69b655c91b8ac66218db087f",
+       "image": {
+        "id": 39,
+        "alt": "Brand logo",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-15T06:47:33.532Z",
+        "createdAt": "2026-03-15T06:47:32.759Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo4.png",
+        "thumbnailURL": null,
+        "filename": "logo4.png",
+        "mimeType": "image/png",
+        "filesize": 24029,
+        "width": 2000,
+        "height": 527,
+        "focalX": 50,
+        "focalY": 50
+       },
+       "alt": "Brand logo",
+       "height": "h-8"
+      },
+      {
+       "id": "69b6560f1b8ac66218db0881",
+       "image": {
+        "id": 40,
+        "alt": "Brand logo",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-15T06:48:02.915Z",
+        "createdAt": "2026-03-15T06:48:02.399Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo6.webp",
+        "thumbnailURL": null,
+        "filename": "logo6.webp",
+        "mimeType": "image/webp",
+        "filesize": 10664,
+        "width": 502,
+        "height": 153,
+        "focalX": 50,
+        "focalY": 50
+       },
+       "alt": "Brand logo",
+       "height": "h-8"
+      },
+      {
+       "id": "69b656301b8ac66218db0883",
+       "image": {
+        "id": 41,
+        "alt": "Brand logo",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-15T06:48:31.862Z",
+        "createdAt": "2026-03-15T06:48:31.159Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo5.png",
+        "thumbnailURL": null,
+        "filename": "logo5.png",
+        "mimeType": "image/png",
+        "filesize": 182916,
+        "width": 821,
+        "height": 829,
+        "focalX": 50,
+        "focalY": 50
+       },
+       "alt": "Brand logo",
+       "height": "h-12"
+      },
+      {
+       "id": "69b656521b8ac66218db0885",
+       "image": {
+        "id": 42,
+        "alt": "Brand logo ",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-15T06:49:09.630Z",
+        "createdAt": "2026-03-15T06:49:09.056Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo7.png",
+        "thumbnailURL": null,
+        "filename": "logo7.png",
+        "mimeType": "image/png",
+        "filesize": 13137,
+        "width": 366,
+        "height": 133,
+        "focalX": 50,
+        "focalY": 50
+       },
+       "alt": "Brand logo ",
+       "height": "h-10"
+      },
+      {
+       "id": "69b657721b8ac66218db0887",
+       "image": {
+        "id": 43,
+        "alt": "Brand logo",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-15T06:53:58.078Z",
+        "createdAt": "2026-03-15T06:53:57.307Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo9.png",
+        "thumbnailURL": null,
+        "filename": "logo9.png",
+        "mimeType": "image/png",
+        "filesize": 62309,
+        "width": 1377,
+        "height": 257,
+        "focalX": 50,
+        "focalY": 50
+       },
+       "alt": "Brand logo ",
+       "height": "h-8"
+      },
+      {
+       "id": "69b6579e1b8ac66218db0889",
+       "image": {
+        "id": 44,
+        "alt": "Brand logo ",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-15T06:54:38.859Z",
+        "createdAt": "2026-03-15T06:54:38.238Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo10.png",
+        "thumbnailURL": null,
+        "filename": "logo10.png",
+        "mimeType": "image/png",
+        "filesize": 59618,
+        "width": 800,
+        "height": 274,
+        "focalX": 50,
+        "focalY": 50
+       },
+       "alt": "Brand logo ",
+       "height": "h-8"
+      },
+      {
+       "id": "69b6580f1b8ac66218db088b",
+       "image": {
+        "id": 45,
+        "alt": "KMC brand",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-15T06:56:36.163Z",
+        "createdAt": "2026-03-15T06:56:35.356Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo11.png",
+        "thumbnailURL": null,
+        "filename": "logo11.png",
+        "mimeType": "image/png",
+        "filesize": 40632,
+        "width": 2421,
+        "height": 574,
+        "focalX": 50,
+        "focalY": 50
+       },
+       "alt": null,
+       "height": "h-6"
+      },
+      {
+       "id": "69b658ca1b8ac66218db088d",
+       "image": {
+        "id": 46,
+        "alt": "Brand logo ",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-15T06:59:35.297Z",
+        "createdAt": "2026-03-15T06:59:34.636Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo12.png",
+        "thumbnailURL": null,
+        "filename": "logo12.png",
+        "mimeType": "image/png",
+        "filesize": 11289,
+        "width": 450,
+        "height": 89,
+        "focalX": 50,
+        "focalY": 50
+       },
+       "alt": "Brand logo ",
+       "height": "h-8"
+      },
+      {
+       "id": "69b658e11b8ac66218db088f",
+       "image": {
+        "id": 47,
+        "alt": "Brand logo ",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-15T07:00:00.547Z",
+        "createdAt": "2026-03-15T07:00:00.019Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo13.png",
+        "thumbnailURL": null,
+        "filename": "logo13.png",
+        "mimeType": "image/png",
+        "filesize": 15278,
+        "width": 400,
+        "height": 79,
+        "focalX": 50,
+        "focalY": 50
+       },
+       "alt": "brand logo ",
+       "height": "h-8"
+      },
+      {
+       "id": "69b658f61b8ac66218db0891",
+       "image": {
+        "id": 49,
+        "alt": "Brand logo ",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-15T07:00:32.864Z",
+        "createdAt": "2026-03-15T07:00:32.270Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/logo15.png",
+        "thumbnailURL": null,
+        "filename": "logo15.png",
+        "mimeType": "image/png",
+        "filesize": 20371,
+        "width": 200,
+        "height": 174,
+        "focalX": 50,
+        "focalY": 50
+       },
+       "alt": "Aznar brand logo ",
+       "height": "h-10"
+      }
+     ],
+     "blockType": "brands"
+    },
+    {
+     "id": "69b17ee481dcca394030fdc3",
+     "eyebrow": "THE TIPSY TRAILS  EXPERIENCE",
+     "heading": "Why Cebu's Top Brands",
+     "headingContinued": "& Planners",
+     "headingHighlight": "Choose us",
+     "blockName": null,
+     "stats": [
+      {
+       "id": "69b17f0581dcca394030fdc5",
+       "value": "50+",
+       "label": "Events Served"
+      },
+      {
+       "id": "69b17f1081dcca394030fdc7",
+       "value": "7+",
+       "label": "Years Experience"
+      },
+      {
+       "id": "69b17f1381dcca394030fdc9",
+       "value": "100%",
+       "label": "Client Satisfaction"
+      }
+     ],
+     "images": [
+      {
+       "id": "69b17f6c81dcca394030fdcd",
+       "image": {
+        "id": 33,
+        "alt": "pic",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-11T14:43:08.014Z",
+        "createdAt": "2026-03-11T14:43:07.267Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/placeholder-2.png",
+        "thumbnailURL": null,
+        "filename": "placeholder-2.png",
+        "mimeType": "image/png",
+        "filesize": 6146,
+        "width": 1200,
+        "height": 800,
+        "focalX": 50,
+        "focalY": 50
+       }
+      },
+      {
+       "id": "69b17f8981dcca394030fdcf",
+       "image": {
+        "id": 33,
+        "alt": "pic",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-11T14:43:08.014Z",
+        "createdAt": "2026-03-11T14:43:07.267Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/placeholder-2.png",
+        "thumbnailURL": null,
+        "filename": "placeholder-2.png",
+        "mimeType": "image/png",
+        "filesize": 6146,
+        "width": 1200,
+        "height": 800,
+        "focalX": 50,
+        "focalY": 50
+       }
+      },
+      {
+       "id": "69b17f8c81dcca394030fdd1",
+       "image": {
+        "id": 33,
+        "alt": "pic",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-11T14:43:08.014Z",
+        "createdAt": "2026-03-11T14:43:07.267Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/placeholder-2.png",
+        "thumbnailURL": null,
+        "filename": "placeholder-2.png",
+        "mimeType": "image/png",
+        "filesize": 6146,
+        "width": 1200,
+        "height": 800,
+        "focalX": 50,
+        "focalY": 50
+       }
+      },
+      {
+       "id": "69b17f8d81dcca394030fdd3",
+       "image": {
+        "id": 33,
+        "alt": "pic",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-11T14:43:08.014Z",
+        "createdAt": "2026-03-11T14:43:07.267Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/placeholder-2.png",
+        "thumbnailURL": null,
+        "filename": "placeholder-2.png",
+        "mimeType": "image/png",
+        "filesize": 6146,
+        "width": 1200,
+        "height": 800,
+        "focalX": 50,
+        "focalY": 50
+       }
+      },
+      {
+       "id": "69b17f8f81dcca394030fdd5",
+       "image": {
+        "id": 33,
+        "alt": "pic",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-11T14:43:08.014Z",
+        "createdAt": "2026-03-11T14:43:07.267Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/placeholder-2.png",
+        "thumbnailURL": null,
+        "filename": "placeholder-2.png",
+        "mimeType": "image/png",
+        "filesize": 6146,
+        "width": 1200,
+        "height": 800,
+        "focalX": 50,
+        "focalY": 50
+       }
+      }
+     ],
+     "blockType": "stats"
+    },
+    {
+     "id": "69b185ce46356d38d7ffa510",
+     "eyebrow": "TASTE OUR COCKTAILS ",
+     "heading": "Don't Just Guess. Taste Your Menu First.",
+     "backgroundImage": {
+      "id": 34,
+      "alt": "pic",
+      "prefix": "tipsytrails",
+      "updatedAt": "2026-03-11T15:10:42.056Z",
+      "createdAt": "2026-03-11T15:10:41.318Z",
+      "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/placeholder-3.png",
+      "thumbnailURL": null,
+      "filename": "placeholder-3.png",
+      "mimeType": "image/png",
+      "filesize": 6146,
+      "width": 1200,
+      "height": 800,
+      "focalX": 50,
+      "focalY": 50
+     },
+     "buttonText": "Book a Tasting Session",
+     "buttonLink": "/cocktail-tasting",
+     "blockName": null,
+     "blockType": "cocktailTasting"
+    },
+    {
+     "id": "69b405a8923fcd197e0216a6",
+     "cardsPerView": "4",
+     "blockName": null,
+     "blockType": "menu",
+     "categories": [
+      {
+       "id": 1,
+       "name": "Signature Cocktails",
+       "featuredOnLanding": true,
+       "order": null,
+       "drinks": {
+        "docs": [
+         {
+          "id": 4,
+          "name": "Mango Sticky Rice",
+          "image": 27,
+          "category": 1,
+          "updatedAt": "2026-03-09T12:19:36.292Z",
+          "createdAt": "2026-02-25T01:04:36.470Z"
+         },
+         {
+          "id": 3,
+          "name": "Tepache Sour",
+          "image": 28,
+          "category": 1,
+          "updatedAt": "2026-03-09T12:20:42.218Z",
+          "createdAt": "2026-02-25T01:03:57.552Z"
+         },
+         {
+          "id": 2,
+          "name": "Matcha Martini",
+          "image": 29,
+          "category": 1,
+          "updatedAt": "2026-03-09T12:21:11.389Z",
+          "createdAt": "2026-02-25T01:03:31.643Z"
+         },
+         {
+          "id": 1,
+          "name": "Ube Cheese",
+          "image": 30,
+          "category": 1,
+          "updatedAt": "2026-03-09T12:21:42.888Z",
+          "createdAt": "2026-02-25T01:02:29.029Z"
+         }
+        ],
+        "hasNextPage": false
+       },
+       "updatedAt": "2026-03-12T15:45:46.874Z",
+       "createdAt": "2026-02-25T00:59:48.587Z"
+      }
+     ]
+    },
+    {
+     "id": "69b4069d923fcd197e0216a8",
+     "eyebrow": "TESTIMONIALS",
+     "headingLine1": "Don't take our word for it!",
+     "headingLine2": "Hear it from our Clients.",
+     "blockName": null,
+     "blockType": "testimonial",
+     "testimonials": [
+      {
+       "id": 5,
+       "quote": "SHEEE TS BUSSIN",
+       "clientName": "Jose Miguel Carumba",
+       "clientRole": "Senior SWE, Surgestudio.tech",
+       "avatar": {
+        "id": 38,
+        "alt": "JOSEEEEE",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-13T12:50:38.385Z",
+        "createdAt": "2026-03-13T12:50:37.496Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/_.jpeg",
+        "thumbnailURL": null,
+        "filename": "_.jpeg",
+        "mimeType": "image/jpeg",
+        "filesize": 68999,
+        "width": 735,
+        "height": 732,
+        "focalX": 50,
+        "focalY": 50
+       },
+       "updatedAt": "2026-03-13T12:50:40.286Z",
+       "createdAt": "2026-03-13T12:50:40.286Z"
+      },
+      {
+       "id": 4,
+       "quote": "wooowww",
+       "clientName": "Simon Gementiza",
+       "clientRole": "Senior SWE, Surgestudio.tech",
+       "avatar": {
+        "id": 24,
+        "alt": "sdf",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-09T09:06:10.678Z",
+        "createdAt": "2026-03-09T09:06:09.923Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/Untitled design-3.png",
+        "thumbnailURL": null,
+        "filename": "Untitled design-3.png",
+        "mimeType": "image/png",
+        "filesize": 244972,
+        "width": 600,
+        "height": 600,
+        "focalX": 50,
+        "focalY": 50
+       },
+       "updatedAt": "2026-03-09T09:06:16.293Z",
+       "createdAt": "2026-02-25T02:41:52.481Z"
+      },
+      {
+       "id": 6,
+       "quote": "Hello test",
+       "clientName": "Jose Miguel Carumba",
+       "clientRole": "PE president",
+       "avatar": null,
+       "updatedAt": "2026-03-15T05:51:35.460Z",
+       "createdAt": "2026-03-15T05:51:35.460Z"
+      },
+      {
+       "id": 2,
+       "quote": "wowowwinnn",
+       "clientName": "Cris Lawrence Lucero",
+       "clientRole": "CEO, Surgestudio.tech",
+       "avatar": {
+        "id": 22,
+        "alt": "sdf",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-09T09:05:33.204Z",
+        "createdAt": "2026-03-09T09:05:32.512Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/Untitled design-1.png",
+        "thumbnailURL": null,
+        "filename": "Untitled design-1.png",
+        "mimeType": "image/png",
+        "filesize": 244972,
+        "width": 600,
+        "height": 600,
+        "focalX": 50,
+        "focalY": 50
+       },
+       "updatedAt": "2026-03-09T09:05:35.423Z",
+       "createdAt": "2026-02-25T01:09:54.225Z"
+      }
+     ]
+    }
+   ],
+   "updatedAt": "2026-03-15T09:54:01.861Z",
+   "createdAt": "2026-03-10T10:37:07.072Z"
+  },
+  {
+   "id": 2,
+   "title": "About",
+   "slug": "about",
+   "layout": [
+    {
+     "id": "69b5409cfa43166038c204ee",
+     "heading": "KNOW OUR",
+     "headingScript": "journey",
+     "backgroundImage": {
+      "id": 31,
+      "alt": "placeholder",
+      "prefix": "tipsytrails",
+      "updatedAt": "2026-03-10T10:58:55.191Z",
+      "createdAt": "2026-03-10T10:58:54.350Z",
+      "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/placeholder.png",
+      "thumbnailURL": null,
+      "filename": "placeholder.png",
+      "mimeType": "image/png",
+      "filesize": 6146,
+      "width": 1200,
+      "height": 800,
+      "focalX": 50,
+      "focalY": 50
+     },
+     "blockName": null,
+     "blockType": "pageHero"
+    },
+    {
+     "id": "69b540bafa43166038c204f0",
+     "blockName": null,
+     "entries": [
+      {
+       "id": "69b540bcfa43166038c204f2",
+       "dateLabel": "Jan 2022",
+       "description": "Lorem Ipsum",
+       "image": {
+        "id": 38,
+        "alt": "JOSEEEEE",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-13T12:50:38.385Z",
+        "createdAt": "2026-03-13T12:50:37.496Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/_.jpeg",
+        "thumbnailURL": null,
+        "filename": "_.jpeg",
+        "mimeType": "image/jpeg",
+        "filesize": 68999,
+        "width": 735,
+        "height": 732,
+        "focalX": 50,
+        "focalY": 50
+       }
+      },
+      {
+       "id": "69b54130fa43166038c204f4",
+       "dateLabel": "Feb 2023",
+       "description": "Lorem Ipsum",
+       "image": {
+        "id": 30,
+        "alt": "Ube Cheese",
+        "prefix": "tipsytrails",
+        "updatedAt": "2026-03-09T12:21:39.903Z",
+        "createdAt": "2026-03-09T12:21:38.559Z",
+        "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/UbeCheese.png",
+        "thumbnailURL": null,
+        "filename": "UbeCheese.png",
+        "mimeType": "image/png",
+        "filesize": 469994,
+        "width": 518,
+        "height": 690,
+        "focalX": 50,
+        "focalY": 50
+       }
+      }
+     ],
+     "blockType": "timeline"
+    }
+   ],
+   "updatedAt": "2026-03-14T11:06:56.439Z",
+   "createdAt": "2026-03-14T11:04:46.865Z"
+  }
+ ],
+ "footerText": "WE DA BEST MUSIC Explore [/] HOME [/about] ABOUT US [/menu] MENU [/cocktail-tasting] COCKTAIL TASTING Socials [/] INSTAGRAM [/] FACEBOOK [/] X [/] Viber © Tipsy Trails , 2026 Based in EARTH",
+ "menuHero": {
+  "id": "69b545cf2390c205c9d73f3e",
+  "heading": "KNOW OUR",
+  "headingScript": "menu",
+  "backgroundImage": {
+   "id": 31,
+   "alt": "placeholder",
+   "prefix": "tipsytrails",
+   "updatedAt": "2026-03-10T10:58:55.191Z",
+   "createdAt": "2026-03-10T10:58:54.350Z",
+   "url": "https://lucerocris.sgp1.cdn.digitaloceanspaces.com/tipsytrails/placeholder.png",
+   "thumbnailURL": null,
+   "filename": "placeholder.png",
+   "mimeType": "image/png",
+   "filesize": 6146,
+   "width": 1200,
+   "height": 800,
+   "focalX": 50,
+   "focalY": 50
+  },
+  "blockName": null,
+  "blockType": "pageHero"
+ }
+}
