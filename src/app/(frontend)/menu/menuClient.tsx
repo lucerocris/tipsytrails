@@ -1,8 +1,8 @@
 'use client'
 
-import { playfair } from '@/app/(frontend)/fonts'
 import { ChevronDown, SlidersHorizontal, X } from 'lucide-react'
 import { CocktailCarousel } from '@/app/(frontend)/components/CocktailCarousel'
+import { DrinkCard } from '@/app/(frontend)/components/DrinkCard'
 import { useEffect, useMemo, useState } from 'react'
 import { PageHeroUI } from '@/blocks/PageHero/UI'
 
@@ -159,6 +159,11 @@ const menuCategories: MenuCategory[] = [
   },
 ]
 
+const chipClass =
+  'meta rounded-xs border px-2 py-1.5 transition-colors duration-150'
+const chipOnClass = 'border-primary bg-tint text-primary!'
+const chipOffClass = 'border-line text-ink-75! hover:bg-paper-3'
+
 function AccordionSection({
   label,
   isOpen,
@@ -171,11 +176,16 @@ function AccordionSection({
   children: React.ReactNode
 }) {
   return (
-    <div className="border-b-[0.5px] border-[#C2C4C7] py-4">
-      <button onClick={onToggle} className="flex items-center justify-between w-full">
-        <p className="text-xs text-[#9A9A9A] tracking-wider font-semibold uppercase">{label}</p>
+    <div className="border-b border-line py-4">
+      <button
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        className="flex items-center justify-between w-full"
+      >
+        <span className="eyebrow">{label}</span>
         <ChevronDown
-          className={`size-4 transition-transform duration-300 ease-in-out ${
+          aria-hidden="true"
+          className={`size-4 text-ink-75 transition-transform duration-300 ease-in-out ${
             isOpen ? 'rotate-0' : '-rotate-90'
           }`}
         />
@@ -187,7 +197,7 @@ function AccordionSection({
         }`}
       >
         <div className="overflow-hidden">
-          <div className="flex flex-col gap-3 pt-4">{children}</div>
+          <div className="flex flex-wrap gap-1.5 pt-4">{children}</div>
         </div>
       </div>
     </div>
@@ -209,17 +219,9 @@ export function MenuClient({ heroBlock }: { heroBlock: HeroBlock }) {
   const [selectedMenu, setSelectedMenu] = useState<MenuFilter | null>(null)
 
   useEffect(() => {
-    const nav = document.querySelector('nav')
-    if (isMobileFilterOpen) {
-      document.body.style.overflow = 'hidden'
-      if (nav) nav.style.display = 'none'
-    } else {
-      document.body.style.overflow = 'unset'
-      if (nav) nav.style.display = 'flex'
-    }
+    document.body.style.overflow = isMobileFilterOpen ? 'hidden' : ''
     return () => {
-      document.body.style.overflow = 'unset'
-      if (nav) nav.style.display = 'flex'
+      document.body.style.overflow = ''
     }
   }, [isMobileFilterOpen])
 
@@ -262,11 +264,10 @@ export function MenuClient({ heroBlock }: { heroBlock: HeroBlock }) {
             setSelectedBaseSpirits([])
             setSelectedMenu(null)
           }}
-          className={`text-xs font-bold underline underline-offset-4 transition-colors duration-500 ${
-            hasActiveFilters ? 'text-primary' : 'text-primary/40 disabled'
-          }`}
+          disabled={!hasActiveFilters}
+          className="link-arrow text-xs! disabled:cursor-not-allowed disabled:opacity-40"
         >
-          CLEAR ALL
+          Clear all
         </button>
       </div>
 
@@ -279,10 +280,9 @@ export function MenuClient({ heroBlock }: { heroBlock: HeroBlock }) {
           <button
             key={spirit}
             onClick={() => toggleBaseSpirit(spirit)}
-            className={`text-left text-xs transition-colors duration-200 ${
-              selectedBaseSpirits.includes(spirit)
-                ? 'font-bold text-black'
-                : 'text-[#3E3E3E] hover:text-black'
+            aria-pressed={selectedBaseSpirits.includes(spirit)}
+            className={`${chipClass} ${
+              selectedBaseSpirits.includes(spirit) ? chipOnClass : chipOffClass
             }`}
           >
             {spirit}
@@ -295,9 +295,8 @@ export function MenuClient({ heroBlock }: { heroBlock: HeroBlock }) {
           <button
             key={filter}
             onClick={() => toggleMenu(filter)}
-            className={`text-left text-xs transition-colors duration-200 ${
-              selectedMenu === filter ? 'font-bold text-black' : 'text-[#3E3E3E] hover:text-black'
-            }`}
+            aria-pressed={selectedMenu === filter}
+            className={`${chipClass} ${selectedMenu === filter ? chipOnClass : chipOffClass}`}
           >
             {filter}
           </button>
@@ -314,50 +313,47 @@ export function MenuClient({ heroBlock }: { heroBlock: HeroBlock }) {
         backgroundImage={heroBlock?.backgroundImage}
       />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-12 lg:py-20">
+      <div className="wrap section">
         <div className="flex flex-col lg:flex-row gap-12">
-          <aside className="hidden lg:block w-64 shrink-0 sticky top-24 self-start">
+          <aside className="hidden lg:block w-60 shrink-0 sticky top-24 self-start">
             {filterSections}
           </aside>
 
-          <main className="flex-1">
+          <div className="flex-1 min-w-0">
             <button
               onClick={() => setIsMobileFilterOpen(true)}
-              className="lg:hidden flex items-center gap-2 px-6 py-3 border border-black mb-8"
+              className="lg:hidden btn btn-secondary mb-8"
             >
-              <SlidersHorizontal className="w-4 h-4" />
-              <span className="text-sm font-medium">Filters</span>
+              <SlidersHorizontal className="size-4" aria-hidden="true" />
+              <span>Filters</span>
               {hasActiveFilters && (
-                <div className="flex items-center justify-center size-6 bg-black rounded-full">
-                  <h1 className="text-white text-xs">{filteredDrinks.length}</h1>
-                </div>
+                <span className="flex size-5 items-center justify-center rounded-full bg-primary text-xs text-white">
+                  {filteredDrinks.length}
+                </span>
               )}
             </button>
 
             {hasActiveFilters ? (
               <div className="flex flex-col gap-8">
-                <h2 className="text-3xl lg:text-4xl text-[#3E3E3E] font-medium">
-                  {selectedFilterTitle}
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
-                  {filteredDrinks.map((drink) => (
-                    <div key={drink.id} className="group cursor-pointer">
-                      <div className="aspect-3/4 overflow-hidden bg-gray-100 mb-4">
-                        <img
-                          src={drink.image.url}
-                          alt={drink.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      </div>
-                      <p className={`${playfair.className} text-xl lg:text-2xl text-black`}>
-                        {drink.name}
-                      </p>
-                    </div>
+                <div className="flex flex-col gap-4">
+                  <p className="eyebrow">
+                    {filteredDrinks.length} {filteredDrinks.length === 1 ? 'drink' : 'drinks'}
+                  </p>
+                  <h2 className="display-m">{selectedFilterTitle}</h2>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
+                  {filteredDrinks.map((drink, i) => (
+                    <DrinkCard key={drink.id} name={drink.name} imageUrl={drink.image.url} index={i} />
                   ))}
+                  {!filteredDrinks.length && (
+                    <p className="text-base text-ink-75 sm:col-span-2 lg:col-span-3">
+                      No drinks match these filters yet.
+                    </p>
+                  )}
                 </div>
               </div>
             ) : (
-              <div className="flex flex-col gap-16 lg:gap-24">
+              <div className="flex flex-col gap-16 lg:gap-20">
                 {menuCategories.map((cat) => (
                   <CocktailCarousel
                     key={cat.name}
@@ -369,35 +365,37 @@ export function MenuClient({ heroBlock }: { heroBlock: HeroBlock }) {
                 ))}
               </div>
             )}
-          </main>
+          </div>
         </div>
       </div>
 
       {/* Mobile Filter Drawer */}
       <div
-        className={`fixed inset-0 z-200 lg:hidden bg-white flex flex-col transition-transform duration-500 ease-in-out ${
-          isMobileFilterOpen ? 'translate-y-0' : 'translate-y-full'
+        role="dialog"
+        aria-modal="true"
+        aria-label="Filters"
+        className={`fixed inset-0 z-[60] lg:hidden bg-paper flex flex-col transition-[transform,visibility] duration-300 ease-(--ease-out) ${
+          isMobileFilterOpen ? 'visible translate-y-0' : 'invisible translate-y-full'
         }`}
       >
-        <div className="flex justify-between items-center p-6 border-b border-gray-100">
-          <h3 className="text-xl font-bold text-black uppercase tracking-tight">Filters</h3>
+        <div className="flex justify-between items-center px-4 h-16 border-b border-line">
+          <h3 className="display-s">Filters</h3>
           <button
             onClick={() => setIsMobileFilterOpen(false)}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+            aria-label="Close filters"
+            className="icon-btn"
           >
-            <X className="size-6 text-black" />
+            <X className="size-4" aria-hidden="true" />
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto p-6 pt-8">{filterSections}</div>
+        <div className="flex-1 overflow-y-auto p-4 pt-6">{filterSections}</div>
 
-        <div className="p-6 border-t border-gray-100">
+        <div className="p-4 border-t border-line">
           <button
             onClick={() => setIsMobileFilterOpen(false)}
             disabled={!hasActiveFilters}
-            className={`w-full bg-primary disabled:bg-primary/40 text-white py-4 rounded-md font-semibold tracking-wide hover:bg-primary/90 transition-colors active:scale-[0.98] ${
-              hasActiveFilters ? '' : 'disabled'
-            }`}
+            className="btn btn-primary h-12! w-full"
           >
             {hasActiveFilters
               ? `Show ${filteredDrinks.length} result${filteredDrinks.length > 1 ? 's' : ''}`

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { CocktailCarousel } from '@/app/(frontend)/components/CocktailCarousel'
 import type { Cocktail } from '@/payload-types'
 
@@ -23,20 +24,22 @@ export function MenuBlockUI({ cardsPerView, resolvedCategories = [] }: MenuBlock
   const perView = cardsPerView === '3' ? 3 : 4
 
   return (
-    <div className="py-14 md:py-20 px-4 md:px-8">
-      <div className="flex flex-col max-w-7xl mx-auto gap-20">
-        <div className="flex flex-col gap-20">
-          {resolvedCategories.map((category) => (
-            <CocktailCarousel
-              key={category.id}
-              categoryName={category.name}
-              drinks={category.drinks}
-              baseUrl={SERVER_URL}
-              cardsPerView={perView}
-            />
-          ))}
-        </div>
+    <section className="section">
+      <div className="wrap flex flex-col gap-16 md:gap-20">
+        {resolvedCategories.map((category) => (
+          <CocktailCarousel
+            key={category.id}
+            categoryName={category.name}
+            drinks={category.drinks}
+            baseUrl={SERVER_URL}
+            cardsPerView={perView}
+          />
+        ))}
+
+        <Link href="/menu" className="link-arrow w-fit">
+          Show me the full menu →
+        </Link>
       </div>
-    </div>
+    </section>
   )
 }

@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { parrisienne } from '@/app/(frontend)/fonts'
 
 type PageHeroProps = {
   heading: string
@@ -16,35 +15,28 @@ export function PageHeroUI({ heading, headingScript, backgroundImage }: PageHero
   const bgAlt = typeof backgroundImage === 'object' ? backgroundImage?.alt || '' : ''
 
   return (
-    <div className="relative min-h-screen md:h-[80vh] lg:h-screen w-full overflow-hidden text-foreground px-6 py-20 md:px-8 pt-32 flex justify-center">
-      <Image
-        src={bgUrl}
-        alt={bgAlt}
-        fill
-        unoptimized
-        priority
-        className="object-cover -z-10"
-        sizes="100vw"
-      />
+    <section className="pt-12 md:pt-20">
+      <div className="wrap md:text-center">
+        {/* Headings are often entered in capitals; display type is set in sentence case */}
+        <h1 className="display-xl">
+          <span className="inline-block lowercase first-letter:uppercase">{heading}</span>{' '}
+          <span className="accent lowercase">{headingScript}</span>
+        </h1>
+      </div>
 
-      <div className="relative z-10 flex h-full w-full max-w-7xl">
-        <div className="flex h-auto flex-col items-start text-left">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold flex flex-col text-black leading-[0.8]">
-            {heading}
-            <span
-              className={`
-                                ${parrisienne.className}
-                                text-primary
-                                text-6xl md:text-7xl lg:text-8xl
-                                leading-none
-                                -mt-2 md:-mt-4 lg:-mt-6 ml-2    
-                            `}
-            >
-              {headingScript}
-            </span>
-          </h1>
+      <div className="wrap-wide mt-10 md:mt-14">
+        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-m bg-paper-3 sm:aspect-[16/9] lg:aspect-[3/1]">
+          <Image
+            src={bgUrl}
+            alt={bgAlt}
+            fill
+            unoptimized
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
         </div>
       </div>
-    </div>
+    </section>
   )
 }

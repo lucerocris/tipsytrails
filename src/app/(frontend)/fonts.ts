@@ -1,16 +1,22 @@
-import { Parisienne, Playfair_Display } from 'next/font/google'
+import { Instrument_Serif, Inter, JetBrains_Mono } from 'next/font/google'
 
-const playfairFont = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-playfair',
-})
-
-const parrisienneFont = Parisienne({
+// Display: serif sets the tone. UI: neutral sans. Mono: metadata labels only.
+const instrumentSerif = Instrument_Serif({
   subsets: ['latin'],
   weight: ['400'],
-  variable: '--font-parrisienne',
+  style: ['normal', 'italic'],
+  variable: '--font-instrument-serif',
 })
 
-export const playfair = { className: playfairFont.className }
-export const parrisienne = { className: parrisienneFont.className }
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-jetbrains-mono',
+})
+
+export const fontVariables = `${instrumentSerif.variable} ${inter.variable} ${jetbrainsMono.variable}`

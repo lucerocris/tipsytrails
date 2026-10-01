@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { playfair } from "@/app/(frontend)/fonts";
 
 type StatItem = {
   value: string
@@ -47,79 +46,77 @@ export function StatsBlockUI({
 }: StatsProps) {
   const [featured, ...grid] = images ?? [];
   const featuredUrl = featured ? resolveUrl(featured.image) : '/placeholder.png';
-  const featuredAlt = featured ? resolveUrl(featured.image) : '';
+  const featuredAlt = featured ? resolveAlt(featured.image) : '';
   
   return (
-    <div className = "py-14 md:py-20 px-4 md:px-8">
-      <div className = "w-full h-fit flex flex-col justify-center gap-10 max-w-7xl mx-auto">
-        <div className = "flex flex-col gap-10">
-          <div className = "flex flex-col gap-6 lg:flex-row lg:justify-between lg:items-end w-full">
-            <div className = "flex flex-col gap-2">
-              <p className="text-sm lg:text-base">{eyebrow}</p>
-              <h2 className = "flex flex-col gap-1 text-2xl md:text-4xl lg:text-5xl font-medium">
-                {heading}
-                {(headingContinued || headingHighlight) && (
-                  <span>
-                    {headingContinued}
-                    {headingHighlight && (
-                      <span className = {`${playfair.className} text-primary`}>
-                        {' '}{headingHighlight}
-                      </span>
-                    )}
-                  </span>
-                )}
-              </h2>
-            </div>
-            
-            {stats && stats.length > 0 && (
-              <div className = "grid grid-cols-3 gap-4 lg:gap-18 w-full lg:max-w-150 lg:w-auto">
-                {stats.map((stat, i) => (
-                  <div key = {stat.id ?? i} className = "flex flex-col items-center justify-start gap-1">
-                    <p className="text-primary font-semibold text-4xl">{stat.value}</p>
-                    <p className="text-[#9A9A9A] text-sm font-medium text-center leading-tight">{ stat.label }</p>
-                  </div>
-                ))}
-              </div>
-            )}
+    <section className = "section">
+      <div className = "wrap flex flex-col gap-12 md:gap-16">
+        <div className = "flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+          <div className = "reveal flex flex-col gap-4">
+            <p className = "eyebrow">{eyebrow}</p>
+            <h2 className = "display-l">
+              {heading}
+              {(headingContinued || headingHighlight) && (
+                <span className = "block">
+                  {headingContinued}
+                  {headingHighlight && (
+                    <span className = "accent">
+                      {' '}{headingHighlight}
+                    </span>
+                  )}
+                </span>
+              )}
+            </h2>
           </div>
           
-          <div className = "flex flex-col lg:flex-row gap-3">
-            <div className = "flex-1 aspect-square w-full relative overflow-hidden bg-gray-100">
-              <Image
-                src={featuredUrl}
-                alt={featuredAlt}
-                fill
-                className="object-cover"
-                sizes = "(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
-            
-            {grid.length > 0 && (
-              <div className = "flex-1 grid grid-cols-2 grid-rows-2 gap-3">
-                {Array.from({ length: 4 }).map((_, i) => {
-                  const item = grid[i];
-                  const url = item ? resolveUrl(item.image) : '/placeholder.png';
-                  const alt = item ? resolveUrl(item.image) : '';
-                  
-                  return (
-                    <div key={i} className = "w-full aspect-square relative overflow-hidden bg-gray-200">
-                      {item && (
-                        <Image
-                          src={url}
-                          alt={alt}
-                          fill
-                          className="object-cover"
-                          sizes = "(max-width: 1024px) 50vw, 25vw"
-                        />
-                      )}
-                    </div>
-                  )
-                })}
-              </div>
-            )}
+          {stats && stats.length > 0 && (
+            <dl className = "reveal grid grid-cols-3 divide-x divide-line rounded-s border border-line lg:min-w-[460px]">
+              {stats.map((stat, i) => (
+                <div key = {stat.id ?? i} className = "flex flex-col-reverse gap-2 px-4 py-5 md:px-6 md:py-6">
+                  <dt className = "text-[13px] leading-tight text-ink-75">{stat.label}</dt>
+                  <dd className = "display-m">{stat.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
+        </div>
+        
+        <div className = "flex flex-col gap-3 lg:flex-row">
+          <div className = "reveal relative aspect-square w-full flex-1 overflow-hidden rounded-s bg-paper-3">
+            <Image
+              src={featuredUrl}
+              alt={featuredAlt}
+              fill
+              className="object-cover"
+              sizes = "(max-width: 1024px) 100vw, 50vw"
+            />
           </div>
+          
+          {grid.length > 0 && (
+            <div className = "flex-1 grid grid-cols-2 grid-rows-2 gap-3">
+              {Array.from({ length: 4 }).map((_, i) => {
+                const item = grid[i];
+                const url = item ? resolveUrl(item.image) : '/placeholder.png';
+                const alt = item ? resolveAlt(item.image) : '';
+                
+                return (
+                  <div key={i} className = "reveal relative aspect-square w-full overflow-hidden rounded-s bg-paper-3">
+                    {item && (
+                      <Image
+                        src={url}
+                        alt={alt}
+                        fill
+                        className="object-cover"
+                        sizes = "(max-width: 1024px) 50vw, 25vw"
+                      />
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          )}
         </div>
       </div>
-    </div>
+    </section>
   )
 }
