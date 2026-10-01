@@ -3,40 +3,12 @@
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import useEmblaCarousel from "embla-carousel-react"
 import Image from "next/image"
+import { ArrowLeft, ArrowRight } from "lucide-react"
 import { Testimonial } from "@/payload-types"
 
 interface TestimonialCarouselProps {
     testimonial: Testimonial[];
     baseUrl: string;
-}
-
-function ArrowIcon({ direction }: { direction: 'left' | 'right' }) {
-    return (
-        <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            aria-hidden="true"
-            className="h-5 w-5"
-        >
-            {direction === 'left' ? (
-                <path
-                    d="M15 18l-6-6 6-6"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                />
-            ) : (
-                <path
-                    d="M9 6l6 6-6 6"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                />
-            )}
-        </svg>
-    )
 }
 
 export function TestimonialCarousel({ testimonial, baseUrl }: TestimonialCarouselProps) {
@@ -118,43 +90,43 @@ export function TestimonialCarousel({ testimonial, baseUrl }: TestimonialCarouse
                             key={`${t.id}-${idx}`}
                             className="embla__slide flex-[0_0_85%] md:flex-[0_0_calc(50%_-_0.75rem)] lg:flex-[0_0_calc((100%_-_3rem)/3)] min-w-0"
                         >
-                            <div className="flex flex-col justify-between aspect-[3/4] bg-primary rounded-sm p-6 md:p-11">
-                                <div className="flex flex-col gap-6 md:gap-9">
-                                    <div className="relative w-14 h-14 rounded-full overflow-hidden bg-gray-300 mb-4">
+                            <figure className="flex h-full min-h-[340px] flex-col justify-between gap-10 rounded-s border border-line bg-paper p-6 md:p-8">
+                                <blockquote className="font-display text-[26px] leading-[1.15] tracking-[-0.01em] text-ink line-clamp-6">
+                                    “{t.quote}”
+                                </blockquote>
+
+                                <figcaption className="flex items-center gap-3">
+                                    <div className="relative size-12 shrink-0 overflow-hidden rounded-s bg-paper-3">
                                         <Image
                                             src={avatarUrl}
                                             alt={avatar?.alt || t.clientName}
                                             fill
-                                            sizes="56px"
+                                            sizes="48px"
                                             className="object-cover"
                                         />
                                     </div>
-                                    <p className="font-medium text-sm md:text-md text-white leading-relaxed line-clamp-6">
-                                        "{t.quote}"
-                                    </p>
-                                </div>
-
-                                <div className="flex flex-col text-white mt-4">
-                                    <p className="font-semibold text-md">{t.clientName}</p>
-                                    {t.clientRole ? <p className="text-sm opacity-80">{t.clientRole}</p> : null}
-                                </div>
-                            </div>
+                                    <div className="flex flex-col">
+                                        <p className="text-base font-semibold text-ink">{t.clientName}</p>
+                                        {t.clientRole ? <p className="text-[13px] text-ink-75">{t.clientRole}</p> : null}
+                                    </div>
+                                </figcaption>
+                            </figure>
                         </div>
                     )
                     })}
                 </div>
             </div>
 
-            <div className="mt-6 hidden sm:flex items-center justify-end gap-4">
+            <div className="mt-8 hidden sm:flex items-center justify-end gap-4">
                 {snapCount > 1 ? (
                     <div className="flex items-center gap-3">
                         <div
-                            className="h-1 w-16 rounded-full bg-black/10 overflow-hidden"
+                            className="h-0.5 w-24 bg-line overflow-hidden"
                             aria-hidden="true"
                         >
                             <div
                                 ref={progressFillRef}
-                                className="h-full w-full origin-left rounded-full bg-black/60 will-change-transform"
+                                className="h-full w-full origin-left bg-ink will-change-transform"
                                 style={{ transform: 'scaleX(0)' }}
                             />
                         </div>
@@ -168,18 +140,18 @@ export function TestimonialCarousel({ testimonial, baseUrl }: TestimonialCarouse
                     onClick={scrollPrev}
                     disabled={!canScrollPrev}
                     aria-label="Previous testimonials"
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-black/10 text-black transition disabled:cursor-not-allowed disabled:opacity-40"
+                    className="icon-btn"
                 >
-                    <ArrowIcon direction="left" />
+                    <ArrowLeft className="size-4" aria-hidden="true" />
                 </button>
                 <button
                     type="button"
                     onClick={scrollNext}
                     disabled={!canScrollNext}
                     aria-label="Next testimonials"
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-black/10 text-black transition disabled:cursor-not-allowed disabled:opacity-40"
+                    className="icon-btn"
                 >
-                    <ArrowIcon direction="right" />
+                    <ArrowRight className="size-4" aria-hidden="true" />
                 </button>
             </div>
         </div>

@@ -1,5 +1,5 @@
 import { Button } from '@/app/(frontend)/components/Button'
-import { playfair } from '@/app/(frontend)/fonts'
+import { Martini } from 'lucide-react'
 import Image from 'next/image'
 
 type HeroProps = {
@@ -29,62 +29,52 @@ export const HeroBlockUI = ({
       : '/placeholder.png'
 
   return (
-    <div className="relative h-screen w-full overflow-hidden text-foreground px-4 md:px-8 lg:px-8 py-16 flex justify-center">
-      {/* The Background Image */}
-      <Image
-        src={bgUrl}
-        alt={
-          typeof backgroundImage === 'object'
-            ? backgroundImage?.alt || 'Hero background'
-            : 'Hero background'
-        }
-        fill
-        unoptimized
-        priority
-        className="object-cover -z-10"
-        sizes="100vw"
-      />
+    <section className="pt-12 md:pt-20 lg:pt-24">
+      <div className="wrap flex flex-col items-start md:items-center md:text-center">
+        <p className="inline-flex items-center gap-2 rounded-full bg-tint px-3 py-1.5 text-sm text-primary">
+          <Martini className="size-3.5" aria-hidden="true" />
+          Weddings, birthdays &amp; corporate events
+        </p>
 
-      {/* The Content Overlay */}
-      <div className="relative z-10 flex h-full w-full items-end max-w-7xl">
-        <div className="flex h-auto flex-col gap-1 lg:gap-3">
-          <div className="flex flex-col gap-8">
-            <div className="flex flex-col gap-3.5">
-              <h1
-                className={`${playfair.className} text-4xl md:text-5xl lg:text-6xl font-semibold flex flex-col gap-2 text-black`}
-              >
-                {heading}{' '}
-                {headingHighlight && <span className="text-primary!">{headingHighlight}</span>}
-              </h1>
+        <h1 className="display-xl mt-6">
+          {heading} {headingHighlight && <span className="accent md:block">{headingHighlight}</span>}
+        </h1>
 
-              {description && (
-                <p className="text-md lg:text-lg text-black max-w-lg">{description}</p>
-              )}
-            </div>
+        {description && <p className="lead mt-5 max-w-xl">{description}</p>}
 
-            <div className="flex flex-row gap-3 lg:justify-start">
-              {primaryButtonText && primaryButtonLink && (
-                <Button
-                  href={primaryButtonLink}
-                  className="flex-1 w-full sm:flex-none sm:w-auto text-center"
-                >
-                  {primaryButtonText}
-                </Button>
-              )}
+        <div className="mt-8 flex w-full flex-row flex-wrap gap-2 md:w-auto">
+          {primaryButtonText && primaryButtonLink && (
+            <Button href={primaryButtonLink} className="flex-1 md:flex-none">
+              {primaryButtonText}
+            </Button>
+          )}
 
-              {secondaryButtonText && secondaryButtonLink && (
-                <Button
-                  href={secondaryButtonLink}
-                  variant="skeleton"
-                  className="flex-1 w-full sm:flex-none sm:w-auto text-center"
-                >
-                  {secondaryButtonText}
-                </Button>
-              )}
-            </div>
-          </div>
+          {secondaryButtonText && secondaryButtonLink && (
+            <Button href={secondaryButtonLink} variant="skeleton" className="flex-1 md:flex-none">
+              {secondaryButtonText}
+            </Button>
+          )}
         </div>
       </div>
-    </div>
+
+      {/* The work carries the color; the frame around it stays quiet */}
+      <div className="wrap-wide mt-12 md:mt-16">
+        <div className="relative aspect-[4/5] w-full overflow-hidden rounded-m bg-paper-3 sm:aspect-[16/9] lg:aspect-[21/9]">
+          <Image
+            src={bgUrl}
+            alt={
+              typeof backgroundImage === 'object'
+                ? backgroundImage?.alt || 'Hero background'
+                : 'Hero background'
+            }
+            fill
+            unoptimized
+            priority
+            className="object-cover"
+            sizes="100vw"
+          />
+        </div>
+      </div>
+    </section>
   )
 }

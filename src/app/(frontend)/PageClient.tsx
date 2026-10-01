@@ -44,8 +44,6 @@ export const PageClient: React.FC<PageClientProps> = ({
   }, [data?.layout, testimonials, categories])
 
   return (
-    <main>
-      <BlockRenderer blocks={blocks} />
-    </main>
+    <BlockRenderer blocks={blocks} />
   )
 }

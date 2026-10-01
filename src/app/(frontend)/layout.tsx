@@ -1,16 +1,15 @@
 import React from 'react'
 import '../global.css'
-import { Inter } from 'next/font/google'
 import type { Metadata } from 'next'
+import { fontVariables } from '@/app/(frontend)/fonts'
 import { Navbar } from '@/app/(frontend)/components/Navbar'
 import { InquiryForm } from '@/app/(frontend)/components/InquiryForm'
 import { FooterBlockUI } from '@/blocks/Footer/UI'
 
-const inter = Inter({ subsets: ['latin'] })
-
 export const metadata: Metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Tipsy Trails',
+  description:
+    'Tipsy Trails brings the bar to your venue: cocktails and full bar service for weddings, birthdays and corporate events in Cebu.',
+  title: 'Tipsy Trails | Mobile Cocktail Bar for Weddings & Events in Cebu',
 }
 
 async function getFooterData() {
@@ -39,8 +38,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const footer = await getFooterData();
 
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={fontVariables}>
+      <body>
         <Navbar />
         <main>{children}</main>
 

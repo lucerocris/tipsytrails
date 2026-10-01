@@ -1,5 +1,6 @@
 'use client'
 import React, { useRef } from 'react'
+import { Calendar, ChevronDown, ChevronUp, Martini } from 'lucide-react'
 export function InquiryForm() {
   const dateInputRef = useRef<HTMLInputElement>(null)
   const [displayDate, setDisplayDate] = React.useState('')
@@ -78,89 +79,90 @@ export function InquiryForm() {
   }
 
   return (
-    <div id="inquiry">
-      {/* header section */}
-      <div className="py-14 lg:py-20 px-4">
-        <div className="flex flex-col max-w-7xl mx-auto gap-10">
-          <div className="flex flex-col gap-3 w-full text-center items-center">
-            <h2 className="text-primary text-2xl md:text-4xl lg:text-5xl font-medium">
-              Ready to Elevate your Event?
-            </h2>
-            <p className="text-black text-base lg:text-lg max-w-xl font-medium">
-              Dates fill up fast. Fill in the details below to secure your date. We typically reply
-              via <span className="font-bold">Viber</span> or{' '}
-              <span className="font-bold">Messenger</span> for a quicker response.
-            </p>
-          </div>
+    <section id="inquiry" className="section border-t border-line">
+      <div className="wrap grid gap-10 lg:grid-cols-12 lg:gap-12">
+        <div className="flex flex-col gap-4 lg:col-span-5 lg:sticky lg:top-28 lg:self-start">
+          <p className="eyebrow">Last call</p>
+          <h2 className="display-l">
+            Tell us about
+            <span className="accent block">your event.</span>
+          </h2>
+          <p className="lead mt-1 max-w-md">
+            Dates fill up fast. Fill in the details to secure yours. We typically reply via Viber or
+            Messenger for a quicker response.
+          </p>
         </div>
-      </div>
 
-      <div className="py-14 lg:py-20 relative">
-        <div className="absolute bottom-0 h-70 !w-full bg-primary z-10" />
-
-        <div className="px-4">
-          {/* form */}
-          <div className="z-20 relative rounded-sm flex flex-col max-w-7xl mx-auto gap-10 bg-[#FFFDF9] shadow-xl h-auto px-6 py-10 md:px-16 md:py-12 lg:px-40 lg:py-15">
-            {isSuccess ? (
-              <div className="flex flex-col items-center justify-center gap-4 py-16 text-center">
-                <div className="text-5xl">🎉</div>
-                <h3 className="text-2xl font-semibold text-primary">Inquiry Sent!</h3>
-                <p className="text-gray-600 max-w-md text-base">
-                  We&apos;ll reach out to you via your preferred contact method shortly. Thank you
-                  for choosing Tipsy Trails!
-                </p>
-              </div>
-            ) : (
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 w-full gap-4 md:gap-6">
+        <div className="rounded-m bg-paper-2 p-5 md:p-10 lg:col-span-7">
+          {isSuccess ? (
+            <div
+              className="flex flex-col items-start gap-4 py-10"
+              role="status"
+              aria-live="polite"
+            >
+              <span className="flex size-12 items-center justify-center rounded-full bg-tint text-primary">
+                <Martini className="size-5" aria-hidden="true" />
+              </span>
+              <h3 className="display-m">Inquiry sent.</h3>
+              <p className="max-w-md text-base text-ink-75">
+                We&apos;ll reach out to you via your preferred contact method shortly. Thank you for
+                choosing Tipsy Trails!
+              </p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="grid w-full grid-cols-1 gap-3 md:grid-cols-2">
               {/* Field 1: First Name */}
-              <div className="flex flex-col gap-1 border border-gray-400/50 rounded-sm py-2 px-4 w-full h-auto focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
-                <label htmlFor="firstName" className="text-xs font-medium text-gray-600">
+              <div className="field">
+                <label htmlFor="firstName" className="field-label">
                   First Name
                 </label>
                 <input
                   type="text"
                   id="firstName"
                   name="firstName"
+                  autoComplete="given-name"
                   placeholder="Enter your first name"
-                  className="w-full text-md text-gray-900 placeholder:text-gray-500 bg-transparent border-none outline-none p-0 focus:ring-0"
+                  className="field-input"
                 />
               </div>
 
               {/* Field 2: Last Name */}
-              <div className="flex flex-col gap-1 border border-gray-400/50 rounded-sm py-2 px-4 w-full h-auto focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
-                <label htmlFor="lastName" className="text-xs font-medium text-gray-600">
+              <div className="field">
+                <label htmlFor="lastName" className="field-label">
                   Last Name
                 </label>
                 <input
                   type="text"
                   id="lastName"
                   name="lastName"
+                  autoComplete="family-name"
                   placeholder="Enter your last name"
-                  className="w-full text-md text-gray-900 placeholder:text-gray-500 bg-transparent border-none outline-none p-0 focus:ring-0"
+                  className="field-input"
                 />
               </div>
 
               {/* Field 3: Email */}
-              <div className="flex flex-col gap-1 border border-gray-400/50 rounded-sm py-2 px-4 w-full h-auto focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
-                <label htmlFor="email" className="text-xs font-medium text-gray-600">
+              <div className="field">
+                <label htmlFor="email" className="field-label">
                   Email Address
                 </label>
                 <input
                   type="email"
                   id="email"
                   name="email"
+                  autoComplete="email"
                   placeholder="name@example.com"
-                  className="w-full text-md text-gray-900 placeholder:text-gray-500 bg-transparent border-none outline-none p-0 focus:ring-0"
+                  className="field-input"
                 />
               </div>
 
               {/* Field 4: Phone */}
-              <div className="flex flex-col gap-1 border border-gray-400/50 rounded-sm py-2 px-4 w-full h-auto focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
-                <label htmlFor="phone" className="text-xs font-medium text-gray-600">
+              <div className="field">
+                <label htmlFor="phone" className="field-label">
                   Mobile / Viber Number
                 </label>
                 <div className="flex items-center">
-                  <span className="text-gray-400 text-md select-none whitespace-nowrap">+63</span>
+                  <span className="select-none whitespace-nowrap text-base text-ink-50">+63</span>
                   <input
                     type="tel"
                     id="phone"
@@ -174,14 +176,14 @@ export function InquiryForm() {
                     onChange={(e) => {
                       e.target.value = e.target.value.replace(/^0+/, '')
                     }}
-                    className="flex-1 text-md text-gray-900 placeholder:text-gray-500 bg-transparent border-none outline-none p-0 focus:ring-0 ml-1"
+                    className="field-input ml-1 flex-1"
                   />
                 </div>
               </div>
 
               {/* Field 4b: Preferred Contact Method */}
-              <div className="flex flex-col gap-1 border border-gray-400/50 rounded-sm py-2 px-4 w-full h-auto focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
-                <label htmlFor="preferredContact" className="text-xs font-medium text-gray-600">
+              <div className="field">
+                <label htmlFor="preferredContact" className="field-label">
                   Preferred Contact Method
                 </label>
                 <select
@@ -189,7 +191,7 @@ export function InquiryForm() {
                   name="preferredContact"
                   value={preferredContact}
                   onChange={(e) => setPreferredContact(e.target.value)}
-                  className="w-full text-md text-gray-900 bg-transparent border-none outline-none p-0 focus:ring-0 appearance-none"
+                  className="field-input appearance-none"
                 >
                   <option value="Viber">Viber</option>
                   <option value="Facebook Messenger">Facebook Messenger</option>
@@ -199,25 +201,27 @@ export function InquiryForm() {
 
               {/* Field 4c: Messenger Username (conditional) */}
               {preferredContact === 'Facebook Messenger' && (
-                <div className="flex flex-col gap-1 border border-gray-400/50 rounded-sm py-2 px-4 w-full h-auto focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
-                  <label htmlFor="messengerUsername" className="text-xs font-medium text-gray-600">
+                <div className="field">
+                  <label htmlFor="messengerUsername" className="field-label">
                     Messenger Username
                   </label>
                   <div className="flex items-center">
-                    <span className="text-gray-400 text-md select-none whitespace-nowrap">m.me/</span>
+                    <span className="select-none whitespace-nowrap text-base text-ink-50">
+                      m.me/
+                    </span>
                     <input
                       type="text"
                       id="messengerUsername"
                       name="messengerUsername"
                       placeholder="your.username"
-                      className="flex-1 text-md text-gray-900 placeholder:text-gray-500 bg-transparent border-none outline-none p-0 focus:ring-0"
+                      className="field-input flex-1"
                     />
                   </div>
                 </div>
               )}
 
               {/* Field 5: Event Date */}
-              <div className="flex flex-row items-stretch border border-gray-400/50 rounded-sm w-full h-auto focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all overflow-hidden relative">
+              <div className="field relative flex-row! items-stretch gap-0! overflow-hidden p-0!">
                 <input
                   ref={dateInputRef}
                   type="date"
@@ -230,53 +234,34 @@ export function InquiryForm() {
                 {/* Left: Display area */}
                 <div
                   onClick={handleDateClick}
-                  className="flex flex-col gap-1 flex-1 py-2 px-4 cursor-pointer"
+                  className="flex flex-1 cursor-pointer flex-col gap-1 px-3.5 py-2.5"
                 >
-                  <label
-                    htmlFor="date"
-                    className="text-xs font-medium text-gray-600 cursor-pointer"
-                  >
+                  <label htmlFor="date" className="field-label cursor-pointer">
                     Event Date
                   </label>
-                  <div className="w-full text-md text-gray-900 uppercase">
+                  <div className={`text-base ${displayDate ? 'text-ink' : 'text-ink-50'}`}>
                     {displayDate || 'MM / DD / YYYY'}
                   </div>
                 </div>
 
                 {/* Right: Icon with Click Handler */}
-                <div
+                <button
+                  type="button"
                   onClick={handleDateClick}
-                  className="flex items-center justify-center border-l border-gray-400/50 w-14 cursor-pointer text-gray-500 hover:text-primary hover:bg-black/5 transition-colors"
+                  aria-label="Choose event date"
+                  className="flex w-12 items-center justify-center border-l border-line text-ink-75 transition-colors hover:bg-paper-3 hover:text-primary"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
-                    />
-                  </svg>
-                </div>
+                  <Calendar className="size-4" aria-hidden="true" />
+                </button>
               </div>
 
               {/* Field 6: Event Type */}
-              <div className="flex flex-col gap-1 border border-gray-400/50 rounded-sm py-2 px-4 w-full h-auto focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
-                <label htmlFor="type" className="text-xs font-medium text-gray-600">
+              <div className="field">
+                <label htmlFor="type" className="field-label">
                   Event Type
                 </label>
-                <select
-                  id="type"
-                  name="type"
-                  className="w-full text-md text-gray-900 bg-transparent border-none outline-none p-0 focus:ring-0 appearance-none"
-                  defaultValue=""
-                >
-                  <option value="" disabled className="text-gray-500">
+                <select id="type" name="type" className="field-input appearance-none" defaultValue="">
+                  <option value="" disabled>
                     Select type
                   </option>
                   <option value="wedding">Wedding</option>
@@ -287,8 +272,8 @@ export function InquiryForm() {
               </div>
 
               {/* Field 7: Venue */}
-              <div className="flex flex-col gap-1 border border-gray-400/50 rounded-sm py-2 px-4 w-full h-auto focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
-                <label htmlFor="venue" className="text-xs font-medium text-gray-600">
+              <div className="field">
+                <label htmlFor="venue" className="field-label">
                   Venue
                 </label>
                 <input
@@ -296,14 +281,14 @@ export function InquiryForm() {
                   id="venue"
                   name="venue"
                   placeholder="Enter your venue"
-                  className="w-full text-md text-gray-900 placeholder:text-gray-500 bg-transparent border-none outline-none p-0 focus:ring-0"
+                  className="field-input"
                 />
               </div>
 
               {/* Field 8: Guest Count */}
-              <div className="flex flex-row items-stretch border border-gray-400/50 rounded-sm w-full h-auto focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all overflow-hidden">
-                <div className="flex flex-col gap-1 flex-1 py-2 px-4">
-                  <label htmlFor="guests" className="text-xs font-medium text-gray-600">
+              <div className="field flex-row! items-stretch gap-0! overflow-hidden p-0!">
+                <div className="flex flex-1 flex-col gap-1 px-3.5 py-2.5">
+                  <label htmlFor="guests" className="field-label">
                     Estimated Guest Count
                   </label>
                   <input
@@ -312,55 +297,33 @@ export function InquiryForm() {
                     name="guests"
                     value={guestCount}
                     onChange={(e) => setGuestCount(Math.max(0, Number(e.target.value)))}
-                    className="w-full text-md text-gray-900 placeholder:text-gray-500 bg-transparent border-none outline-none p-0 focus:ring-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    className="field-input [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                   />
                 </div>
 
-                <div className="flex flex-col border-l border-gray-400/50 w-10">
+                <div className="flex w-12 flex-col border-l border-line">
                   <button
                     type="button"
                     onClick={() => setGuestCount((c) => c + 1)}
-                    className="flex-1 hover:bg-black/5 flex items-center justify-center text-gray-500 hover:text-primary transition-colors"
+                    className="flex flex-1 items-center justify-center text-ink-75 transition-colors hover:bg-paper-3 hover:text-primary"
                     aria-label="Increase guest count"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      className="w-4 h-4"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M14.77 12.79a.75.75 0 01-1.06-.02L10 8.832 6.29 12.77a.75.75 0 11-1.08-1.04l4.25-4.5a.75.75 0 011.08 0l4.25 4.5a.75.75 0 01-.02 1.06z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                    <ChevronUp className="size-4" aria-hidden="true" />
                   </button>
                   <button
                     type="button"
                     onClick={() => setGuestCount((c) => Math.max(0, c - 1))}
-                    className="flex-1 border-t border-gray-400/50 hover:bg-black/5 flex items-center justify-center text-gray-500 hover:text-primary transition-colors"
+                    className="flex flex-1 items-center justify-center border-t border-line text-ink-75 transition-colors hover:bg-paper-3 hover:text-primary"
                     aria-label="Decrease guest count"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      className="w-4 h-4"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01-.02-1.06z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                    <ChevronDown className="size-4" aria-hidden="true" />
                   </button>
                 </div>
               </div>
 
               {/* Field 9: Message */}
-              <div className="md:col-span-2 flex flex-col gap-1 border border-gray-400/50 rounded-sm py-2 px-4 w-full focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
-                <label htmlFor="message" className="text-xs font-medium text-gray-600">
+              <div className="field md:col-span-2">
+                <label htmlFor="message" className="field-label">
                   Message / Special Requests
                 </label>
                 <textarea
@@ -368,30 +331,28 @@ export function InquiryForm() {
                   name="message"
                   rows={4}
                   placeholder="Tell us about your drink preferences or any specific theme ideas"
-                  className="w-full text-md text-gray-900 placeholder:text-gray-500 bg-transparent border-none outline-none p-0 focus:ring-0 resize-none"
+                  className="field-input resize-none"
                 />
               </div>
 
               {/* Submit Button */}
-              <div className="md:col-span-2 mt-4 flex flex-col gap-3">
+              <div className="mt-3 flex flex-col gap-3 md:col-span-2">
                 {error && (
-                  <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-sm px-4 py-2">
+                  <p
+                    role="alert"
+                    className="rounded-s border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-700"
+                  >
                     {error}
                   </p>
                 )}
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="px-5 py-3 bg-primary text-white text-md rounded-sm hover:bg-opacity-90 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
-                >
+                <button type="submit" disabled={isLoading} className="btn btn-primary h-12! w-full">
                   {isLoading ? 'Sending...' : 'Send Inquiry'}
                 </button>
               </div>
             </form>
-            )}
-          </div>
+          )}
         </div>
       </div>
-    </div>
+    </section>
   )
 }

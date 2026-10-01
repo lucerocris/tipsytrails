@@ -1,156 +1,124 @@
 'use client'
 
 import Link from 'next/link'
-import React, { useEffect, useRef, useState, useMemo } from 'react'
-import { Menu, X } from 'lucide-react'
+import { usePathname } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
 import { Button } from './Button'
 
+const links = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'Our Story' },
+  { href: '/menu', label: 'Our Menu' },
+  { href: '/cocktail-tasting', label: 'Cocktail Tasting' },
+]
+
 export function Navbar() {
-  const [scrollY, setScrollY] = useState(0)
-  const [windowHeight, setWindowHeight] = useState(0)
-  const [hasMounted, setHasMounted] = useState(false)
+  const pathname = usePathname()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isNearFooter, setIsNearFooter] = useState(false)
 
-  const ticking = useRef(false)
-
+  // The footer carries its own navigation, so the bar steps aside once it shows.
   useEffect(() => {
-    if (typeof window === 'undefined') return
+    const footer = document.querySelector('footer')
+    if (!footer) return
 
-    setWindowHeight(window.innerHeight)
-    const rafId = requestAnimationFrame(() => setHasMounted(true))
-
-    const handleScroll = () => {
-      if (!ticking.current) {
-        requestAnimationFrame(() => {
-          setScrollY(window.scrollY)
-          ticking.current = false
-        })
-        ticking.current = true
-      }
-    }
-
-    const handleResize = () => setWindowHeight(window.innerHeight)
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', handleResize)
-      cancelAnimationFrame(rafId)
-    }
+    const observer = new IntersectionObserver(([entry]) => setIsNearFooter(entry.isIntersecting), {
+      rootMargin: '0px 0px -40% 0px',
+    })
+    observer.observe(footer)
+    return () => observer.disconnect()
   }, [])
 
-  const heroMidPoint = windowHeight / 2
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isMobileMenuOpen])
 
-  const navbarClasses = useMemo(() => {
-    let classes = hasMounted ? 'navbar is-visible' : 'navbar is-hidden'
-    if (scrollY >= heroMidPoint) classes += ' is-white'
-    if (isMobileMenuOpen) classes += ' is-menu-open'
-    return classes
-  }, [scrollY, windowHeight, hasMounted, isMobileMenuOpen, heroMidPoint])
+  const closeMenu = () => setIsMobileMenuOpen(false)
 
   return (
     <>
-      <nav className={navbarClasses}>
-        <div className="navbar-content px-4 md:px-8 lg:px-8 xl:px-0">
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex w-full h-full justify-between items-center gap-4">
-            <Link href="/" className="navbar-logo flex items-center shrink-0">
-              <img src="/logo.svg" alt="Logo" className="w-24 lg:w-32" />
-            </Link>
+      <header
+        className={`sticky top-0 z-50 h-16 bg-paper border-b border-line transition-transform duration-300 ease-(--ease-out) ${
+          isNearFooter && !isMobileMenuOpen ? '-translate-y-full' : 'translate-y-0'
+        }`}
+      >
+        <nav className="wrap h-full flex items-center justify-between gap-6" aria-label="Main">
+          <Link href="/" className="flex items-center shrink-0" onClick={closeMenu}>
+            <img src="/logo.svg" alt="Tipsy Trails" className="w-24 lg:w-28" />
+          </Link>
 
-            {/* Links Container */}
-            <div className="flex items-center gap-4 lg:gap-10">
-              <ul className="navbar-links flex items-center gap-4! lg:gap-8! text-sm! md:text-base! lg:text-lg! lg:font-medium whitespace-nowrap">
-                <li>
-                  <Link href="/" className="px-1 hover:text-primary transition-colors">
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/about" className="px-1 hover:text-primary transition-colors">
-                    Our Story
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/menu" className="px-1 hover:text-primary transition-colors">
-                    Our Menu
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/cocktail-tasting"
-                    className="px-1 hover:text-primary transition-colors"
-                  >
-                    Cocktail Tasting
-                  </Link>
-                </li>
-              </ul>
+          <ul className="hidden md:flex items-center gap-6 lg:gap-8">
+            {links.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  aria-current={pathname === link.href ? 'page' : undefined}
+                  className={`text-sm font-medium transition-colors duration-150 hover:text-primary ${
+                    pathname === link.href ? 'text-primary' : 'text-ink'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
 
-              <Link
-                href="#inquiry"
-                className="inline-flex items-center justify-center px-6 py-3 lg:px-6 lg:py-3 font-base! lg:font-medium !text-white bg-primary rounded-sm text-sm md:text-base! lg:text-base whitespace-nowrap"
-              >
-                Get My Custom Quote
-              </Link>
-            </div>
-          </div>
+          <Button href="#inquiry" className="hidden md:inline-flex">
+            Get My Custom Quote
+          </Button>
 
-          {/* Mobile Navigation */}
-          <div className="flex md:hidden w-full h-full items-center justify-between">
-            <Link href="/" className="navbar-logo flex items-center">
-              <img src="logo.svg" alt="Tipsy Trails" className="w-24" />
-            </Link>
-            <button
-              className={`navbar-hamburger ${isMobileMenuOpen ? 'open' : ''}`}
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle menu"
+          <button
+            type="button"
+            className="md:hidden icon-btn"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu"
+          >
+            <span
+              className={`grid grid-cols-3 gap-[3px] transition-transform duration-300 ease-(--ease-out) ${
+                isMobileMenuOpen ? 'rotate-45' : ''
+              }`}
+              aria-hidden="true"
             >
-              <span className="hamburger-line hamburger-line-top" />
-              <span className="hamburger-line hamburger-line-bottom" />
-            </button>
-          </div>
-        </div>
-      </nav>
+              {Array.from({ length: 9 }).map((_, i) => (
+                <span key={i} className="size-[3px] rounded-full bg-ink" />
+              ))}
+            </span>
+          </button>
+        </nav>
+      </header>
 
-      {/* Mobile Menu Drawer */}
-      <div className="mobile-menu-wrapper">
-        <div className={`mobile-menu${isMobileMenuOpen ? ' is-open' : ''}`}>
-          <div className="flex flex-col gap-10 w-full">
-            <ul className="flex flex-col gap-6 text-5xl">
-              <li>
-                <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" onClick={() => setIsMobileMenuOpen(false)}>
-                  Our Journey
-                </Link>
-              </li>
-              <li>
-                <Link href="/menu" onClick={() => setIsMobileMenuOpen(false)}>
-                  Our Menu
-                </Link>
-              </li>
-              <li>
-                <Link href="/cocktail-tasting" onClick={() => setIsMobileMenuOpen(false)}>
-                  Cocktail Tasting
-                </Link>
-              </li>
-            </ul>
-            <div className="flex flex-col gap-4 w-full">
-              <Button
-                href="/"
-                className="w-full justify-center py-5 text-xl font-base"
-                onClick={() => setIsMobileMenuOpen(false)}
+      <div
+        id="mobile-menu"
+        className={`md:hidden fixed inset-x-0 top-16 bottom-0 z-40 bg-paper flex flex-col justify-between px-4 pt-10 pb-6 transition-[opacity,visibility] duration-300 ease-(--ease-out) ${
+          isMobileMenuOpen ? 'visible opacity-100' : 'invisible opacity-0'
+        }`}
+      >
+        <ul className="flex flex-col">
+          {links.map((link, i) => (
+            <li key={link.href} className="border-b border-line">
+              <Link
+                href={link.href}
+                onClick={closeMenu}
+                className="flex items-baseline gap-4 py-5"
+                aria-current={pathname === link.href ? 'page' : undefined}
               >
-                Get My Custom Quote
-              </Button>
-            </div>
-          </div>
-        </div>
+                <span className="meta">{String(i + 1).padStart(2, '0')}</span>
+                <span className={`display-m ${pathname === link.href ? 'accent' : ''}`}>
+                  {link.label}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <Button href="#inquiry" className="w-full" onClick={closeMenu}>
+          Get My Custom Quote
+        </Button>
       </div>
     </>
   )

@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 type ButtonProps = {
   href: string
-  variant?: 'filled' | 'skeleton'
+  variant?: 'filled' | 'skeleton' | 'light'
   children: React.ReactNode
   className?: string
   onClick?: () => void
@@ -15,15 +15,14 @@ export function Button({
   className = 'w-fit',
   onClick,
 }: ButtonProps) {
-  const base =
-    'inline-flex items-center justify-center px-6 py-3 text-sm md:text-base! font-medium rounded-sm cursor-pointer'
   const styles = {
-    filled: 'text-white bg-primary',
-    skeleton: 'text-primary border-primary border',
+    filled: 'btn-primary',
+    skeleton: 'btn-secondary',
+    light: 'btn-light',
   }
 
   return (
-    <Link href={href} className={`${base} ${styles[variant]} ${className}`} onClick={onClick}>
+    <Link href={href} className={`btn ${styles[variant]} ${className}`} onClick={onClick}>
       {children}
     </Link>
   )

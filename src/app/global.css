@@ -1,12 +1,324 @@
 @import 'tailwindcss';
 
-html {
-  scroll-behavior: smooth;
-}
-
+/* One hue (olive) + its tint. Neutrals take the hue's warm temperature. */
 @theme {
   --color-primary: #63612a;
-  --color-black: #3b3b3b;
+  --color-primary-dark: #535122;
+  --color-tint: #ecebd9;
+  --color-ink: #1f1e16;
+  --color-ink-75: rgb(31 30 22 / 0.75);
+  --color-ink-50: rgb(31 30 22 / 0.6);
+  --color-paper: #fffdf8;
+  --color-paper-2: #f8f5ec;
+  --color-paper-3: #f1ede1;
+  --color-line: rgb(31 30 22 / 0.1);
+  --color-black: #1f1e16;
+
+  --radius-xs: 2px;
+  --radius-s: 4px;
+  --radius-m: 12px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@theme inline {
+  --font-display: var(--font-instrument-serif), Georgia, 'Times New Roman', serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* layout */
+  .wrap {
+    width: 100%;
+    max-width: calc(1240px + 48px);
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+
+  .wrap-wide {
+    width: 100%;
+    max-width: calc(1400px + 48px);
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+
+  .section {
+    padding-block: clamp(72px, 10vw, 140px);
+  }
+
+  @media (max-width: 640px) {
+    .wrap,
+    .wrap-wide {
+      padding-inline: 16px;
+    }
+  }
+
+  /* type: serif display, always near 1.0 line-height with negative tracking */
+  .display-xl,
+  .display-l,
+  .display-m,
+  .display-s {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+  }
+
+  .display-xl {
+    font-size: clamp(46px, 6.4vw, 92px);
+    line-height: 0.98;
+  }
+
+  .display-l {
+    font-size: clamp(38px, 4.8vw, 68px);
+    line-height: 1.02;
+  }
+
+  .display-m {
+    font-size: clamp(30px, 3.2vw, 44px);
+    line-height: 1.05;
+  }
+
+  .display-s {
+    font-size: clamp(25px, 2.4vw, 32px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+
+  /* emphasis by color, not weight */
+  .accent {
+    font-style: italic;
+    color: var(--color-primary);
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+
+  .lead {
+    font-size: 18px;
+    line-height: 1.45;
+    font-weight: 500;
+    color: var(--color-ink);
+  }
+
+  .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--color-ink-50);
+  }
+
+  /* buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 44px;
+    padding-inline: 20px;
+    border-radius: var(--radius-s);
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 150ms var(--ease-out);
+  }
+
+  .btn-primary {
+    background: var(--color-primary);
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background: var(--color-primary-dark);
+  }
+
+  .btn-secondary {
+    background: var(--color-paper-3);
+    color: var(--color-ink);
+  }
+
+  .btn-secondary:hover {
+    background: var(--color-tint);
+  }
+
+  /* for use on the olive panels */
+  .btn-light {
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  .btn-light:hover {
+    background: var(--color-tint);
+  }
+
+  .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .link-arrow {
+    font-size: 14px;
+    line-height: 1.3;
+    font-weight: 600;
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  .link-arrow:hover {
+    color: var(--color-primary);
+  }
+
+  /* square icon button used by carousels */
+  .icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-s);
+    color: var(--color-ink);
+    transition: background-color 150ms var(--ease-out);
+  }
+
+  .icon-btn:hover:not(:disabled) {
+    background: var(--color-paper-3);
+  }
+
+  .icon-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  /* form fields: label sits inside the bordered box */
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--color-paper);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-s);
+    transition: border-color 150ms var(--ease-out);
+  }
+
+  .field:focus-within {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 1px var(--color-primary);
+  }
+
+  .field-label {
+    font-size: 12px;
+    line-height: 1.2;
+    font-weight: 500;
+    color: var(--color-ink-75);
+  }
+
+  .field-input {
+    width: 100%;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    outline: none;
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--color-ink);
+  }
+
+  .field-input::placeholder {
+    color: var(--color-ink-50);
+  }
+
+  /* the trail: dashed route line with waypoint dots, the brand's one motif */
+  .trail-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    background: var(--color-primary);
+    box-shadow: 0 0 0 5px var(--color-paper);
+  }
+}
+
+/* Scroll reveal without JS: content stays visible wherever view timelines are unsupported. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 40%;
+    }
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 /* Hide native date input calendar icon so we can use a custom one.
@@ -27,191 +339,4 @@ input[type='date']::-webkit-inner-spin-button,
 input[type='date']::-webkit-clear-button {
   display: none;
   -webkit-appearance: none;
-}
-
-/* Minimal Navbar Styles */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 64px;
-  z-index: 1001;
-  background-color: transparent;
-  transition:
-    background-color 0.8s cubic-bezier(0.18, 0.71, 0.11, 1),
-    transform 0.8s cubic-bezier(0.18, 0.71, 0.11, 1);
-  opacity: 1;
-  transform: translateY(0);
-  --link-color: white;
-}
-
-@media (min-width: 768px) {
-  .navbar {
-    height: 78px;
-    padding: 14px 0;
-  }
-}
-
-/* White navbar state */                              
-.navbar.is-white {
-  background-color: #ffffff;
-  --link-color: #3b3b3b;
-  border-bottom: 1px solid rgb(229, 231, 235);
-}
-
-/* Menu open state */
-.navbar.is-menu-open {
-  background-color: #ffffff;
-  --link-color: #3b3b3b;
-  border-bottom: 1px solid rgb(229, 231, 235);
-}
-
-/* Hide/show states */
-.navbar.is-hidden {
-  opacity: 0;
-  transform: translateY(-100%);
-}
-
-.navbar.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Navbar content */
-.navbar-content {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  max-width: 1280px;
-  margin: 0 auto;
-}
-
-/* Links */
-.navbar-links {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  gap: 1.5rem;
-  list-style: none;
-  font-size: 16px;
-  margin: 0;
-  padding: 0;
-  font-weight: 500;
-}
-
-.navbar-links li {
-  height: 100%;
-}
-
-.navbar-links a {
-  color: var(--color-primary);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  height: 100%;
-
-  transition:
-    color 0.8s cubic-bezier(0.18, 0.71, 0.11, 1),
-    opacity 0.3s ease;
-}
-
-.navbar-links a:hover {
-  opacity: 0.7;
-}
-
-/* Logo */
-.navbar-logo {
-  transition: color 0.8s cubic-bezier(0.18, 0.71, 0.11, 1);
-}
-
-/* Hamburger menu */
-.navbar-hamburger {
-  position: relative;
-  width: 35px;
-  height: 18px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
-
-.hamburger-line {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background-color: var(--link-color);
-  border-radius: 2px;
-  top: 50%;
-  transition:
-    transform 0.8s cubic-bezier(0.18, 0.71, 0.11, 1),
-    background-color 0.8s cubic-bezier(0.18, 0.71, 0.11, 1);
-}
-
-.hamburger-line-top {
-  transform: translateY(calc(-50% - 3.5px));
-}
-
-.hamburger-line-bottom {
-  transform: translateY(calc(-50% + 3.5px));
-}
-
-.navbar-hamburger.open .hamburger-line-top {
-  transform: translateY(-50%) rotate(45deg);
-}
-
-.navbar-hamburger.open .hamburger-line-bottom {
-  transform: translateY(-50%) rotate(-45deg);
-}
-
-/* Mobile menu drawer wrapper  */
-.mobile-menu-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  overflow: hidden;
-  z-index: 1000;
-  pointer-events: none;
-}
-
-/* Mobile menu drawer */
-.mobile-menu {
-  background: #ffffff;
-  height: 100dvh;
-  padding: 22px 22px;
-  padding-top: calc(64px + 2rem);
-  transform: translateY(-100%);
-  transition: transform 0.8s cubic-bezier(0.18, 0.71, 0.11, 1);
-  pointer-events: none;
-}
-
-.mobile-menu.is-open {
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.mobile-menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.mobile-menu ul a {
-  color: #3b3b3b;
-  text-decoration: none;
-  font-size: 28px;
-  font-weight: 400;
-  display: block;
-}
-
-.mobile-menu ul a:hover {
-  opacity: 0.7;
 }

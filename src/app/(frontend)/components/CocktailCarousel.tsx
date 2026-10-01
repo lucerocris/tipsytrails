@@ -2,7 +2,8 @@
 
 import React, { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
-import { parrisienne, playfair } from '@/app/(frontend)/fonts'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { DrinkCard } from './DrinkCard'
 // Define types based on your Payload structure
 interface CocktailCarouselProps {
   drinks: any[]
@@ -14,30 +15,6 @@ interface CocktailCarouselProps {
 const cardBasisClass: Record<3 | 4, string> = {
   3: 'min-w-0 flex-[0_0_80%] md:flex-[0_0_calc(50%_-_0.75rem)] lg:flex-[0_0_calc(33.333%_-_1rem)]',
   4: 'min-w-0 flex-[0_0_85%] md:flex-[0_0_calc(50%_-_0.75rem)] lg:flex-[0_0_calc(33.333%_-_1rem)] xl:flex-[0_0_calc(25%_-_1.125rem)]',
-}
-
-function ArrowIcon({ direction }: { direction: 'left' | 'right' }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="h-5 w-5">
-      {direction === 'left' ? (
-        <path
-          d="M15 18l-6-6 6-6"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      ) : (
-        <path
-          d="M9 6l6 6-6 6"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      )}
-    </svg>
-  )
 }
 
 export function CocktailCarousel({
@@ -77,42 +54,47 @@ export function CocktailCarousel({
 
   if (!drinks.length) return null
 
+  const canScroll = canScrollPrev || canScrollNext
+
   return (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-wrap items-end justify-between gap-3">
+    <div className="flex flex-col gap-8">
+      <div className="flex flex-wrap items-end justify-between gap-4">
         {categoryName ? (
-          <h4 className="flex gap-2 md:gap-3 items-baseline">
-            <span className={`${parrisienne.className} text-3xl md:text-5xl text-primary`}>
-              {categoryName.split(' ')[0]}
-            </span>{' '}
-            <span className={`${playfair.className} text-2xl md:text-4xl text-black`}>
+          <div className="flex flex-col gap-4">
+            <p className="eyebrow">
+              {drinks.length} {drinks.length === 1 ? 'drink' : 'drinks'}
+            </p>
+            <h3 className="display-m">
+              <span className="accent">{categoryName.split(' ')[0]}</span>{' '}
               {categoryName.split(' ').slice(1).join(' ')}
-            </span>
-          </h4>
+            </h3>
+          </div>
         ) : (
           <div />
         )}
 
-        <div className="hidden sm:flex items-center gap-2">
-          <button
-            type="button"
-            onClick={scrollPrev}
-            disabled={!canScrollPrev}
-            aria-label="Previous cocktails"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-black/10 text-black transition disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            <ArrowIcon direction="left" />
-          </button>
-          <button
-            type="button"
-            onClick={scrollNext}
-            disabled={!canScrollNext}
-            aria-label="Next cocktails"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-black/10 text-black transition disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            <ArrowIcon direction="right" />
-          </button>
-        </div>
+        {canScroll && (
+          <div className="hidden sm:flex items-center gap-2">
+            <button
+              type="button"
+              onClick={scrollPrev}
+              disabled={!canScrollPrev}
+              aria-label="Previous cocktails"
+              className="icon-btn"
+            >
+              <ArrowLeft className="size-4" aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              onClick={scrollNext}
+              disabled={!canScrollNext}
+              aria-label="Next cocktails"
+              className="icon-btn"
+            >
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </button>
+          </div>
+        )}
       </div>
 
       {/* carousel viewport */}
@@ -142,15 +124,7 @@ export function CocktailCarousel({
 
             return (
               <div key={`${drink.id ?? idx}-${idx}`} className={cardBasisClass[cardsPerView]}>
-                <div className="flex flex-col gap-2">
-                  <div
-                    className="w-full aspect-[3/4] bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: `url('${imageUrl}')` }}
-                  />
-                  <p className={`${playfair.className} text-black text-xl font-medium`}>
-                    {drink.name}
-                  </p>
-                </div>
+                <DrinkCard name={drink.name} imageUrl={imageUrl} index={idx} />
               </div>
             )
           })}

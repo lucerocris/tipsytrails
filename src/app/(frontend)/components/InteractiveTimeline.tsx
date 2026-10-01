@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useScroll, useSpring } from 'framer-motion'
+import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion'
 import { useRef } from 'react'
 
 // --- TYPESCRIPT INTERFACES ---
@@ -18,47 +18,8 @@ interface TimelineEntryProps {
   index: number
 }
 
-// interface TimelineData {
-//   id: number
-//   title: string
-//   description: string
-//   image: string
-// }
-
-// interface TimelineItemProps {
-//   item: TimelineData
-//   index: number
-// }
-
-// --- DUMMY DATA ---
-// const timelineData: TimelineData[] = [
-//   {
-//     id: 1,
-//     title: 'Jan 2022',
-//     description:
-//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
-//     image:
-//       'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=800&auto=format&fit=crop',
-//   },
-//   {
-//     id: 2,
-//     title: 'Feb 2022',
-//     description:
-//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
-//     image:
-//       'https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=800&auto=format&fit=crop',
-//   },
-//   {
-//     id: 3,
-//     title: 'Mar 2022',
-//     description:
-//       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
-//     image:
-//       'https://images.unsplash.com/photo-1620189507195-68309c04c4d0?q=80&w=800&auto=format&fit=crop',
-//   },
-// ]
-
 // --- MAIN COMPONENT ---
+// The trail: a dashed route that fills in as the visitor walks the story.
 export default function InteractiveTimeline({ entries }: { entries: TimelineEntry[] }) {
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -76,111 +37,62 @@ export default function InteractiveTimeline({ entries }: { entries: TimelineEntr
   if (!entries.length) return null
 
   return (
-    <div
-      className="relative bg-white text-slate-900 py-32 min-h-screen overflow-hidden"
-      ref={containerRef}
-    >
-      <div className="max-w-7xl mx-auto px-4 md:px-8 xl:px-0 relative">
-        <div className="absolute left-[37px] top-0 bottom-0 w-[2px] bg-gray-200 md:left-1/2 md:-translate-x-1/2" />
+    <section className="section overflow-hidden" ref={containerRef}>
+      <div className="wrap">
+        <div className="relative">
+          <div className="absolute left-[5px] top-0 bottom-0 border-l border-dashed border-ink/25 md:left-1/2" />
 
-        <motion.div
-          className="absoluge left-[36px] top-0 bottom-0 w-[4px] bg-primary origin-top md:left-1/2 md:-translate-x-1/2"
-          style={{ scaleY }}
-        />
+          <motion.div
+            className="absolute left-[5px] top-0 bottom-0 w-px bg-primary origin-top md:left-1/2"
+            style={{ scaleY }}
+          />
 
-        <div className="space-y-24 md:space-y-40">
-          {entries.map((item, index) => (
-            <TimelineItem key={item.id ?? index} item={item} index={index} />
-          ))}
+          <ol className="flex flex-col gap-20 md:gap-32">
+            {entries.map((item, index) => (
+              <TimelineItem key={item.id ?? index} item={item} index={index} />
+            ))}
+          </ol>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
 // --- INDIVIDUAL ITEM COMPONENT ---
 function TimelineItem({ item, index }: TimelineEntryProps) {
   const isEven = index % 2 === 0
+  const reduceMotion = useReducedMotion()
+
+  const rise = {
+    initial: reduceMotion ? false : { opacity: 0, y: 16 },
+    whileInView: { opacity: 1, y: 0 },
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
+    viewport: { once: true, margin: '0px 0px -10% 0px' },
+  }
 
   return (
-    <div>
-      {/* ── MOBILE LAYOUT ── */}
-      <div className="flex items-start md:hidden">
-        {/* Dot — width 44px + 16px container padding = center at exactly 38px */}
-        <div className="flex-shrink-0 w-11 flex justify-center pt-[6px] relative z-10">
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-            viewport={{ once: true, amount: 'some' }} // Triggers immediately on entering screen
-            className="w-5 h-5 rounded-full bg-primary border-4 border-white shadow-[0_0_0_2px_rgba(0,0,0,0.1)]"
-          />
-        </div>
+    <li className="relative grid gap-6 pl-9 md:grid-cols-2 md:items-center md:gap-0 md:pl-0">
+      <span
+        className="trail-dot absolute left-0 top-2 md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2"
+        aria-hidden="true"
+      />
 
-        {/* Stacked Content */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-          viewport={{ once: true, amount: 'some' }} // Triggers immediately on entering screen
-          className="flex flex-col gap-3 pl-4 text-left w-full pr-4"
-        >
-          <h3 className="text-3xl font-bold text-primary">{item.dateLabel}</h3>
-          <p className="text-base text-gray-600 leading-relaxed">{item.description}</p>
-          <div className="relative rounded-lg overflow-hidden shadow-xl bg-gray-100 mt-2 w-full">
-            <img
-              src={item.imageUrl}
-              alt={item.imageAlt}
-              className="w-full object-cover h-[250px] hover:scale-105 transition-transform duration-500 ease-out"
-            />
-          </div>
-        </motion.div>
-      </div>
-
-      {/* ── DESKTOP LAYOUT ── */}
-      <div
-        className={`hidden md:flex items-center justify-between w-full group ${isEven ? 'flex-row' : 'flex-row-reverse'}`}
+      <motion.div
+        {...rise}
+        className={`flex flex-col gap-3 ${
+          isEven ? 'md:items-end md:pr-16 md:text-right' : 'md:order-2 md:pl-16'
+        }`}
       >
-        {/* TEXT CONTENT SIDE */}
-        <motion.div
-          initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          viewport={{ once: true, margin: '-50px' }}
-          className={`w-[45%] flex flex-col ${isEven ? 'items-end text-right pr-8' : 'items-start text-left pl-8'}`}
-        >
-          <h3 className="text-4xl font-bold mb-3 text-primary">{item.dateLabel}</h3>
-          <p className="text-lg text-gray-600 leading-relaxed max-w-sm">{item.description}</p>
-        </motion.div>
+        <p className="meta">Stop {String(index + 1).padStart(2, '0')}</p>
+        <h3 className="display-m">{item.dateLabel}</h3>
+        <p className="max-w-sm text-base text-ink-75">{item.description}</p>
+      </motion.div>
 
-        {/* CENTER: Animated Dot */}
-        <div className="w-[10%] flex justify-center relative z-10">
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
-            viewport={{ once: true, margin: '-50px' }}
-            className="w-5 h-5 rounded-full bg-primary border-4 border-white shadow-[0_0_0_2px_rgba(0,0,0,0.1)]"
-          />
+      <motion.div {...rise} className={isEven ? 'md:pl-16' : 'md:order-1 md:pr-16'}>
+        <div className="aspect-[4/3] overflow-hidden rounded-m bg-paper-3">
+          <img src={item.imageUrl} alt={item.imageAlt} className="size-full object-cover" />
         </div>
-
-        {/* IMAGE SIDE */}
-        <motion.div
-          initial={{ opacity: 0, x: isEven ? 50 : -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          viewport={{ once: true, margin: '-50px' }}
-          className={`w-[45%] ${isEven ? 'pl-8' : 'pr-8'}`}
-        >
-          <div className="relative rounded-lg overflow-hidden shadow-2xl bg-gray-100">
-            <img
-              src={item.imageUrl}
-              alt={item.imageAlt}
-              className="w-full object-cover h-[350px] hover:scale-105 transition-transform duration-500 ease-out"
-            />
-          </div>
-        </motion.div>
-      </div>
-    </div>
+      </motion.div>
+    </li>
   )
 }

@@ -14,6 +14,42 @@ type BrandCarouselProps = {
   logos: LogoEntry[]
 }
 
+// Marquees hold still for visitors who ask for reduced motion.
+const playOnInit = () =>
+  typeof window === 'undefined' || !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+function LogoRow({ logos, speed }: { logos: LogoEntry[]; speed: number }) {
+  const [emblaRef] = useEmblaCarousel({ loop: true }, [
+    AutoScroll({
+      speed,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+      playOnInit: playOnInit(),
+    }),
+  ]);
+
+  return (
+    <div className = "relative w-full overflow-hidden" ref = {emblaRef}>
+      <div className = "flex touch-pan-y select-none">
+        {[...logos, ...logos, ...logos, ...logos].map((logo, index) => (
+          <div
+            key = {index}
+            className = "flex-[0_0_auto] min-w-0 px-6 md:px-10 flex items-center justify-center"
+          >
+            <img
+              src = {logo.src}
+              alt = {logo.alt || "Brand Logo"}
+              className = {`w-auto object-contain opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300 ${
+                logo.className ? logo.className : "h-8 md:h-12"
+              }`}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export function BrandCarousel({
   logos,
 }: BrandCarouselProps) {
@@ -21,63 +57,12 @@ export function BrandCarousel({
   const firstRow = logos.slice(0, splitIndex);
   const secondRow = logos.slice(splitIndex);
 
-  const [emblaRefTop] = useEmblaCarousel({ loop: true }, [
-    AutoScroll({
-      speed: 1.5,
-      stopOnInteraction: false,
-      stopOnMouseEnter: true,
-    }),
-  ]);
-
-  const [emblaRefBottom] = useEmblaCarousel({ loop: true }, [
-    AutoScroll({
-      speed: -1.5,
-      stopOnInteraction: false,
-      stopOnMouseEnter: true
-    }),
-  ]);
-
   if (!logos.length) return null
 
   return (
-    <div className = "w-full py-6 flex flex-col gap-8 md:gap-12">
-      <div className = "relative w-full overflow-hidden" ref = {emblaRefTop}>
-        <div className = "flex touch-pan-y select-none">
-          {[...firstRow, ...firstRow, ...firstRow, ...firstRow].map((logo, index) => (
-            <div
-              key = {index}
-              className = "flex-[0_0_auto] min-w-0 px-6 md:px-10 flex items-center justify-center"
-            >
-              <img 
-                src = {logo.src}
-                alt = {logo.alt || "Brand Logo"}
-                className = {`w-auto object-contain opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300 ${
-                  logo.className ? logo.className : "h-8 md:h-12"
-                }`}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className = "relative w-full overflow-hidden" ref = {emblaRefBottom}>
-        <div className = "flex touch-pan-y select-none">
-          {[...secondRow, ...secondRow, ...secondRow, ...secondRow].map((logo, index) => (
-            <div
-              key = {index}
-              className = "flex-[0_0_auto] min-w-0 px-6 md:px-10 flex items-center justify-center"
-            >
-              <img 
-                src = {logo.src}
-                alt = {logo.alt || "Brand Logo"}
-                className = {`w-auto object-contain opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300 ${
-                  logo.className ? logo.className : "h-8 md:h-12"
-                }`}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
+    <div className = "w-full py-8 md:py-10 flex flex-col gap-8 md:gap-10">
+      <LogoRow logos = {firstRow} speed = {1} />
+      {secondRow.length > 0 && <LogoRow logos = {secondRow} speed = {-1} />}
     </div>
   )
 }
